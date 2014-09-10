@@ -14,7 +14,7 @@ import hanto.common.MoveResult;
  * @author alexbragdon
  *
  */
-public class AlphaHanto implements HantoGame {
+public class AlphaHantoGame implements HantoGame {
 
 	/* (non-Javadoc)
 	 * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
