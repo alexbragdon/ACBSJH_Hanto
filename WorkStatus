@@ -1,0 +1,14 @@
+
+Updated 9/10
+
+Interfaces to impliment <- alex does
+
+HantoGame
+HantoCoordinate
+HantoPiece
+
+Classes to write <- sean does
+
+HantoBaseClass
+AlphaHantoClass
+
