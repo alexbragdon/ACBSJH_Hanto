@@ -1,15 +1,15 @@
-package hanto.studentACBSJH.alpha;
+package hanto.studentACBSJH.common;
 
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 
-public class HantoPieceAlpha implements HantoPiece {
+public class HantoPieceAlphaACBSJH implements HantoPiece {
 	
 	private HantoPieceType type;
 	private HantoPlayerColor playerColor;
 	
-	public HantoPieceAlpha(HantoPlayerColor color) {
+	public HantoPieceAlphaACBSJH(HantoPlayerColor color) {
 		type = HantoPieceType.BUTTERFLY;
 		playerColor = color;
 	}

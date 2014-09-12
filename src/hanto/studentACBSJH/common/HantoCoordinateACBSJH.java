@@ -1,12 +1,12 @@
-package hanto.studentACBSJH.alpha;
+package hanto.studentACBSJH.common;
 
 import hanto.common.HantoCoordinate;
 
-public class HantoCoordinateAlpha implements HantoCoordinate {
+public class HantoCoordinateACBSJH implements HantoCoordinate {
 
 	private int X, Y;
 	
-	public HantoCoordinateAlpha(int Xin, int Yin) {
+	public HantoCoordinateACBSJH(int Xin, int Yin) {
 		X = Xin;
 		Y = Yin;
 	}
