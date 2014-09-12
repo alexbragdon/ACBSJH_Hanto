@@ -8,6 +8,8 @@ import org.junit.Test;
 
 public class AlphaHantoTests {
 
+	
+	
 	@before
 	public void setup()
 	{
