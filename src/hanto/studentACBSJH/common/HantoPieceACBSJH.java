@@ -10,10 +10,30 @@
  *		Sean Halloran
  *		Alex Bragdon
  *******************************************************************************/
-package hanto;
+package hanto.studentACBSJH.common;
 
-public abstract class BaseHantoGame {
+import hanto.common.HantoPiece;
+import hanto.common.HantoPieceType;
+import hanto.common.HantoPlayerColor;
 
+public class HantoPieceACBSJH implements HantoPiece {
 	
+	private HantoPieceType type;
+	private HantoPlayerColor playerColor;
 	
+	public HantoPieceACBSJH(HantoPlayerColor color) {
+		type = HantoPieceType.BUTTERFLY;
+		playerColor = color;
+	}
+	
+	@Override
+	public HantoPlayerColor getColor() {
+		return playerColor;
+	}
+
+	@Override
+	public HantoPieceType getType() {
+		return type;
+	}
+
 }
