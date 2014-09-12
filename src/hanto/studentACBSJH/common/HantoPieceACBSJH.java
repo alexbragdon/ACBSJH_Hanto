@@ -10,28 +10,30 @@
  *		Sean Halloran
  *		Alex Bragdon
  *******************************************************************************/
-
 package hanto.studentACBSJH.common;
 
-import hanto.common.HantoCoordinate;
+import hanto.common.HantoPiece;
+import hanto.common.HantoPieceType;
+import hanto.common.HantoPlayerColor;
 
-public class HantoCoordinateACBSJH implements HantoCoordinate {
-
-	private int X, Y;
+public class HantoPieceACBSJH implements HantoPiece {
 	
-	public HantoCoordinateACBSJH(int Xin, int Yin) {
-		X = Xin;
-		Y = Yin;
+	private HantoPieceType type;
+	private HantoPlayerColor playerColor;
+	
+	public HantoPieceACBSJH(HantoPlayerColor color) {
+		type = HantoPieceType.BUTTERFLY;
+		playerColor = color;
 	}
 	
 	@Override
-	public int getX() {
-		return X;
+	public HantoPlayerColor getColor() {
+		return playerColor;
 	}
 
 	@Override
-	public int getY() {
-		return Y;
+	public HantoPieceType getType() {
+		return type;
 	}
 
 }
