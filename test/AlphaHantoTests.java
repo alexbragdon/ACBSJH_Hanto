@@ -1,19 +1,23 @@
 import static org.junit.Assert.*;
 import hanto.common.HantoPlayerColor;
+import hanto.studentACBSJH.alpha.AlphaHantoGame;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceAlphaACBSJH;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import hanto.common.*;
+import hanto.studentACBSJH.*;
 
 public class AlphaHantoTests {
 
+	HantoGame alphaHantoGame;
 	
-	
-	@before
+	@Before
 	public void setup()
 	{
-		
+		alphaHantoGame  = new AlphaHantoGame();
 	}
 	
 	@Test
@@ -27,6 +31,22 @@ public class AlphaHantoTests {
 		assertEquals(HantoPlayerColor.BLUE, testPieceBlue.getColor());
 		assertEquals("Butterfly", testPieceRed.getType().getPrintableName());
 		
+	}
+	
+	/**
+	 * 		AlphaHantoGame Tests
+	 */
+	
+	@Test
+	public void emptyCoordinateTest()
+	{
+		assertEquals(null, alphaHantoGame.getPieceAt(new HantoCoordinateACBSJH(0, 0)));
+	}
+	
+	@Test
+	public void correctFirstBlueMove()
+	{
+		//alphaHantoGame.makeMove(HantoPieceType., from, to)
 	}
 
 }
