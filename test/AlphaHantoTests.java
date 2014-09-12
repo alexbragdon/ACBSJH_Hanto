@@ -3,30 +3,34 @@ import hanto.common.HantoPlayerColor;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
+import org.junit.Before;
 import org.junit.Test;
 
 
 public class AlphaHantoTests {
-
+	
+	HantoCoordinateACBSJH testCoordinate1;
+	HantoPieceACBSJH testPieceBlue;
+	HantoPieceACBSJH testPieceRed;
 	
 	
-	@before
+	@Before
 	public void setup()
 	{
-		
+		testCoordinate1 = new HantoCoordinateACBSJH(1,2);
+		testPieceRed = new HantoPieceACBSJH(HantoPlayerColor.RED);
+		testPieceBlue = new HantoPieceACBSJH(HantoPlayerColor.BLUE);
 	}
 	
 	@Test
-	public void test() {
-		HantoCoordinateACBSJH testCoordinate1 = new HantoCoordinateACBSJH(1,2);
-		HantoPieceACBSJH testPieceRed = new HantoPieceACBSJH(HantoPlayerColor.RED);
-		HantoPieceACBSJH testPieceBlue = new HantoPieceACBSJH(HantoPlayerColor.BLUE);
-		
+	public void testGettersForCoordinates() {
 		assertEquals(1, testCoordinate1.getX());
 		assertEquals(2, testCoordinate1.getY());
-		assertEquals(HantoPlayerColor.BLUE, testPieceBlue.getColor());
-		assertEquals("Butterfly", testPieceRed.getType().getPrintableName());
-		
 	}
 
+	@Test
+	public void testPieces() {
+		assertEquals(HantoPlayerColor.BLUE, testPieceBlue.getColor());
+		assertEquals("Butterfly", testPieceRed.getType().getPrintableName());
+	}
 }
