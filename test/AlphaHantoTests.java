@@ -8,6 +8,12 @@ import org.junit.Test;
 
 public class AlphaHantoTests {
 
+	@before
+	public void setup()
+	{
+		
+	}
+	
 	@Test
 	public void test() {
 		HantoCoordinateACBSJH testCoordinate1 = new HantoCoordinateACBSJH(1,2);
