@@ -61,7 +61,7 @@ public class AlphaHantoTests {
 		assertEquals(1, testCoordinate1.getX());
 		assertEquals(2, testCoordinate1.getY());
 	}
-
+	
 	/**
 	 * 
 	 */
@@ -93,6 +93,8 @@ public class AlphaHantoTests {
 		assertEquals(MoveResult.OK, result);
 		HantoPiece placedPiece = alphaHanto.getPieceAt(origin);
 		assertNotEquals(null, placedPiece);
+		assertEquals(HantoPlayerColor.BLUE, placedPiece.getColor());
+		assertEquals(HantoPieceType.BUTTERFLY, placedPiece.getType());
 	}
 	
 	@Test
@@ -105,6 +107,8 @@ public class AlphaHantoTests {
 		assertEquals(MoveResult.DRAW, result);
 		HantoPiece placedPiece = alphaHanto.getPieceAt(destination);
 		assertNotEquals(null, placedPiece);
+		assertEquals(HantoPlayerColor.RED, placedPiece.getColor());
+		assertEquals(HantoPieceType.BUTTERFLY, placedPiece.getType());
 
 	}
 	
@@ -138,10 +142,19 @@ public class AlphaHantoTests {
 		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, null);
 	}
 	
-	//@Test
-	//public void incorrectSecondMove() throws HantoException
-	//{
-		
-	//}
+	@Test(expected = HantoException.class)
+	public void incorrectSecondMoveLocation() throws HantoException
+	{
+		HantoGame alphaHanto = new AlphaHantoGame();
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 1));
+	}
+
+	@Test(expected = HantoException.class)
+	public void cannotMoveNonExsistantPieceFromLocation() throws HantoException
+	{
+		HantoGame alphaHanto = new AlphaHantoGame();
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(0, 1));
+	}
 	
 }

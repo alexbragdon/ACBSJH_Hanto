@@ -54,7 +54,7 @@ public abstract class BaseHantoGame {
 	 */
 	protected HantoPlayerColor getCurrentPlayersTurn()
 	{
-		return (TurnNumber % 2 == 0) ? HantoPlayerColor.RED : HantoPlayerColor.BLUE;
+		return (TurnNumber % 2 == 0) ? HantoPlayerColor.BLUE : HantoPlayerColor.RED;
 	}
 	
 	/**

@@ -35,6 +35,12 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
 		
+		//if there is no piece to move that the from location, throw exception
+		if(from != null && getPieceAt(from) == null)
+		{
+			throw new HantoException("There is no piece to move at "+(new HantoCoordinateACBSJH(to)).toString());
+		}
+		
 		//if to is not a valid coordinate
 		if(to == null)
 		{
