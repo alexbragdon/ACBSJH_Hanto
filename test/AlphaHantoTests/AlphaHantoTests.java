@@ -121,6 +121,32 @@ public class AlphaHantoTests {
 		assertEquals(MoveResult.DRAW, result);
 	}
 
+	@Test
+	public void testAdjacency() {
+		HantoCoordinateACBSJH from = new HantoCoordinateACBSJH(0, 0);
+		HantoCoordinate to1 = new HantoCoordinateACBSJH(0, 1);
+		HantoCoordinate to2 = new HantoCoordinateACBSJH(1, 0);
+		HantoCoordinate to3 = new HantoCoordinateACBSJH(1, -1);
+		HantoCoordinate to4 = new HantoCoordinateACBSJH(0, -1);
+		HantoCoordinate to5 = new HantoCoordinateACBSJH(-1, 0);
+		HantoCoordinate to6 = new HantoCoordinateACBSJH(-1, 1);
+		
+		HantoCoordinate not1 = new HantoCoordinateACBSJH(1, 2);
+		HantoCoordinate not2 = new HantoCoordinateACBSJH(-1, -2);
+		HantoCoordinate not3 = new HantoCoordinateACBSJH(0, -2);
+		
+		assertFalse(from.isAdjacent(not1));
+		assertFalse(from.isAdjacent(not2));
+		assertFalse(from.isAdjacent(not3));
+		
+		assertTrue(from.isAdjacent(to1));
+		assertTrue(from.isAdjacent(to2));
+		assertTrue(from.isAdjacent(to3));
+		assertTrue(from.isAdjacent(to4));
+		assertTrue(from.isAdjacent(to5));
+		assertTrue(from.isAdjacent(to6));
+	}
+
 	@Test(expected = HantoException.class)
 	public void incorrectFirstBlueMoveLocation() throws HantoException
 	{

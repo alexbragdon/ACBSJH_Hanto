@@ -14,6 +14,7 @@
 package hanto.studentACBSJH.common;
 
 import hanto.common.HantoCoordinate;
+import hanto.studentACBSJH.alpha.AlphaHantoGame;
 
 /**
  * @author alexbragdon
@@ -63,6 +64,27 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 	public String toString()
 	{
 		return "(" + X + ", " + Y + ")";
+	}
+	
+	public boolean isAdjacent(HantoCoordinate to) {
+		int toX = to.getX();
+		int toY = to.getY();
+		
+		if ((toX == X) && (toY == Y + 1)) {
+			return true;
+		} else if ((toX == X + 1) && (toY == Y)) {
+			return true;
+		} else if ((toX == X + 1) && (toY == Y - 1)) {
+			return true;
+		} else if ((toX == X) && (toY == Y - 1)) {
+			return true;
+		} else if ((toX == X - 1) && (toY == Y)) {
+			return true;
+		} else if ((toX == X - 1) && (toY == Y + 1)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 }
