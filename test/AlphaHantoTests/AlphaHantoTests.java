@@ -117,4 +117,6 @@ public class AlphaHantoTests {
 		assertEquals(MoveResult.DRAW, result);
 	}
 
+	
+	
 }

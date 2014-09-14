@@ -69,4 +69,9 @@ public class HantoPieceACBSJH implements HantoPiece {
 		return location == null;
 	}
 	
+	public String toString()
+	{
+		return type.toString() + " @ " + location.toString()
+	}
+	
 }
