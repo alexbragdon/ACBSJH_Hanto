@@ -1,3 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2014 Sean J. Halloran & Alexander C. Bragdon
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *		Sean Halloran
+ *		Alex Bragdon
+ *******************************************************************************/
+
 package AlphaHantoTests;
 import static org.junit.Assert.*;
 import hanto.common.HantoException;
@@ -10,8 +23,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import hanto.common.*;
-import hanto.studentACBSJH.*;
 
+/**
+ * @author alexbragdon
+ *
+ */
 public class AlphaHantoTests {
 
 	HantoGame alphaHantoGame;
@@ -23,22 +39,31 @@ public class AlphaHantoTests {
 	
 	HantoCoordinateACBSJH origin;
 	
+	/**
+	 * 
+	 */
 	@Before
 	public void setup()
 	{
 		alphaHantoGame  = new AlphaHantoGame();
-		testCoordinate1 = new HantoCoordinateACBSJH(1,2);
+		testCoordinate1 = new HantoCoordinateACBSJH(1, 2);
 		origin = new HantoCoordinateACBSJH(0, 0);
 		testPieceRed = new HantoPieceACBSJH(HantoPlayerColor.RED);
 		testPieceBlue = new HantoPieceACBSJH(HantoPlayerColor.BLUE);
 	}
 	
+	/**
+	 * 
+	 */
 	@Test
 	public void testGettersForCoordinates() {
 		assertEquals(1, testCoordinate1.getX());
 		assertEquals(2, testCoordinate1.getY());
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testPieces() {
 		assertEquals(HantoPlayerColor.BLUE, testPieceBlue.getColor());
@@ -55,6 +80,9 @@ public class AlphaHantoTests {
 		assertEquals(null, alphaHantoGame.getPieceAt(new HantoCoordinateACBSJH(0, 0)));
 	}
 	
+	/**
+	 * @throws HantoException
+	 */
 	@Test
 	public void correctFirstBlueMove() throws HantoException
 	{

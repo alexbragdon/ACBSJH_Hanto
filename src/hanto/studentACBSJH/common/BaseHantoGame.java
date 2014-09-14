@@ -18,6 +18,10 @@ import hanto.common.HantoPlayerColor;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * @author alexbragdon
+ *
+ */
 public abstract class BaseHantoGame {
 
 	/**

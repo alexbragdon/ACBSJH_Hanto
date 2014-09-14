@@ -16,31 +16,50 @@ import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 
+/**
+ * @author alexbragdon seanhalloran
+ * Our implementation of the HantoPience Class. 
+ */
 public class HantoPieceACBSJH implements HantoPiece {
 	
-	private HantoPieceType type;
+	private HantoPieceType type; 
 	private HantoPlayerColor playerColor;
 	private HantoCoordinateACBSJH location = null;
 	
+	/**
+	 * @param color
+	 */
 	public HantoPieceACBSJH(HantoPlayerColor color) {
 		type = HantoPieceType.BUTTERFLY;
 		playerColor = color;
 	}
 	
+	/** (non-Javadoc)
+	 * @see hanto.common.HantoPiece#getColor()
+	 */
 	@Override
 	public HantoPlayerColor getColor() {
 		return playerColor;
 	}
 
+	/** (non-Javadoc)
+	 * @see hanto.common.HantoPiece#getType()
+	 */
 	@Override
 	public HantoPieceType getType() {
 		return type;
 	}
 	
+	/**
+	 * @return
+	 */
 	public HantoCoordinateACBSJH getLocation() {
 		return location;
 	}
 	
+	/**
+	 * @param newLocation
+	 */
 	public void setLocation(HantoCoordinateACBSJH newLocation) {
 		location = newLocation;
 	}

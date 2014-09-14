@@ -15,20 +15,34 @@ package hanto.studentACBSJH.common;
 
 import hanto.common.HantoCoordinate;
 
+/**
+ * @author alexbragdon
+ *
+ */
 public class HantoCoordinateACBSJH implements HantoCoordinate {
 
 	private int X, Y;
 	
+	/**
+	 * @param Xin
+	 * @param Yin
+	 */
 	public HantoCoordinateACBSJH(int Xin, int Yin) {
 		X = Xin;
 		Y = Yin;
 	}
 	
+	/** (non-Javadoc)
+	 * @see hanto.common.HantoCoordinate#getX()
+	 */
 	@Override
 	public int getX() {
 		return X;
 	}
 
+	/** (non-Javadoc)
+	 * @see hanto.common.HantoCoordinate#getY()
+	 */
 	@Override
 	public int getY() {
 		return Y;
