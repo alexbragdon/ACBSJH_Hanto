@@ -117,6 +117,19 @@ public class AlphaHantoTests {
 		assertEquals(MoveResult.DRAW, result);
 	}
 
+	@Test(expected = HantoException.class)
+	public void incorrectFirstBlueMoveLocation() throws HantoException
+	{
+		HantoGame alphaHanto = new AlphaHantoGame();
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 1));
+	}
+	
+	@Test(expected = HantoException.class)
+	public void incorrectFirstBlueMovePieceType() throws HantoException
+	{
+		HantoGame alphaHanto = new AlphaHantoGame();
+		alphaHanto.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 0));
+	}
 	
 	
 }

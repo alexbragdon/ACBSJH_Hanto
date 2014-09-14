@@ -34,6 +34,21 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
+		
+		//if first move, make sure its to (0,0)
+		HantoCoordinateACBSJH origin = new HantoCoordinateACBSJH(0, 0);
+		if(TurnNumber == 0 && !origin.equals(to))
+		{
+			throw new HantoException("Expected first move to be (0, 0), got " +
+									 (new HantoCoordinateACBSJH(to)).toString());
+		}
+		
+		//make sure only butterflies are in play
+		if(!pieceType.equals(HantoPieceType.BUTTERFLY))
+		{
+			throw new HantoException("Expected butterfly to be moved for Alpha Hanto, got " + pieceType.toString());
+		}
+		
 		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);
 		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
 		TurnNumber++;
@@ -43,7 +58,7 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 			return MoveResult.OK;
 		}
 	}
-
+	
 	/** (non-Javadoc)
 	 * @see hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)
 	 */
