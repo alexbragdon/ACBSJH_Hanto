@@ -60,4 +60,9 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 		return coordinate.getX() == X && coordinate.getY() == Y;
 	}
 
+	public String toString()
+	{
+		return "(" + X + ", " + Y + ")";
+	}
+	
 }

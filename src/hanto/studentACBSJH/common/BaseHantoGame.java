@@ -76,4 +76,24 @@ public abstract class BaseHantoGame {
 		return null;
 	}
 	
+	/**
+	 * Makes a printable board, a list of all the pieces on 
+	 * the board as defined by their type and location
+	 * 
+	 * @return a string list of all the pieces on the board
+	 */
+	protected String getPrintableBoard()
+	{
+		String board = "-=AlphaHantoGame=-\n";
+		for(HantoPieceACBSJH hp : HantoPieces)
+		{
+			if(!hp.isInHand())
+			{
+				board += hp.toString() + '\n';
+			}
+		}
+		board += "-end-";
+		return board; 
+	}
+	
 }

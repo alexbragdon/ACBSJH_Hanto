@@ -94,4 +94,6 @@ public class AlphaHantoTests {
 		assertNotEquals(null, placedPiece);
 	}
 
+	
+	
 }
