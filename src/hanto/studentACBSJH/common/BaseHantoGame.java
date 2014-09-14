@@ -10,7 +10,7 @@
  *		Sean Halloran
  *		Alex Bragdon
  *******************************************************************************/
-package hanto;
+package hanto.studentACBSJH.common;
 
 public abstract class BaseHantoGame {
 
