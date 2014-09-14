@@ -20,6 +20,7 @@ public class HantoPieceACBSJH implements HantoPiece {
 	
 	private HantoPieceType type;
 	private HantoPlayerColor playerColor;
+	private HantoCoordinateACBSJH location = null;
 	
 	public HantoPieceACBSJH(HantoPlayerColor color) {
 		type = HantoPieceType.BUTTERFLY;
@@ -34,6 +35,14 @@ public class HantoPieceACBSJH implements HantoPiece {
 	@Override
 	public HantoPieceType getType() {
 		return type;
+	}
+	
+	public HantoCoordinateACBSJH getLocation() {
+		return location;
+	}
+	
+	public void setLocation(HantoCoordinateACBSJH newLocation) {
+		location = newLocation;
 	}
 
 }
