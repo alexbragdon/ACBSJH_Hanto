@@ -142,5 +142,31 @@ public class AlphaHantoTests {
 		assertTrue(from.isAdjacent(to5));
 		assertTrue(from.isAdjacent(to6));
 	}
+
+	@Test(expected = HantoException.class)
+	public void incorrectFirstBlueMoveLocation() throws HantoException
+	{
+		HantoGame alphaHanto = new AlphaHantoGame();
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 1));
+	}
 	
+	@Test(expected = HantoException.class)
+	public void incorrectFirstBlueMovePieceType() throws HantoException
+	{
+		HantoGame alphaHanto = new AlphaHantoGame();
+		alphaHanto.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 0));
+	}
+	
+	@Test(expected = HantoException.class)
+	public void incorrectFirstNullLocation() throws HantoException
+	{
+		HantoGame alphaHanto = new AlphaHantoGame();
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, null);
+	}
+	
+	//@Test
+	//public void incorrectSecondMove() throws HantoException
+	//{
+		
+	//}
 }
