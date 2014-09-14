@@ -1,6 +1,15 @@
-/**
- * *********8TRIVIAL CHANGE*******
- */
+/*******************************************************************************
+ * Copyright (c) 2014 Sean J. Halloran & Alexander C. Bragdon
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *		Sean Halloran
+ *		Alex Bragdon
+ *******************************************************************************/
 package hanto.studentACBSJH.alpha;
 
 import hanto.common.HantoCoordinate;
@@ -19,13 +28,7 @@ import hanto.studentACBSJH.common.HantoPieceACBSJH;
  *
  */
 public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
-
-	public AlphaHantoGame()
-	{
-		super();
-	}
-	
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
 	 */
 	@Override
@@ -37,7 +40,7 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 		return MoveResult.OK;
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)
 	 */
 	@Override
@@ -52,7 +55,7 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see hanto.common.HantoGame#getPrintableBoard()
 	 */
 	@Override
@@ -61,7 +64,7 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see hanto.studentACBSJH.common.BaseHantoGame#setupHands()
 	 */
 	@Override
