@@ -28,11 +28,14 @@ public abstract class BaseHantoGame {
 	{
 		HantoPieces = new ArrayList<HantoPiece>();
 		TurnNumber = 0;
+		setupHands();
 	}
 	
 	protected HantoPlayerColor getCurrentPlayersTurn()
 	{
 		return (TurnNumber % 2 == 0) ? HantoPlayerColor.BLUE : HantoPlayerColor.RED;
 	}
+	
+	protected abstract void setupHands();
 	
 }
