@@ -45,4 +45,9 @@ public class HantoPieceACBSJH implements HantoPiece {
 		location = newLocation;
 	}
 
+	public boolean isInHand()
+	{
+		return location == null;
+	}
+	
 }

@@ -11,6 +11,7 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentACBSJH.common.BaseHantoGame;
+import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
 /**
@@ -30,8 +31,9 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
+		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);
+		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
 		TurnNumber++;
-		
 		return MoveResult.OK;
 	}
 
@@ -40,7 +42,14 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 	 */
 	@Override
 	public HantoPiece getPieceAt(HantoCoordinate where) {
-		return new HantoPieceACBSJH(HantoPlayerColor.BLUE);
+		for(HantoPieceACBSJH piece : HantoPieces)
+		{
+			if(!piece.isInHand() && piece.getLocation().equals(where))
+			{
+				return piece;
+			}
+		}
+		return null;
 	}
 
 	/* (non-Javadoc)

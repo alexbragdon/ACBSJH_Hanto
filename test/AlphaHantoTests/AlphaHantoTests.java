@@ -52,15 +52,17 @@ public class AlphaHantoTests {
 	@Test
 	public void emptyCoordinateTest()
 	{
-		assertEquals(null, alphaHantoGame.getPieceAt(new HantoCoordinateACBSJH(0, 0)));
+		HantoGame alphaHanto = new AlphaHantoGame();
+		assertEquals(null, alphaHanto.getPieceAt(new HantoCoordinateACBSJH(0, 0)));
 	}
 	
 	@Test
 	public void correctFirstBlueMove() throws HantoException
 	{
-		MoveResult result = alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		HantoGame alphaHanto = new AlphaHantoGame();
+		MoveResult result = alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		assertEquals(MoveResult.OK, result);
-		HantoPiece placedPiece = alphaHantoGame.getPieceAt(origin);
+		HantoPiece placedPiece = alphaHanto.getPieceAt(origin);
 		assertNotEquals(null, placedPiece);
 	}
 

@@ -24,6 +24,11 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 		Y = Yin;
 	}
 	
+	public HantoCoordinateACBSJH(HantoCoordinate coordinate)
+	{
+		this(coordinate.getX(), coordinate.getY());
+	}
+	
 	@Override
 	public int getX() {
 		return X;
@@ -32,6 +37,11 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 	@Override
 	public int getY() {
 		return Y;
+	}
+	
+	public boolean equals(HantoCoordinate coordinate)
+	{
+		return coordinate.getX() == X && coordinate.getY() == Y;
 	}
 
 }

@@ -13,6 +13,7 @@
 package hanto.studentACBSJH.common;
 
 import hanto.common.HantoPiece;
+import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public abstract class BaseHantoGame {
 	 * All of the HantoPieces used in this HantoGame,
 	 * including those in the hand.
 	 */
-	protected Collection<HantoPiece> HantoPieces;
+	protected Collection<HantoPieceACBSJH> HantoPieces;
 	
 	/**
 	 * The number of the turn being played. This variable must
@@ -37,7 +38,7 @@ public abstract class BaseHantoGame {
 	 */
 	protected BaseHantoGame()
 	{
-		HantoPieces = new ArrayList<HantoPiece>();
+		HantoPieces = new ArrayList<HantoPieceACBSJH>();
 		TurnNumber = 0;
 		setupHands();
 	}
@@ -49,7 +50,7 @@ public abstract class BaseHantoGame {
 	 */
 	protected HantoPlayerColor getCurrentPlayersTurn()
 	{
-		return (TurnNumber % 2 == 0) ? HantoPlayerColor.BLUE : HantoPlayerColor.RED;
+		return (TurnNumber % 2 == 0) ? HantoPlayerColor.RED : HantoPlayerColor.BLUE;
 	}
 	
 	/**
@@ -57,5 +58,18 @@ public abstract class BaseHantoGame {
 	 *  they are in the hand.
 	 */
 	protected abstract void setupHands();
+
+	protected HantoPieceACBSJH getPieceFromHand(HantoPieceType pieceType)
+	{
+		for(HantoPieceACBSJH hp : HantoPieces)
+		{
+			if(hp.isInHand() && hp.getType().equals(pieceType)
+					&& hp.getColor().equals(getCurrentPlayersTurn()))
+			{
+				return hp;
+			}
+		}
+		return null;
+	}
 	
 }
