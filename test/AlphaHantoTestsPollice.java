@@ -1,3 +1,20 @@
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import hanto.HantoGameFactory;
+import hanto.common.HantoCoordinate;
+import hanto.common.HantoException;
+import hanto.common.HantoGame;
+import hanto.common.HantoGameID;
+import hanto.common.HantoPiece;
+import hanto.common.HantoPlayerColor;
+import hanto.common.MoveResult;
+import hanto.common.HantoPieceType;
+import hanto.studentACBSJH.alpha.AlphaHantoGame;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 /*******************************************************************************
  * Copyright (c) 2014 Sean J. Halloran
  * 
@@ -14,7 +31,7 @@
  * @author Sean
  *
  */
-public class AlphaHantoMasterTest {
+public class AlphaHantoTestsPollice {
 	/** * Internal class for these test cases. * @version Sep 13, 2014 */
 	class TestHantoCoordinate implements HantoCoordinate {
 		private final int x, y;
@@ -55,43 +72,43 @@ public class AlphaHantoMasterTest {
 
 	@Test
 	public void blueMakesValidFirstMove() throws HantoException {
-		final MoveResult mr = game.makeMove(BUTTERFLY, null,
+		final MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null,
 				new TestHantoCoordinate(0, 0));
-		assertEquals(OK, mr);
+		assertEquals(MoveResult.OK, mr);
 	}
 
 	@Test
 	public void afterFirstMoveBlueButterflyIsAt0_0() throws HantoException {
-		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(0, 0));
+		game.makeMove(HantoPieceType.BUTTERFLY, null, new TestHantoCoordinate(0, 0));
 		final HantoPiece p = game.getPieceAt(new TestHantoCoordinate(0, 0));
-		assertEquals(BUTTERFLY, p.getType());
+		assertEquals(HantoPieceType.BUTTERFLY, p.getType());
 		assertEquals(HantoPlayerColor.BLUE, p.getColor());
 	}
 
 	@Test(expected = HantoException.class)
 	public void bluePlacesNonButterfly() throws HantoException {
-		game.makeMove(SPARROW, null, new TestHantoCoordinate(0, 0));
+		game.makeMove(HantoPieceType.SPARROW, null, new TestHantoCoordinate(0, 0));
 	}
 
 	@Test
 	public void redPlacesButterflyNextToBlueButterfly() throws HantoException {
-		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(0, 0));
-		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(0, 1));
+		game.makeMove(HantoPieceType.BUTTERFLY, null, new TestHantoCoordinate(0, 0));
+		game.makeMove(HantoPieceType.BUTTERFLY, null, new TestHantoCoordinate(0, 1));
 		final HantoPiece p = game.getPieceAt(new TestHantoCoordinate(0, 1));
-		assertEquals(BUTTERFLY, p.getType());
+		assertEquals(HantoPieceType.BUTTERFLY, p.getType());
 		assertEquals(HantoPlayerColor.RED, p.getColor());
 	}
 
 	@Test(expected = HantoException.class)
 	public void blueAttemptsToPlaceButterflyAtWrongLocation()
 			throws HantoException {
-		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(-1, 1));
+		game.makeMove(HantoPieceType.BUTTERFLY, null, new TestHantoCoordinate(-1, 1));
 	}
 
 	@Test
 	public void redMakesValidSecondMoveAndGameIsDrawn() throws HantoException {
-		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(0, 0));
-		final MoveResult mr = game.makeMove(BUTTERFLY, null,
+		game.makeMove(HantoPieceType.BUTTERFLY, null, new TestHantoCoordinate(0, 0));
+		final MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null,
 				new TestHantoCoordinate(-1, 1));
 		assertEquals(MoveResult.DRAW, mr);
 	}
@@ -99,13 +116,13 @@ public class AlphaHantoMasterTest {
 	@Test(expected = HantoException.class)
 	public void redPlacesButterflyNonAdjacentToBlueButterfly()
 			throws HantoException {
-		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(0, 0));
-		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(0, 2));
+		game.makeMove(HantoPieceType.BUTTERFLY, null, new TestHantoCoordinate(0, 0));
+		game.makeMove(HantoPieceType.BUTTERFLY, null, new TestHantoCoordinate(0, 2));
 	}
 
 	@Test(expected = HantoException.class)
 	public void attemptToMoveRatherThanPlace() throws HantoException {
-		game.makeMove(BUTTERFLY, new TestHantoCoordinate(0, 1),
+		game.makeMove(HantoPieceType.BUTTERFLY, new TestHantoCoordinate(0, 1),
 				new TestHantoCoordinate(0, 0));
 	}
 }
