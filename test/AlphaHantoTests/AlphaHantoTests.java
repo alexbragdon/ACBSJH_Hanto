@@ -13,6 +13,7 @@
 
 package AlphaHantoTests;
 import static org.junit.Assert.*;
+import hanto.HantoGameFactory;
 import hanto.common.HantoException;
 import hanto.common.HantoPlayerColor;
 import hanto.studentACBSJH.alpha.AlphaHantoGame;
@@ -92,6 +93,28 @@ public class AlphaHantoTests {
 		assertEquals(MoveResult.OK, result);
 		HantoPiece placedPiece = alphaHanto.getPieceAt(origin);
 		assertNotEquals(null, placedPiece);
+	}
+	
+	@Test
+	public void correctSecondRedMove() throws HantoException 
+	{
+		HantoGame alphaHanto = new AlphaHantoGame();
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
+		MoveResult result = alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, destination);
+		assertEquals(MoveResult.DRAW, result);
+		HantoPiece placedPiece = alphaHanto.getPieceAt(destination);
+		assertNotEquals(null, placedPiece);
+
+	}
+	
+	@Test
+	public void testFactoryCanMakeGames() throws HantoException {
+		HantoGame alphaHanto = HantoGameFactory.getInstance().makeHantoGame(HantoGameID.ALPHA_HANTO, HantoPlayerColor.BLUE);
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
+		MoveResult result = alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, destination);
+		assertEquals(MoveResult.DRAW, result);
 	}
 
 }

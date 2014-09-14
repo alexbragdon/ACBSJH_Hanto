@@ -37,7 +37,11 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);
 		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
 		TurnNumber++;
-		return MoveResult.OK;
+		if (TurnNumber == 2) {
+			return MoveResult.DRAW;
+		} else {
+			return MoveResult.OK;
+		}
 	}
 
 	/** (non-Javadoc)
