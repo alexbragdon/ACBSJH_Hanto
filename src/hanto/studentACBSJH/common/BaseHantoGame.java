@@ -20,10 +20,21 @@ import java.util.Collection;
 
 public abstract class BaseHantoGame {
 
+	/**
+	 * All of the HantoPieces used in this HantoGame,
+	 * including those in the hand.
+	 */
 	protected Collection<HantoPiece> HantoPieces;
 	
+	/**
+	 * The number of the turn being played. This variable must
+	 * be incremented by MakeMove.
+	 */
 	protected int TurnNumber; 
 	
+	/**
+	 * Constructs things in common between all Hanto games.
+	 */
 	protected BaseHantoGame()
 	{
 		HantoPieces = new ArrayList<HantoPiece>();
@@ -31,11 +42,20 @@ public abstract class BaseHantoGame {
 		setupHands();
 	}
 	
+	/**
+	 * Gets the color of the player whose turn it is to move
+	 * 
+	 * @return the color of the player who should move next
+	 */
 	protected HantoPlayerColor getCurrentPlayersTurn()
 	{
 		return (TurnNumber % 2 == 0) ? HantoPlayerColor.BLUE : HantoPlayerColor.RED;
 	}
 	
+	/**
+	 *  Constructs HantoPieces for the game with null locations signifying that
+	 *  they are in the hand.
+	 */
 	protected abstract void setupHands();
 	
 }
