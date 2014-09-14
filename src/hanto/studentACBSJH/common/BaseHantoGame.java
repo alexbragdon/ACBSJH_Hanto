@@ -12,8 +12,27 @@
  *******************************************************************************/
 package hanto.studentACBSJH.common;
 
+import hanto.common.HantoPiece;
+import hanto.common.HantoPlayerColor;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
 public abstract class BaseHantoGame {
 
+	protected Collection<HantoPiece> HantoPieces;
 	
+	protected int TurnNumber; 
+	
+	protected BaseHantoGame()
+	{
+		HantoPieces = new ArrayList<HantoPiece>();
+		TurnNumber = 0;
+	}
+	
+	protected HantoPlayerColor getCurrentPlayersTurn()
+	{
+		return (TurnNumber % 2 == 0) ? HantoPlayerColor.BLUE : HantoPlayerColor.RED;
+	}
 	
 }

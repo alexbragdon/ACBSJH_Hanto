@@ -8,22 +8,34 @@ import hanto.common.HantoException;
 import hanto.common.HantoGame;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
+import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
+import hanto.studentACBSJH.common.BaseHantoGame;
+import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
 /**
  * @author alexbragdon
  *
  */
-public class AlphaHantoGame implements HantoGame {
+public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 
+	public AlphaHantoGame()
+	{
+		super();
+	}
+	
 	/* (non-Javadoc)
 	 * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
 	 */
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
-		// TODO Auto-generated method stub
-		return null;
+		HantoPieceACBSJH newPiece = new HantoPieceACBSJH(getCurrentPlayersTurn());
+		
+		HantoPieces.add(newPiece);
+		TurnNumber++;
+		
+		return MoveResult.OK;
 	}
 
 	/* (non-Javadoc)
@@ -31,8 +43,7 @@ public class AlphaHantoGame implements HantoGame {
 	 */
 	@Override
 	public HantoPiece getPieceAt(HantoCoordinate where) {
-		// TODO Auto-generated method stub
-		return null;
+		return new HantoPieceACBSJH(HantoPlayerColor.BLUE);
 	}
 
 	/* (non-Javadoc)

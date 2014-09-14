@@ -1,9 +1,11 @@
 package AlphaHantoTests;
 import static org.junit.Assert.*;
+import hanto.common.HantoException;
 import hanto.common.HantoPlayerColor;
 import hanto.studentACBSJH.alpha.AlphaHantoGame;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,12 +19,16 @@ public class AlphaHantoTests {
 	HantoPieceACBSJH testPieceBlue;
 	HantoPieceACBSJH testPieceRed;
 	
+	final HantoCoordinateACBSJH HAND = null;
+	
+	HantoCoordinateACBSJH origin;
 	
 	@Before
 	public void setup()
 	{
 		alphaHantoGame  = new AlphaHantoGame();
 		testCoordinate1 = new HantoCoordinateACBSJH(1,2);
+		origin = new HantoCoordinateACBSJH(0, 0);
 		testPieceRed = new HantoPieceACBSJH(HantoPlayerColor.RED);
 		testPieceBlue = new HantoPieceACBSJH(HantoPlayerColor.BLUE);
 	}
@@ -50,9 +56,12 @@ public class AlphaHantoTests {
 	}
 	
 	@Test
-	public void correctFirstBlueMove()
+	public void correctFirstBlueMove() throws HantoException
 	{
-		//alphaHantoGame.makeMove(HantoPieceType., from, to)
+		MoveResult result = alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		assertEquals(MoveResult.OK, result);
+		HantoPiece placedPiece = alphaHantoGame.getPieceAt(origin);
+		assertNotEquals(null, placedPiece);
 	}
 
 }
