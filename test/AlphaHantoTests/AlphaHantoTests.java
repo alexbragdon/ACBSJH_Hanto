@@ -1,3 +1,4 @@
+package AlphaHantoTests;
 import static org.junit.Assert.*;
 import hanto.common.HantoPlayerColor;
 import hanto.studentACBSJH.alpha.AlphaHantoGame;
