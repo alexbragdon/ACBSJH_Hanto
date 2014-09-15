@@ -12,6 +12,8 @@
  *******************************************************************************/
 package hanto.studentACBSJH.common;
 
+import hanto.common.HantoCoordinate;
+import hanto.common.HantoException;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
@@ -76,6 +78,17 @@ public abstract class BaseHantoGame {
 		return null;
 	}
 	
+	public HantoPiece getPieceAt(HantoCoordinate where) {
+		for(HantoPieceACBSJH piece : HantoPieces)
+		{
+			if(!piece.isInHand() && piece.getLocation().equals(where))
+			{
+				return piece;
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Makes a printable board, a list of all the pieces on 
 	 * the board as defined by their type and location
@@ -94,6 +107,46 @@ public abstract class BaseHantoGame {
 		}
 		board += "-end-";
 		return board; 
+	}
+	
+	protected void checkForNoPieceOnBoardToMoveException(HantoCoordinate from, HantoCoordinate to) throws HantoException
+	{
+		if(from != null && getPieceAt(from) == null)
+		{
+			throw new HantoException("There is no piece to move at "+(new HantoCoordinateACBSJH(to)).toString());
+		}
+	}
+	
+	protected void checkForMovingWrongColorPieceException(HantoCoordinate from) throws HantoException
+	{
+		if(from != null)
+		{
+			HantoPiece HPToMove = getPieceAt(from);
+			if(!HPToMove.getColor().equals(getCurrentPlayersTurn()))
+			{
+				throw new HantoException("Cannot move "+HPToMove.getColor().toString() +
+						"piece when it is " + getCurrentPlayersTurn() + " turn");
+			}
+		}
+	}
+	
+	protected void checkFirstMoveIsToOriginException(HantoCoordinate to) throws HantoException
+	{
+		HantoCoordinateACBSJH origin = new HantoCoordinateACBSJH(0, 0);
+		if(TurnNumber == 0 && !origin.equals(to))
+		{
+			throw new HantoException("Expected first move to be (0, 0), got " +
+									 (new HantoCoordinateACBSJH(to)).toString());
+		}	
+	}
+	
+	protected void checkToCoordinateIsValid(HantoCoordinate to) throws HantoException
+	{
+		//if to is not a valid coordinate
+		if(to == null)
+		{
+			throw new HantoException("Cannot move piece to a null location.");
+		}
 	}
 	
 }

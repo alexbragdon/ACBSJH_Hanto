@@ -28,41 +28,21 @@ import hanto.studentACBSJH.common.HantoPieceACBSJH;
  *
  */
 public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
+	
 	/** (non-Javadoc)
 	 * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
 	 */
-	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
-		
-		//if there is no piece to move that the from location, throw exception
-		if(from != null && getPieceAt(from) == null)
-		{
-			throw new HantoException("There is no piece to move at "+(new HantoCoordinateACBSJH(to)).toString());
-		}
-		
-		if(from != null)
-		{
-			HantoPiece HPToMove = getPieceAt(from);
-			if(!HPToMove.getColor().equals(getCurrentPlayersTurn()))
-			{
-				throw new HantoException("Cannot move "+HPToMove.getColor().toString() +
-						"piece when it is " + getCurrentPlayersTurn() + " turn");
-			}
-		}
+		checkToCoordinateIsValid(to);
+		checkForNoPieceOnBoardToMoveException(from, to);
+		checkForMovingWrongColorPieceException(from);
+		checkFirstMoveIsToOriginException(to);
 		
 		//if to is not a valid coordinate
 		if(to == null)
 		{
 			throw new HantoException("Cannot move piece to a null location.");
-		}
-		
-		//if first move, make sure its to (0,0)
-		HantoCoordinateACBSJH origin = new HantoCoordinateACBSJH(0, 0);
-		if(TurnNumber == 0 && !origin.equals(to))
-		{
-			throw new HantoException("Expected first move to be (0, 0), got " +
-									 (new HantoCoordinateACBSJH(to)).toString());
 		}
 		
 		//make sure only butterflies are in play
@@ -87,21 +67,6 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 		} else {
 			return MoveResult.OK;
 		}
-	}
-	
-	/** (non-Javadoc)
-	 * @see hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)
-	 */
-	@Override
-	public HantoPiece getPieceAt(HantoCoordinate where) {
-		for(HantoPieceACBSJH piece : HantoPieces)
-		{
-			if(!piece.isInHand() && piece.getLocation().equals(where))
-			{
-				return piece;
-			}
-		}
-		return null;
 	}
 
 	/** (non-Javadoc)
