@@ -12,6 +12,7 @@ package hanto;
 
 import hanto.common.*;
 import hanto.studentACBSJH.alpha.AlphaHantoGame;
+import hanto.studentACBSJH.beta.BetaHantoGame;
 
 /**
  * This is a singleton class that provides a factory to create an instance of any version
@@ -63,6 +64,8 @@ public class HantoGameFactory
 		case ALPHA_HANTO:
 			game = new AlphaHantoGame();
 			break;
+		case BETA_HANTO:
+			game = new BetaHantoGame();
 		}
 		return game;
 	}
