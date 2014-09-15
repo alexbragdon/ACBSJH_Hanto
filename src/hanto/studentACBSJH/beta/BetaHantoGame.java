@@ -60,13 +60,31 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 		checkForMovingWrongColorPieceException(from);
 		checkFirstMoveIsToOriginException(to);
 
+		//Ensures that both players play their butterfly on or before the fourth turn. 
+		if ((TurnNumber > 5) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) && blueButterfly == null 
+				&& (pieceType != HantoPieceType.BUTTERFLY)) {
+			throw new HantoException("Must place butterfly on or before the fourth turn!!");
+		}
+		if ((TurnNumber > 5) && (getCurrentPlayersTurn() == HantoPlayerColor.RED) && redButterfly == null 
+				&& (pieceType != HantoPieceType.BUTTERFLY)) {
+			throw new HantoException("Must place butterfly on or before the fourth turn!!");
+		}
+			
+		
 		
 		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);
 		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
 		
-		
-		
+		//Updates the the butterflys location to prevent having to iterate too many times. 
+		if ((pieceType == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE)) {
+			blueButterfly = pieceToMove;
+		}
+		if ((pieceType == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.RED)) {
+			redButterfly = pieceToMove;
+		}
+
 		TurnNumber++;
+		
 		return MoveResult.OK;
 	}
 

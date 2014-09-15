@@ -78,7 +78,6 @@ public class BetaHantoTests {
 		HantoCoordinate destination = new HantoCoordinateACBSJH(1, 0);
 		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
 	}
-	
 
 	@Test(expected = HantoException.class)
 	public void cannotPlaceCrabTest() throws HantoException
@@ -111,5 +110,17 @@ public class BetaHantoTests {
 		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
 		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
+	}
+	
+	@Test(expected = HantoException.class)
+	public void mustPlaceButterFlyByFourthTurn() throws HantoException {
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
 	}
 }
