@@ -55,11 +55,8 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
-		checkToCoordinateIsValid(to);
-		checkForNoPieceToMoveException(from, to);
-		checkForMovingWrongColorPieceException(from);
-		checkFirstMoveIsToOriginException(to);
-
+		checkMakeMoveInputForException(pieceType, from, to);
+		
 		//Ensures that both players play their butterfly on or before the fourth turn. 
 		if ((TurnNumber > 5) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) && blueButterfly == null 
 				&& (pieceType != HantoPieceType.BUTTERFLY)) {
@@ -104,6 +101,12 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 			HantoPieces.add(blueSparrow);
 			HantoPieces.add(redSparrow);
 		}
+	}
+	
+	protected void addValidHantoPieceTypes()
+	{
+		super.addValidHantoPieceTypes();
+		ValidHantoPieceTypes.add(HantoPieceType.SPARROW);
 	}
 
 }

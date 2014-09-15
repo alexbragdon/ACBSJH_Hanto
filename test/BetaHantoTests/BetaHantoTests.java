@@ -113,14 +113,8 @@ public class BetaHantoTests {
 	}
 	
 	@Test(expected = HantoException.class)
-	public void mustPlaceButterFlyByFourthTurn() throws HantoException {
+	public void cannotPlacePieceOnOccupiedSpace() throws HantoException {
 		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
-		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
-		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
-		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
-		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
-		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
-		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
 		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
 	}
 }
