@@ -18,9 +18,12 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.common.MoveResult;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import sun.security.action.GetLongAction;
 
 /**
  * @author alexbragdon
@@ -136,6 +139,27 @@ public abstract class BaseHantoGame {
 		return board; 
 	}
 	
+
+	protected void checkMakeMoveInputForException(HantoPieceType pieceType, HantoCoordinate from,
+			HantoCoordinate to) throws HantoException
+	{
+		checkToCoordinateIsValid(to);
+		checkForNoPieceToMoveException(from, to);
+		checkForMovingWrongColorPieceException(from);
+		checkFirstMoveIsToOriginException(to);
+		checkForInvalidPieceTypeException(pieceType);
+		checkForOccupiedMoveDestinatationException(to);
+	}
+	
+	protected void checkForOccupiedMoveDestinatationException(HantoCoordinate to) throws HantoException
+	{
+		if(getPieceAt(to) != null)
+		{
+			throw new HantoException("Cannot move piece to "+(new HantoCoordinateACBSJH(to)).toString()
+					+" because the space is already occupied.");
+		}
+	}
+	
 	/**
 	 * Used for validating input on makeMove in subclasses.
 	 * Throws an exception if there is no piece to move
@@ -207,11 +231,11 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
-	protected void checkForInvalidPieceTypeException(HantoPieceType type) throws HantoException
+	protected void checkForInvalidPieceTypeException(HantoPieceType pieceType) throws HantoException
 	{
-		if(!ValidHantoPieceTypes.contains(type))
+		if(!ValidHantoPieceTypes.contains(pieceType))
 		{
-			throw new HantoException("Piece type " + type.toString() + " not allowed in " + iD.toString() + " Hanto Game");
+			throw new HantoException("Piece type " + pieceType.toString() + " not allowed in " + iD.toString() + " Hanto Game");
 		}
 	}
 	

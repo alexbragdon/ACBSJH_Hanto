@@ -49,22 +49,7 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 	 */
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
-		checkToCoordinateIsValid(to);
-		checkForNoPieceToMoveException(from, to);
-		checkForMovingWrongColorPieceException(from);
-		checkFirstMoveIsToOriginException(to);
-		
-		//if to is not a valid coordinate
-		if(to == null)
-		{
-			throw new HantoException("Cannot move piece to a null location.");
-		}
-		
-		//make sure only butterflies are in play
-		if(!pieceType.equals(HantoPieceType.BUTTERFLY))
-		{
-			throw new HantoException("Expected butterfly to be moved for Alpha Hanto, got " + pieceType.toString());
-		}
+		checkMakeMoveInputForException(pieceType, from, to);
 		
 		if(TurnNumber == 1) {
 			HantoCoordinateACBSJH toACBSJH = new HantoCoordinateACBSJH(to.getX(), to.getY());
