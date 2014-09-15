@@ -180,5 +180,55 @@ public class BetaHantoTests {
 		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
 		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(3, 0));
 	}
+	
+	@Test
+	public void redWins() throws HantoException
+	{
+		//turn 1
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
+		//turn 2
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(2, 0));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 3
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(3, 0));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
+		//turn 4
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(4, 0));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 0));
+		//turn 5
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(5, 0));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
+		//turn 6
+		MoveResult mrOK = betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(6, 0));
+		MoveResult mrWin = betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, -1));
+		assertEquals(MoveResult.OK, mrOK);
+		assertEquals(MoveResult.RED_WINS, mrWin);
+	}
+	
+	@Test
+	public void blueWins() throws HantoException
+	{
+		//turn 1
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 2
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, 0));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
+		//turn 3
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, 1));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -2));
+		//turn 4
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 2));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -3));
+		//turn 5
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 2));
+		MoveResult mrOK = betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -4));
+		//turn 6
+		MoveResult mrWin = betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
+		
+		assertEquals(MoveResult.OK, mrOK);
+		assertEquals(MoveResult.BLUE_WINS, mrWin);
+	}
 
 }
