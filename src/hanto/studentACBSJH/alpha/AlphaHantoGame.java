@@ -35,6 +35,8 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
 		
+		//check to not move other player's piece
+		
 		//if there is no piece to move that the from location, throw exception
 		if(from != null && getPieceAt(from) == null)
 		{
@@ -91,15 +93,6 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 				return piece;
 			}
 		}
-		return null;
-	}
-
-	/** (non-Javadoc)
-	 * @see hanto.common.HantoGame#getPrintableBoard()
-	 */
-	@Override
-	public String getPrintableBoard() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
