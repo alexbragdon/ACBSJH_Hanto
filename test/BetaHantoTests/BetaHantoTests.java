@@ -231,4 +231,24 @@ public class BetaHantoTests {
 		assertEquals(MoveResult.BLUE_WINS, mrWin);
 	}
 
+	@Test
+	public void testDrawCondition() throws HantoException {
+		//turn 3
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, 0));
+		//turn 2
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(2, 0));
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(3, 0));
+		//turn 3
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(4, 0));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(5, 0));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(6, 0));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(7, 0));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(8, 0));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(9, 0));
+		MoveResult okResult = betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(10, 0));
+		assertEquals(MoveResult.OK, okResult);
+		MoveResult result = betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(11, 0));
+		assertEquals(MoveResult.DRAW, result);
+	}
 }
