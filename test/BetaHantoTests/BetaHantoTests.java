@@ -69,7 +69,7 @@ public class BetaHantoTests {
 		HantoPiece placedPiece = betaHantoGame.getPieceAt(origin);
 		assertNotEquals(null, placedPiece);
 		assertEquals(HantoPlayerColor.BLUE, placedPiece.getColor());
-		assertEquals(HantoPieceType.BUTTERFLY, placedPiece.getType());
+		assertEquals(HantoPieceType.SPARROW, placedPiece.getType());
 	}
 	
 	@Test(expected = HantoException.class)
