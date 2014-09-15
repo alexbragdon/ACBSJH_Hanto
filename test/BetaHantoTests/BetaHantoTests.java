@@ -14,9 +14,11 @@ package BetaHantoTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import hanto.HantoGameFactory;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGame;
+import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
@@ -200,5 +202,17 @@ public class BetaHantoTests {
 		assertEquals(MoveResult.OK, okResult);
 		MoveResult result = betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(11, 0));
 		assertEquals(MoveResult.DRAW, result);
+	}
+	
+	@Test
+	public void testRedFirst() throws HantoException {
+		HantoGame betaHantoGame = HantoGameFactory.getInstance().makeHantoGame(
+				HantoGameID.BETA_HANTO, HantoPlayerColor.RED);
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		HantoPiece retriviedPience1 = betaHantoGame.getPieceAt(origin);
+		assertEquals(HantoPlayerColor.RED, retriviedPience1.getColor());
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
+		HantoPiece retriviedPience2 = betaHantoGame.getPieceAt(new HantoCoordinateACBSJH(1, 0));
+		assertEquals(HantoPlayerColor.BLUE, retriviedPience2.getColor());
 	}
 }
