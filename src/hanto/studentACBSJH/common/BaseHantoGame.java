@@ -169,6 +169,7 @@ public abstract class BaseHantoGame {
 		checkFirstMoveIsToOriginException(to);
 		checkForInvalidPieceTypeException(pieceType);
 		checkForOccupiedMoveDestinatationException(to);
+		checkForPieceNotInHandException(pieceType, from);
 	}
 	
 	/**
@@ -266,6 +267,28 @@ public abstract class BaseHantoGame {
 			throw new HantoException("Piece type " + pieceType.toString() + " not allowed in " + iD.toString() + " Hanto Game");
 		}
 	}
+	
+	protected void checkForPieceNotInHandException(HantoPieceType pieceType,
+			HantoCoordinate from) throws HantoException
+	{
+		if(from == null)
+		{
+			boolean pieceFound = false;
+			for(HantoPieceACBSJH hp : HantoPieces)
+			{
+				if(hp.isInHand() && hp.getType().equals(pieceType))
+				{
+					pieceFound = true;
+				}
+			}
+			if(!pieceFound)
+			{
+				throw new HantoException("A piece of type "+pieceType.toString()
+						+" is not in your hand to move onto the baord");
+			}
+		}
+	}
+	
 	
 	/** Counts how many pieces surround a butterfly of the given color.
 	 * @param color
