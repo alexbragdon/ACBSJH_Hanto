@@ -21,9 +21,14 @@ import hanto.common.HantoCoordinate;
  */
 public class HantoCoordinateACBSJH implements HantoCoordinate {
 
+	/**
+	 * x and y coordinates on the hex grid of Hanto
+	 */
 	private int X, Y;
 	
 	/**
+	 * Creates a new coordinate and given location.
+	 * 
 	 * @param Xin
 	 * @param Yin
 	 */
@@ -33,7 +38,9 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 	}
 	
 
-	/**Converts a HantoCoordinate to a HantoCoordinateACBSJH.
+	/**
+	 * Converts a HantoCoordinate to a HantoCoordinateACBSJH.
+	 * 
 	 * @param coordinate
 	 */
 	public HantoCoordinateACBSJH(HantoCoordinate coordinate)
@@ -72,7 +79,7 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 		return "(" + X + ", " + Y + ")";
 	}
 	
-	/** Checks if a tile is ajacent to this one.
+	/** Checks if a given coordinate is adjacent to this one.
 	 * @param to
 	 * @return a boolean.
 	 */

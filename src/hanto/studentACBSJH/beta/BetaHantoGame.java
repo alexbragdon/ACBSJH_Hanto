@@ -24,12 +24,32 @@ import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
 /**
+ * Controller for playing the BetaHantoGame
+ * 
  * @author alexbragdon
  *
  */
 public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 
 	/**
+	 * The number of moves that can happen before a draw
+	 */
+	private final int turnsToDraw = 12;
+	
+	/**
+	 * The number of moves that can be made before the butterfly must be placed
+	 */
+	private final int turnsToButterfly = 5;
+	
+	/**
+	 * The number of sparrow's in each player's hand.
+	 */
+	private final int sparrowsPerPlayer = 5;
+	
+	/**
+	 * Private constructed needed to extend BaseHantoGame abstract class.
+	 * This will never be called outside this class.
+	 * 
 	 * @param gameID
 	 * @param firstPlayerColor
 	 */
@@ -39,13 +59,18 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 	}
 	
 	/**
-	 * @param firstPlayerColor
+	 * Constructs a BetaHantoGame
+	 * 
+	 * @param firstPlayerColor the color of the first player to move
 	 */
 	public BetaHantoGame(HantoPlayerColor firstPlayerColor)
 	{
 		this(HantoGameID.BETA_HANTO, firstPlayerColor);
 	}
 
+	/**
+	 * Constructs a BetaHantoGame where Blue goes first.
+	 */
 	public BetaHantoGame()
 	{
 		this(HantoPlayerColor.BLUE);
@@ -59,68 +84,44 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 			HantoCoordinate to) throws HantoException {
 		checkMakeMoveInputForException(pieceType, from, to);
 		
-		checkForNoAdjacentPieceToDestination(to);
-		
 		//Ensures that both players play their butterfly on or before the fourth turn. 
-		if ((TurnNumber > 5) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) && blueButterfly == null 
+		if ((TurnNumber > turnsToButterfly) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) && blueButterfly == null 
 				&& (pieceType != HantoPieceType.BUTTERFLY)) {
 			throw new HantoException("Must place butterfly on or before the fourth turn!!");
 		}
-		if ((TurnNumber > 5) && (getCurrentPlayersTurn() == HantoPlayerColor.RED) && redButterfly == null 
+		if ((TurnNumber > turnsToButterfly) && (getCurrentPlayersTurn() == HantoPlayerColor.RED) && redButterfly == null 
 				&& (pieceType != HantoPieceType.BUTTERFLY)) {
 			throw new HantoException("Must place butterfly on or before the fourth turn!!");
 		}
-			
-		
 		
 		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);
 		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
 		
-		//Updates the the butterflys location to prevent having to iterate too many times. 
+		//Saves the the butterfly's location to prevent having to search for it in the future. 
 		if ((pieceType == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE)) {
 			blueButterfly = pieceToMove;
-			blueButterfly.setLocation(new HantoCoordinateACBSJH(to));
 		}
-		if ((pieceType == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.RED)) {
+		else if ((pieceType == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.RED)) {
 			redButterfly = pieceToMove;
-			redButterfly.setLocation(new HantoCoordinateACBSJH(to));
 		}
 
 		TurnNumber++;
 		
-		
+		//Determine and return move result
+		MoveResult mr = MoveResult.OK;
 		if (countPiecesSurroundingButterfly(HantoPlayerColor.RED) == 6) {
-			return MoveResult.BLUE_WINS;
-		} else if (countPiecesSurroundingButterfly(HantoPlayerColor.BLUE) == 6) {
-			return MoveResult.RED_WINS;
+			mr = MoveResult.BLUE_WINS;
 		}
-		if (TurnNumber == 12) {
-			return MoveResult.DRAW;
+		else if (countPiecesSurroundingButterfly(HantoPlayerColor.BLUE) == 6) {
+			mr = MoveResult.RED_WINS;
 		}
-		
-		return MoveResult.OK;
+		else if (TurnNumber == turnsToDraw) {
+			mr = MoveResult.DRAW;
+		}
+		return mr;
 	}
 	
-	private void checkForNoAdjacentPieceToDestination(HantoCoordinate to) throws HantoException
-	{
-		if(TurnNumber != 0)
-		{
-			boolean foundAdjacentPiece = false;
-			for(HantoPieceACBSJH hp : HantoPieces)
-			{
-				if(!hp.isInHand() && hp.getLocation().isAdjacent(to))
-				{
-					foundAdjacentPiece = true;
-				}
-			}
-			if(!foundAdjacentPiece)
-			{
-				throw new HantoException("The destination "+(new HantoCoordinateACBSJH(to)).toString() 
-						+ " is not adjacent to any piece and therefor not a valid destination"); 
-			}
-		}
-	}
-
+	
 	/** (non-Javadoc)
 	 * @see hanto.studentACBSJH.common.BaseHantoGame#setupHands()
 	 */
@@ -131,7 +132,7 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 		HantoPieceACBSJH redButterfly = new HantoPieceACBSJH(HantoPlayerColor.RED);
 		HantoPieces.add(redButterfly);
 		
-		for (int i=0; i<5; i++) {
+		for (int i=0; i<sparrowsPerPlayer; i++) {
 			HantoPieceACBSJH blueSparrow = new HantoPieceACBSJH(HantoPlayerColor.BLUE, HantoPieceType.SPARROW);
 			HantoPieceACBSJH redSparrow = new HantoPieceACBSJH(HantoPlayerColor.RED, HantoPieceType.SPARROW);
 			HantoPieces.add(blueSparrow);
@@ -139,6 +140,10 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 		}
 	}
 	
+	/** (non-Javadoc)
+	 * @see hanto.studentACBSJH.common.BaseHantoGame#addValidHantoPieceTypes()
+	 */
+	@Override
 	protected void addValidHantoPieceTypes()
 	{
 		super.addValidHantoPieceTypes();

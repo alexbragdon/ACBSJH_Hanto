@@ -35,10 +35,19 @@ public abstract class BaseHantoGame {
 	 */
 	protected Collection<HantoPieceACBSJH> HantoPieces;
 	
+	/**
+	 * A list of the types of Hanto pieces used in this game.
+	 */
 	protected Collection<HantoPieceType> ValidHantoPieceTypes;
 	
+	/**
+	 * The type of Hanto Game this is.
+	 */
 	protected HantoGameID iD;
 	
+	/**
+	 * The color of each player.
+	 */
 	protected HantoPlayerColor firstPlayer, secondPlayer;
 	
 	/**
@@ -47,15 +56,23 @@ public abstract class BaseHantoGame {
 	 */
 	protected int TurnNumber; 
 	
+	/**
+	 * The Hanto Piece that is the red player's butterfly. This
+	 * is set by makeMove as soon as it see's it.
+	 */
 	protected HantoPieceACBSJH redButterfly = null;
+	
+	/**
+	 * The Hanto Piece that is the blue player's butterfly. This
+	 * is set by makeMove as soon as it see's it.
+	 */
 	protected HantoPieceACBSJH blueButterfly = null;
 	
 	/**
 	 * Constructs things in common between all Hanto games.
-	 */
-	/**
-	 * @param gameID
-	 * @param firstPlayerColor
+	 * 
+	 * @param gameID the type of hanto game this is
+	 * @param firstPlayerColor color of the first player to move
 	 */
 	protected BaseHantoGame(HantoGameID gameID, HantoPlayerColor firstPlayerColor)
 	{
@@ -93,7 +110,9 @@ public abstract class BaseHantoGame {
 	protected abstract void setupHands();
 
 	/**
-	 * 
+	 *  Creates the list of valid Hanto pieces for this game. Sub classes
+	 *  of this class should override this method and add their own valid pieces.
+	 *  In this method we assume every Hanto game will at least have a butterfly in it.
 	 */
 	protected void addValidHantoPieceTypes()
 	{
@@ -101,7 +120,9 @@ public abstract class BaseHantoGame {
 	}
 	
 
-	/** Moves a hanto piece from the hand to the board.
+	/**
+	 * Searches for a Hanto piece of a certain type that is in the hand.
+	 * 
 	 * @param pieceType
 	 * @return a hantoPieceACBSJH or null.
 	 */
@@ -170,10 +191,40 @@ public abstract class BaseHantoGame {
 		checkForInvalidPieceTypeException(pieceType);
 		checkForOccupiedMoveDestinatationException(to);
 		checkForPieceNotInHandException(pieceType, from);
+		checkForNoAdjacentPieceToDestination(to);
 	}
 	
 	/**
-	 * @param to
+	 * Throws an exception if there is no HantoPiece adjacent to the given coordinate.
+	 * 
+	 * @param to 	the coordinate to check adjacency to
+	 * @throws HantoException
+	 */
+	private void checkForNoAdjacentPieceToDestination(HantoCoordinate to) throws HantoException
+	{
+		if(TurnNumber != 0)
+		{
+			boolean foundAdjacentPiece = false;
+			for(HantoPieceACBSJH hp : HantoPieces)
+			{
+				if(!hp.isInHand() && hp.getLocation().isAdjacent(to))
+				{
+					foundAdjacentPiece = true;
+				}
+			}
+			if(!foundAdjacentPiece)
+			{
+				throw new HantoException("The destination "+(new HantoCoordinateACBSJH(to)).toString() 
+						+ " is not adjacent to any piece and therefor not a valid destination"); 
+			}
+		}
+	}
+
+	
+	/**
+	 * Throws an exception if the location given is occupied so that a piece cannot move there.
+	 * 
+	 * @param to the location to check
 	 * @throws HantoException
 	 */
 	protected void checkForOccupiedMoveDestinatationException(HantoCoordinate to) throws HantoException
@@ -256,7 +307,9 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
-	/** Ensures that only allowable pieces are played in any hanto game.
+	/**
+	 * Ensures that only allowable pieces are played in any Hanto game.
+	 * 
 	 * @param pieceType
 	 * @throws HantoException
 	 */
@@ -268,7 +321,9 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
-	/** Confirms that the piece in the hand before it's moved.
+	/**
+	 * Throws an exception if the piece trying to be moves from the hand, is not in the hand.
+	 * 
 	 * @param pieceType
 	 * @param from
 	 * @throws HantoException
@@ -295,7 +350,9 @@ public abstract class BaseHantoGame {
 	}
 	
 	
-	/** Counts how many pieces surround a butterfly of the given color.
+	/**
+	 * Counts how many pieces surround a butterfly of the given color.
+	 * 
 	 * @param color
 	 * @return count if the butterfly is placed, zero otherwise.
 	 */

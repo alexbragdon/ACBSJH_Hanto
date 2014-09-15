@@ -24,12 +24,19 @@ import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
 /**
+ * A class for playing an AlphaHantoGame. In Alpha Hanto, blue always moves first,
+ * each player has one butterfly, and once each is on the board in a valid location,
+ * the game ends in a draw.
+ * 
  * @author alexbragdon
  *
  */
 public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 	
 	/**
+	 * Private constructed needed to extend BaseHantoGame abstract class.
+	 * This will never be called outside this class.
+	 * 
 	 * @param gameID
 	 * @param firstPlayerColor
 	 */
@@ -38,6 +45,9 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 		super(gameID, firstPlayerColor);
 	}
 	
+	/**
+	 * Constructs an AlphaHanto game where the first player to move is always Blue.
+	 */
 	public AlphaHantoGame()
 	{
 		this(HantoGameID.ALPHA_HANTO, HantoPlayerColor.BLUE);

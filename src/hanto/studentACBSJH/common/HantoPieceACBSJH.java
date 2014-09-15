@@ -22,8 +22,20 @@ import hanto.common.HantoPlayerColor;
  */
 public class HantoPieceACBSJH implements HantoPiece {
 	
+	/**
+	 * The type of Hanto Piece this is.
+	 */
 	private HantoPieceType type; 
+	
+	/**
+	 * The color of this piece, denoting which player the piece belongs to.
+	 */
 	private HantoPlayerColor playerColor;
+	
+	/**
+	 * The location of this piece. If null, then the piece is in a player's
+	 * hand.
+	 */
 	private HantoCoordinateACBSJH location = null;
 	
 	/**
@@ -34,6 +46,8 @@ public class HantoPieceACBSJH implements HantoPiece {
 	}
 	
 	/**
+	 * Creates a piece of a certain color and type
+	 * 
 	 * @param color
 	 * @param type
 	 */
@@ -72,11 +86,20 @@ public class HantoPieceACBSJH implements HantoPiece {
 		location = newLocation;
 	}
 
+	/**
+	 * Says if this piece is in a player's hand. This is denoted by the location
+	 * of this piece being null.
+	 * 
+	 * @return if the piece is in a player's hand
+	 */
 	public boolean isInHand()
 	{
 		return location == null;
 	}
 	
+	/***
+	 * Returns a string with the type location and color of this piece
+	 */
 	public String toString()
 	{
 		return type.toString() + " @ " + location.toString();
