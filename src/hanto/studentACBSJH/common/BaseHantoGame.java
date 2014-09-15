@@ -244,7 +244,7 @@ public abstract class BaseHantoGame {
 			int count = 0;
 			HantoCoordinate butterfly = blueButterfly.getLocation();
 			for(HantoPieceACBSJH hp : HantoPieces){
-				if (hp.getLocation().isAdjacent(butterfly)) {
+				if (!hp.isInHand() && hp.getLocation().isAdjacent(butterfly)) {
 					count++;
 				}
 			}
@@ -253,7 +253,7 @@ public abstract class BaseHantoGame {
 			int count = 0;
 			HantoCoordinate butterfly = redButterfly.getLocation();
 			for(HantoPieceACBSJH hp : HantoPieces){
-				if (hp.getLocation().isAdjacent(butterfly)) {
+				if (!hp.isInHand() && hp.getLocation().isAdjacent(butterfly)) {
 					count++;
 				}
 			}
