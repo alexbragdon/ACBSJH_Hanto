@@ -220,7 +220,7 @@ public class AlphaHantoTests {
 		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
 		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, destination);
 		String board = alphaHantoGame.getPrintableBoard();
-		String expected = "-=AlphaHantoGame=-\nButterfly @ (0, 0)\nButterfly @ (0, 1)\n-end-";
+		String expected = "-=AlphaHantoGame=-\nBLUE Butterfly @ (0, 0)\nRED Butterfly @ (0, 1)\n-end-";
 		assertEquals(expected, board);
 	}
 }
