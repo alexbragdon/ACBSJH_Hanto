@@ -20,6 +20,7 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentACBSJH.common.BaseHantoGame;
+import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
 /**
@@ -34,26 +35,18 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** (non-Javadoc)
-	 * @see hanto.common.HantoGame#getPieceAt(hanto.common.HantoCoordinate)
-	 */
-	@Override
-	public HantoPiece getPieceAt(HantoCoordinate where) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** (non-Javadoc)
-	 * @see hanto.common.HantoGame#getPrintableBoard()
-	 */
-	@Override
-	public String getPrintableBoard() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		//if to is not a valid coordinate
+		if(to == null)
+		{
+			throw new HantoException("Cannot move piece to a null location.");
+		}
+			
+		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);
+		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
+			
+		TurnNumber++;
+		return MoveResult.OK;
 	}
 
 	/** (non-Javadoc)
