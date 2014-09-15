@@ -112,13 +112,13 @@ public abstract class BaseHantoGame {
 	/**
 	 * Used for validating input on makeMove in subclasses.
 	 * Throws an exception if there is no piece to move
-	 * at the from location.
+	 * at the 'from' location.
 	 * 
 	 * @param from
 	 * @param to
 	 * @throws HantoException
 	 */
-	protected void checkForNoPieceOnBoardToMoveException(HantoCoordinate from, HantoCoordinate to) throws HantoException
+	protected void checkForNoPieceToMoveException(HantoCoordinate from, HantoCoordinate to) throws HantoException
 	{
 		if(from != null && getPieceAt(from) == null)
 		{

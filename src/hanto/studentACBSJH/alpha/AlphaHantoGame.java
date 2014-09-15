@@ -35,7 +35,7 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
 		checkToCoordinateIsValid(to);
-		checkForNoPieceOnBoardToMoveException(from, to);
+		checkForNoPieceToMoveException(from, to);
 		checkForMovingWrongColorPieceException(from);
 		checkFirstMoveIsToOriginException(to);
 		

@@ -78,8 +78,7 @@ public class AlphaHantoTests {
 	@Test
 	public void emptyCoordinateTest()
 	{
-		HantoGame alphaHanto = new AlphaHantoGame();
-		assertEquals(null, alphaHanto.getPieceAt(new HantoCoordinateACBSJH(0, 0)));
+		assertEquals(null, alphaHantoGame.getPieceAt(new HantoCoordinateACBSJH(0, 0)));
 	}
 	
 	/**
@@ -88,10 +87,9 @@ public class AlphaHantoTests {
 	@Test
 	public void correctFirstBlueMove() throws HantoException
 	{
-		HantoGame alphaHanto = new AlphaHantoGame();
-		MoveResult result = alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		MoveResult result = alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		assertEquals(MoveResult.OK, result);
-		HantoPiece placedPiece = alphaHanto.getPieceAt(origin);
+		HantoPiece placedPiece = alphaHantoGame.getPieceAt(origin);
 		assertNotEquals(null, placedPiece);
 		assertEquals(HantoPlayerColor.BLUE, placedPiece.getColor());
 		assertEquals(HantoPieceType.BUTTERFLY, placedPiece.getType());
@@ -100,12 +98,11 @@ public class AlphaHantoTests {
 	@Test
 	public void correctSecondRedMove() throws HantoException 
 	{
-		HantoGame alphaHanto = new AlphaHantoGame();
-		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
-		MoveResult result = alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, destination);
+		MoveResult result = alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, destination);
 		assertEquals(MoveResult.DRAW, result);
-		HantoPiece placedPiece = alphaHanto.getPieceAt(destination);
+		HantoPiece placedPiece = alphaHantoGame.getPieceAt(destination);
 		assertNotEquals(null, placedPiece);
 		assertEquals(HantoPlayerColor.RED, placedPiece.getColor());
 		assertEquals(HantoPieceType.BUTTERFLY, placedPiece.getType());
@@ -150,56 +147,49 @@ public class AlphaHantoTests {
 	@Test(expected = HantoException.class)
 	public void incorrectFirstBlueMoveLocation() throws HantoException
 	{
-		HantoGame alphaHanto = new AlphaHantoGame();
-		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 1));
+		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 1));
 	}
 	
 	@Test(expected = HantoException.class)
 	public void incorrectFirstBlueMovePieceType() throws HantoException
 	{
-		HantoGame alphaHanto = new AlphaHantoGame();
-		alphaHanto.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 0));
+		alphaHantoGame.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 0));
 	}
 	
 	@Test(expected = HantoException.class)
 	public void incorrectFirstNullLocation() throws HantoException
 	{
-		HantoGame alphaHanto = new AlphaHantoGame();
-		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, null);
+		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, null);
 	}
 	
 	@Test(expected = HantoException.class)
 	public void incorrectSecondMoveLocation() throws HantoException
 	{
-		HantoGame alphaHanto = new AlphaHantoGame();
-		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
-		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 1));
+		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 1));
 	}
 
 	@Test(expected = HantoException.class)
 	public void cannotMoveNonExsistantPieceFromLocation() throws HantoException
 	{
-		HantoGame alphaHanto = new AlphaHantoGame();
-		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(0, 1));
+		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(0, 1));
 	}
 	
 	@Test(expected = HantoException.class)
 	public void cannotMoveOtherPlayersPieceOnSecondTurnTest() throws HantoException
 	{
-		HantoGame alphaHanto = new AlphaHantoGame();
-		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
-		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
+		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
 	}
 	
 	@Test
 	public void testPrintableBoard() throws HantoException
 	{
-		HantoGame alphaHanto = new AlphaHantoGame();
-		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
-		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, destination);
-		String board = alphaHanto.getPrintableBoard();
+		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, destination);
+		String board = alphaHantoGame.getPrintableBoard();
 		String expected = "-=AlphaHantoGame=-\nButterfly @ (0, 0)\nButterfly @ (0, 1)\n-end-";
 		assertEquals(expected, board);
 	}

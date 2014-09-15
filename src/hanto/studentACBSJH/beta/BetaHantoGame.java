@@ -35,16 +35,17 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
+		checkToCoordinateIsValid(to);
+		checkForNoPieceToMoveException(from, to);
+		checkForMovingWrongColorPieceException(from);
+		checkFirstMoveIsToOriginException(to);
+
 		
-		//if to is not a valid coordinate
-		if(to == null)
-		{
-			throw new HantoException("Cannot move piece to a null location.");
-		}
-			
 		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);
 		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
-			
+		
+		
+		
 		TurnNumber++;
 		return MoveResult.OK;
 	}
