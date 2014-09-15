@@ -191,4 +191,16 @@ public class AlphaHantoTests {
 		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
 		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
 	}
+	
+	@Test
+	public void testPrintableBoard() throws HantoException
+	{
+		HantoGame alphaHanto = new AlphaHantoGame();
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, destination);
+		String board = alphaHanto.getPrintableBoard();
+		String expected = "-=AlphaHantoGame=-\nButterfly @ (0, 0)\nButterfly @ (0, 1)\n-end-";
+		assertEquals(expected, board);
+	}
 }
