@@ -80,7 +80,14 @@ public class BetaHantoTests {
 	}
 	
 	@Test(expected = HantoException.class)
-	public void mustPlaceButterFlyByFourthTurn() {
-		
+	public void mustPlaceButterFlyByFourthTurn() throws HantoException {
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
 	}
 }
