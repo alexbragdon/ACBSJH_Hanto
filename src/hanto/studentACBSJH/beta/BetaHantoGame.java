@@ -57,6 +57,8 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 			HantoCoordinate to) throws HantoException {
 		checkMakeMoveInputForException(pieceType, from, to);
 		
+		checkForNoAdjacentPieceToDestination(to);
+		
 		//Ensures that both players play their butterfly on or before the fourth turn. 
 		if ((TurnNumber > 5) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) && blueButterfly == null 
 				&& (pieceType != HantoPieceType.BUTTERFLY)) {
@@ -85,9 +87,9 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 		TurnNumber++;
 		
 		
-		if (countSurroundingPieces(HantoPlayerColor.BLUE) == 6) {
+		if (countPiecesSurroundingButterfly(HantoPlayerColor.RED) == 6) {
 			return MoveResult.BLUE_WINS;
-		} else if (countSurroundingPieces(HantoPlayerColor.RED) == 6) {
+		} else if (countPiecesSurroundingButterfly(HantoPlayerColor.BLUE) == 6) {
 			return MoveResult.RED_WINS;
 		}
 		if (TurnNumber == 11) {
@@ -95,6 +97,26 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 		}
 		
 		return MoveResult.OK;
+	}
+	
+	private void checkForNoAdjacentPieceToDestination(HantoCoordinate to) throws HantoException
+	{
+		if(TurnNumber != 0)
+		{
+			boolean foundAdjacentPiece = false;
+			for(HantoPieceACBSJH hp : HantoPieces)
+			{
+				if(!hp.isInHand() && hp.getLocation().isAdjacent(to))
+				{
+					foundAdjacentPiece = true;
+				}
+			}
+			if(!foundAdjacentPiece)
+			{
+				throw new HantoException("The destination "+(new HantoCoordinateACBSJH(to)).toString() 
+						+ " is not adjacent to any piece and therefor not a valid destination"); 
+			}
+		}
 	}
 
 	/** (non-Javadoc)

@@ -239,7 +239,7 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
-	public int countSurroundingPieces(HantoPlayerColor color) {
+	public int countPiecesSurroundingButterfly(HantoPlayerColor color) {
 		if (color == HantoPlayerColor.BLUE && blueButterfly != null) {
 			int count = 0;
 			HantoCoordinate butterfly = blueButterfly.getLocation();

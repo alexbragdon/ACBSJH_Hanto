@@ -150,5 +150,19 @@ public class BetaHantoTests {
 		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
 		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 2));
 	}
+	
+	@Test(expected = HantoException.class)
+	public void cannotPlacePieceInNonAdjacentLocation() throws HantoException
+	{
+		//turn 1
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 2
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 0));
+		//turn 3
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(3, 0));
+	}
 
 }
