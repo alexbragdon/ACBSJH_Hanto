@@ -94,7 +94,7 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 		} else if (countPiecesSurroundingButterfly(HantoPlayerColor.BLUE) == 6) {
 			return MoveResult.RED_WINS;
 		}
-		if (TurnNumber == 11) {
+		if (TurnNumber == 12) {
 			return MoveResult.DRAW;
 		}
 		
