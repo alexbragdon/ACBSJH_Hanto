@@ -33,7 +33,7 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 	}
 	
 
-	/**
+	/**Converts a HantoCoordinate to a HantoCoordinateACBSJH.
 	 * @param coordinate
 	 */
 	public HantoCoordinateACBSJH(HantoCoordinate coordinate)
@@ -58,7 +58,7 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 		return Y;
 	}
 	
-	/**
+	/** If two coordinates are equal.
 	 * @param coordinate
 	 * @return a string.
 	 */
@@ -72,7 +72,7 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 		return "(" + X + ", " + Y + ")";
 	}
 	
-	/**
+	/** Checks if a tile is ajacent to this one.
 	 * @param to
 	 * @return a boolean.
 	 */
