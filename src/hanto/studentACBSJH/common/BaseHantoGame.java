@@ -109,6 +109,15 @@ public abstract class BaseHantoGame {
 		return board; 
 	}
 	
+	/**
+	 * Used for validating input on makeMove in subclasses.
+	 * Throws an exception if there is no piece to move
+	 * at the from location.
+	 * 
+	 * @param from
+	 * @param to
+	 * @throws HantoException
+	 */
 	protected void checkForNoPieceOnBoardToMoveException(HantoCoordinate from, HantoCoordinate to) throws HantoException
 	{
 		if(from != null && getPieceAt(from) == null)
@@ -117,6 +126,14 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
+	/**
+	 * Used for validating input on makeMove in subclasses.
+	 * Throws an exception if the wrong player is moving a piece
+	 * on the board. 
+	 * 
+	 * @param from
+	 * @throws HantoException
+	 */
 	protected void checkForMovingWrongColorPieceException(HantoCoordinate from) throws HantoException
 	{
 		if(from != null)
@@ -130,6 +147,13 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
+	/**
+	 * Used for validating input on makeMove in subclasses.
+	 * Throws an exception if the first move is not on (0,0)  
+	 * 
+	 * @param to
+	 * @throws HantoException
+	 */
 	protected void checkFirstMoveIsToOriginException(HantoCoordinate to) throws HantoException
 	{
 		HantoCoordinateACBSJH origin = new HantoCoordinateACBSJH(0, 0);
@@ -140,6 +164,13 @@ public abstract class BaseHantoGame {
 		}	
 	}
 	
+	/**
+	 * Used for validating input on makeMove in subclasses.
+	 * Throws an exception if to coordinate is null 
+	 * 
+	 * @param to coordinate MakeMove
+	 * @throws HantoException
+	 */
 	protected void checkToCoordinateIsValid(HantoCoordinate to) throws HantoException
 	{
 		//if to is not a valid coordinate
