@@ -63,7 +63,7 @@ public class BetaHantoTests {
 	}
 	
 	@Test
-	public void testMakePieceOtherThanButterfly() throws HantoException {
+	public void testPlacePieceSparrow() throws HantoException {
 		MoveResult result = betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
 		assertEquals(MoveResult.OK, result);
 		HantoPiece placedPiece = betaHantoGame.getPieceAt(origin);
@@ -73,7 +73,7 @@ public class BetaHantoTests {
 	}
 	
 	@Test(expected = HantoException.class)
-	public void testCantMoveAllreadyPlacePieces() throws HantoException {
+	public void testCannotMoveAllreadyPlacePieces() throws HantoException {
 		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		HantoCoordinate destination = new HantoCoordinateACBSJH(1, 0);
 		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
@@ -117,4 +117,38 @@ public class BetaHantoTests {
 		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
 	}
+	
+	@Test(expected = HantoException.class)
+	public void blueDoesNotPlaceButterFlyByFourthTurn() throws HantoException
+	{
+		//turn 1
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 2
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 0));
+		//turn 3
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, -1));
+		//turn 4
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, 0));
+	}
+	
+	@Test(expected = HantoException.class)
+	public void redDoesNotPlaceButterFlyByFourthTurn() throws HantoException
+	{
+		//turn 1
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 2
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 0));
+		//turn 3
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, -1));
+		//turn 4
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
+		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 2));
+	}
+
 }
