@@ -101,9 +101,9 @@ public abstract class BaseHantoGame {
 	}
 	
 
-	/**
+	/** Moves a hanto piece from the hand to the board.
 	 * @param pieceType
-	 * @return nothing.
+	 * @return a hantoPieceACBSJH or null.
 	 */
 	protected HantoPieceACBSJH getPieceFromHand(HantoPieceType pieceType)
 	{
@@ -118,9 +118,9 @@ public abstract class BaseHantoGame {
 		return null;
 	}
 	
-	/**
+	/** Returns whatever piece is at a given location.
 	 * @param where
-	 * @return nothing.
+	 * @return either a piece or null.
 	 */
 	public HantoPiece getPieceAt(HantoCoordinate where) {
 		for(HantoPieceACBSJH piece : HantoPieces)
@@ -154,7 +154,7 @@ public abstract class BaseHantoGame {
 	}
 	
 
-	/**
+	/** Part of the checks used to determine if a move was valid or not.
 	 * @param pieceType
 	 * @param from
 	 * @param to
@@ -255,7 +255,7 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
-	/**
+	/** Ensures that only allowable pieces are played in any hanto game.
 	 * @param pieceType
 	 * @throws HantoException
 	 */
@@ -267,7 +267,7 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
-	/**
+	/** Counts how many pieces surround a butterfly of the given color.
 	 * @param color
 	 * @return count if the butterfly is placed, zero otherwise.
 	 */

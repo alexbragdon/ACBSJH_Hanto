@@ -128,6 +128,9 @@ public class BetaHantoTests {
 		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
 	}
 	
+	/**
+	 * @throws HantoException
+	 */
 	@Test(expected = HantoException.class)
 	public void blueDoesNotPlaceButterFlyByFourthTurn() throws HantoException
 	{
@@ -144,6 +147,9 @@ public class BetaHantoTests {
 		betaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, 0));
 	}
 	
+	/**
+	 * @throws HantoException
+	 */
 	@Test(expected = HantoException.class)
 	public void redDoesNotPlaceButterFlyByFourthTurn() throws HantoException
 	{
