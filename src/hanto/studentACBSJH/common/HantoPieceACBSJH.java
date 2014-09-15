@@ -33,6 +33,10 @@ public class HantoPieceACBSJH implements HantoPiece {
 		this(color, HantoPieceType.BUTTERFLY);
 	}
 	
+	/**
+	 * @param color
+	 * @param type
+	 */
 	public HantoPieceACBSJH(HantoPlayerColor color, HantoPieceType type) {
 		playerColor = color;
 		this.type = type;
