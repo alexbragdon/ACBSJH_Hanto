@@ -157,7 +157,7 @@ public class AlphaHantoTests {
 	}
 	
 	@Test(expected = HantoException.class)
-	public void incorrectFirstNullLocation() throws HantoException
+	public void incorrectMoveToNullLocation() throws HantoException
 	{
 		alphaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, null);
 	}

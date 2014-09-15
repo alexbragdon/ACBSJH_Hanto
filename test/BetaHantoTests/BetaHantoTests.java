@@ -78,4 +78,38 @@ public class BetaHantoTests {
 		HantoCoordinate destination = new HantoCoordinateACBSJH(1, 0);
 		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
 	}
+	
+
+	@Test(expected = HantoException.class)
+	public void cannotPlaceCrabTest() throws HantoException
+	{
+		betaHantoGame.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 0));
+	}
+	
+	@Test(expected = HantoException.class)
+	public void incorrectMoveToNullLocation() throws HantoException
+	{
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, null);
+	}
+	
+	@Test(expected = HantoException.class)
+	public void incorrectSecondMoveLocation() throws HantoException
+	{
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 1));
+	}
+	
+	@Test(expected = HantoException.class)
+	public void cannotMoveNonExsistantPieceFromLocation() throws HantoException
+	{
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(0, 1));
+	}
+	
+	@Test(expected = HantoException.class)
+	public void cannotMoveOtherPlayersPieceOnSecondTurnTest() throws HantoException
+	{
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
+	}
 }

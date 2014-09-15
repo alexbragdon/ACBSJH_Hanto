@@ -14,6 +14,7 @@ package hanto.studentACBSJH.common;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
+import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
@@ -33,6 +34,12 @@ public abstract class BaseHantoGame {
 	 */
 	protected Collection<HantoPieceACBSJH> HantoPieces;
 	
+	protected Collection<HantoPieceType> ValidHantoPieceTypes;
+	
+	protected HantoGameID iD;
+	
+	protected HantoPlayerColor firstPlayer, secondPlayer;
+	
 	/**
 	 * The number of the turn being played. This variable must
 	 * be incremented by MakeMove.
@@ -42,11 +49,23 @@ public abstract class BaseHantoGame {
 	/**
 	 * Constructs things in common between all Hanto games.
 	 */
-	protected BaseHantoGame()
+	protected BaseHantoGame(HantoGameID gameID, HantoPlayerColor firstPlayerColor)
 	{
+		iD = gameID;
+		firstPlayer = firstPlayerColor;
+		if(firstPlayer.equals(HantoPlayerColor.BLUE))
+		{
+			secondPlayer = HantoPlayerColor.RED;
+		}
+		else
+		{
+			secondPlayer = HantoPlayerColor.BLUE;
+		}
 		HantoPieces = new ArrayList<HantoPieceACBSJH>();
+		ValidHantoPieceTypes = new ArrayList<HantoPieceType>();
 		TurnNumber = 0;
 		setupHands();
+		addValidHantoPieceTypes();
 	}
 	
 	/**
@@ -56,7 +75,7 @@ public abstract class BaseHantoGame {
 	 */
 	protected HantoPlayerColor getCurrentPlayersTurn()
 	{
-		return (TurnNumber % 2 == 0) ? HantoPlayerColor.BLUE : HantoPlayerColor.RED;
+		return (TurnNumber % 2 == 0) ? firstPlayer : secondPlayer;
 	}
 	
 	/**
@@ -65,6 +84,11 @@ public abstract class BaseHantoGame {
 	 */
 	protected abstract void setupHands();
 
+	protected void addValidHantoPieceTypes()
+	{
+		ValidHantoPieceTypes.add(HantoPieceType.BUTTERFLY);
+	}
+	
 	protected HantoPieceACBSJH getPieceFromHand(HantoPieceType pieceType)
 	{
 		for(HantoPieceACBSJH hp : HantoPieces)
@@ -177,6 +201,14 @@ public abstract class BaseHantoGame {
 		if(to == null)
 		{
 			throw new HantoException("Cannot move piece to a null location.");
+		}
+	}
+	
+	protected void checkForInvalidPieceTypeException(HantoPieceType type) throws HantoException
+	{
+		if(!ValidHantoPieceTypes.contains(type))
+		{
+			throw new HantoException("Piece type " + type.toString() + " not allowed in " + iD.toString() + " Hanto Game");
 		}
 	}
 	

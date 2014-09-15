@@ -15,6 +15,7 @@ package hanto.studentACBSJH.beta;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGame;
+import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
@@ -28,6 +29,25 @@ import hanto.studentACBSJH.common.HantoPieceACBSJH;
  *
  */
 public class BetaHantoGame extends BaseHantoGame implements HantoGame {
+
+	/**
+	 * @param gameID
+	 * @param firstPlayerColor
+	 */
+	private BetaHantoGame(HantoGameID gameID,
+			HantoPlayerColor firstPlayerColor) {
+		super(gameID, firstPlayerColor);
+	}
+	
+	public BetaHantoGame(HantoPlayerColor firstPlayerColor)
+	{
+		this(HantoGameID.BETA_HANTO, firstPlayerColor);
+	}
+
+	public BetaHantoGame()
+	{
+		this(HantoPlayerColor.BLUE);
+	}
 
 	/** (non-Javadoc)
 	 * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
