@@ -95,7 +95,7 @@ public class BetaHantoTests {
 	public void incorrectSecondMoveLocation() throws HantoException
 	{
 		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
-		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 1));
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(1, 1));
 	}
 	
 	@Test(expected = HantoException.class)
