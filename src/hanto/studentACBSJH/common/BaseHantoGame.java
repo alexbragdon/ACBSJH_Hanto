@@ -268,6 +268,11 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
+	/** Confirms that the piece in the hand before it's moved.
+	 * @param pieceType
+	 * @param from
+	 * @throws HantoException
+	 */
 	protected void checkForPieceNotInHandException(HantoPieceType pieceType,
 			HantoCoordinate from) throws HantoException
 	{

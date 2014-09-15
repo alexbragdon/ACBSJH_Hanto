@@ -58,14 +58,14 @@ public class HantoPieceACBSJH implements HantoPiece {
 		return type;
 	}
 	
-	/**
+	/** Gets the location of the piece.
 	 * @return
 	 */
 	public HantoCoordinateACBSJH getLocation() {
 		return location;
 	}
 	
-	/**
+	/** Sets the Location of the piece.
 	 * @param newLocation
 	 */
 	public void setLocation(HantoCoordinateACBSJH newLocation) {
