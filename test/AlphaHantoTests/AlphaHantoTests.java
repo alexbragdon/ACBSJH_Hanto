@@ -183,4 +183,12 @@ public class AlphaHantoTests {
 		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(0, 1));
 	}
 	
+	@Test(expected = HantoException.class)
+	public void cannotMoveOtherPlayersPieceOnSecondTurnTest() throws HantoException
+	{
+		HantoGame alphaHanto = new AlphaHantoGame();
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
+		alphaHanto.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
+	}
 }

@@ -151,7 +151,7 @@ public class AlphaHantoTestsPollice {
 	 * @throws HantoException
 	 */
 	@Test
-	public void redMakesValidSecondMoveAndGameIsDrawn() throws HantoException {
+	public void redMakesValidSecondMoveAndGameIsDraw() throws HantoException {
 		game.makeMove(HantoPieceType.BUTTERFLY, null, new TestHantoCoordinate(0, 0));
 		final MoveResult mr = game.makeMove(HantoPieceType.BUTTERFLY, null,
 				new TestHantoCoordinate(-1, 1));
