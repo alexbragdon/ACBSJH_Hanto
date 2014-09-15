@@ -39,6 +39,9 @@ public abstract class BaseHantoGame {
 	 */
 	protected int TurnNumber; 
 	
+	protected HantoPiece redButterfly = null;
+	protected HantoPiece blueButterfly = null;
+	
 	/**
 	 * Constructs things in common between all Hanto games.
 	 */

@@ -77,4 +77,9 @@ public class BetaHantoTests {
 		HantoCoordinate destination = new HantoCoordinateACBSJH(1, 0);
 		betaHanto.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
 	}
+	
+	@Test(expected = HantoException.class)
+	public void mustPlaceButterFlyByFourthTurn() {
+		
+	}
 }
