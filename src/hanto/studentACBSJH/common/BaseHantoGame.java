@@ -46,8 +46,8 @@ public abstract class BaseHantoGame {
 	 */
 	protected int TurnNumber; 
 	
-	protected HantoPiece redButterfly = null;
-	protected HantoPiece blueButterfly = null;
+	protected HantoPieceACBSJH redButterfly = null;
+	protected HantoPieceACBSJH blueButterfly = null;
 	
 	/**
 	 * Constructs things in common between all Hanto games.
@@ -212,6 +212,30 @@ public abstract class BaseHantoGame {
 		if(!ValidHantoPieceTypes.contains(type))
 		{
 			throw new HantoException("Piece type " + type.toString() + " not allowed in " + iD.toString() + " Hanto Game");
+		}
+	}
+	
+	public int countSurroundingPieces(HantoPlayerColor color) {
+		if (color == HantoPlayerColor.BLUE && blueButterfly != null) {
+			int count = 0;
+			HantoCoordinate butterfly = blueButterfly.getLocation();
+			for(HantoPieceACBSJH hp : HantoPieces){
+				if (hp.getLocation().isAdjacent(butterfly)) {
+					count++;
+				}
+			}
+			return count;
+		} if (color == HantoPlayerColor.RED && redButterfly != null) {
+			int count = 0;
+			HantoCoordinate butterfly = redButterfly.getLocation();
+			for(HantoPieceACBSJH hp : HantoPieces){
+				if (hp.getLocation().isAdjacent(butterfly)) {
+					count++;
+				}
+			}
+			return count;
+		}else {
+		return 0;
 		}
 	}
 	

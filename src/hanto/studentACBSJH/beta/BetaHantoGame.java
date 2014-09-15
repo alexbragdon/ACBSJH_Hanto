@@ -78,12 +78,24 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 		//Updates the the butterflys location to prevent having to iterate too many times. 
 		if ((pieceType == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE)) {
 			blueButterfly = pieceToMove;
+			blueButterfly.setLocation(new HantoCoordinateACBSJH(to));
 		}
 		if ((pieceType == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.RED)) {
 			redButterfly = pieceToMove;
+			redButterfly.setLocation(new HantoCoordinateACBSJH(to));
 		}
 
 		TurnNumber++;
+		
+		
+		if (countSurroundingPieces(HantoPlayerColor.BLUE) == 6) {
+			return MoveResult.BLUE_WINS;
+		} else if (countSurroundingPieces(HantoPlayerColor.RED) == 6) {
+			return MoveResult.RED_WINS;
+		}
+		if (TurnNumber == 11) {
+			return MoveResult.DRAW;
+		}
 		
 		return MoveResult.OK;
 	}
