@@ -102,7 +102,7 @@ public class HantoPieceACBSJH implements HantoPiece {
 	 */
 	public String toString()
 	{
-		return type.toString() + " @ " + location.toString();
+		return playerColor.toString() + " " + type.toString() + " @ " + location.toString();
 	}
 	
 }
