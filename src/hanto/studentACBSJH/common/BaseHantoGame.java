@@ -82,7 +82,7 @@ public abstract class BaseHantoGame {
 	 * 
 	 * @return a string list of all the pieces on the board
 	 */
-	protected String getPrintableBoard()
+	public String getPrintableBoard()
 	{
 		String board = "-=AlphaHantoGame=-\n";
 		for(HantoPieceACBSJH hp : HantoPieces)
