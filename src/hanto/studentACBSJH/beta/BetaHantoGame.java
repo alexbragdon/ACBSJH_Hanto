@@ -75,52 +75,34 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 	{
 		this(HantoPlayerColor.BLUE);
 	}
-
+	
+	
+	
 	/** (non-Javadoc)
 	 * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
 	 */
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
+		
 		checkMakeMoveInputForException(pieceType, from, to);
 		
-		//Ensures that both players play their butterfly on or before the fourth turn. 
-		if ((TurnNumber > turnsToButterfly) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) && blueButterfly == null 
-				&& (pieceType != HantoPieceType.BUTTERFLY)) {
-			throw new HantoException("Must place butterfly on or before the fourth turn!!");
-		}
-		if ((TurnNumber > turnsToButterfly) && (getCurrentPlayersTurn() == HantoPlayerColor.RED) && redButterfly == null 
-				&& (pieceType != HantoPieceType.BUTTERFLY)) {
-			throw new HantoException("Must place butterfly on or before the fourth turn!!");
-		}
+		checkButterflyIsPlacedByTurn(turnsToButterfly, pieceType);
 		
 		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);
 		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
 		
-		//Saves the the butterfly's location to prevent having to search for it in the future. 
-		if ((pieceType == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE)) {
-			blueButterfly = pieceToMove;
-		}
-		else if ((pieceType == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.RED)) {
-			redButterfly = pieceToMove;
-		}
+		saveButterfly(pieceToMove);
 
 		TurnNumber++;
 		
-		//Determine and return move result
-		MoveResult mr = MoveResult.OK;
-		if (countPiecesSurroundingButterfly(HantoPlayerColor.RED) == 6) {
-			mr = MoveResult.BLUE_WINS;
-		}
-		else if (countPiecesSurroundingButterfly(HantoPlayerColor.BLUE) == 6) {
-			mr = MoveResult.RED_WINS;
-		}
-		else if (TurnNumber == turnsToDraw) {
-			mr = MoveResult.DRAW;
+		MoveResult mr = checkForWinner();
+		if(mr == MoveResult.OK)
+		{
+			mr = drawGameOnTurn(turnsToDraw);
 		}
 		return mr;
 	}
-	
 	
 	/** (non-Javadoc)
 	 * @see hanto.studentACBSJH.common.BaseHantoGame#setupHands()

@@ -18,6 +18,7 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.common.MoveResult;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -380,4 +381,90 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
+	/**
+	 * If the user if placing the butterfly this turn, save a reference to it.
+	 * 
+	 * @param piece piece to check for being the butterfly
+	 */
+	protected void saveButterfly(HantoPieceACBSJH piece)
+	{
+		//Saves the the butterfly's location to prevent having to search for it in the future. 
+		if ((piece.getType() == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE)) {
+			blueButterfly = piece;
+		}
+		else if ((piece.getType() == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.RED)) {
+			redButterfly = piece;
+		}
+	}
+	
+	/**
+	 * Checks if the butterfly has been placed yet
+	 * 
+	 * @param color the color of the butterfly to check
+	 * @return if the butterfly of color color has been placed
+	 */
+	protected boolean isButterflyPlaced(HantoPlayerColor color)
+	{
+		if(color == HantoPlayerColor.RED)
+		{
+			return redButterfly != null;
+		}
+		else
+		{
+			return blueButterfly != null;
+		}
+	}
+	
+	/**
+	 * Throws an exception if the butterfly of the current player who's turn it is has not placed their
+	 * butterfly by a given turn.
+	 * 
+	 * @param turn the turn a player must place their butterfly by
+	 * @param pieceType the piece the current player is trying to place
+	 * @throws HantoException
+	 */
+	protected void checkButterflyIsPlacedByTurn(int turn, HantoPieceType pieceType) throws HantoException
+	{
+		HantoPlayerColor currentPlayerColor = getCurrentPlayersTurn(); 
+		if ((TurnNumber > turn) && (currentPlayerColor == HantoPlayerColor.BLUE) && !isButterflyPlaced(currentPlayerColor) 
+				&& (pieceType != HantoPieceType.BUTTERFLY)) {
+			throw new HantoException("Must place butterfly on or before turn " + turn);
+		}
+		if ((TurnNumber > turn) && (currentPlayerColor == HantoPlayerColor.RED) && !isButterflyPlaced(currentPlayerColor) 
+				&& (pieceType != HantoPieceType.BUTTERFLY)) {
+			throw new HantoException("Must place butterfly on or before turn " + turn);
+		}
+	}
+	
+	/**
+	 * Checks if the game is a draw based on the game drawing on a given turn number
+	 * 
+	 * @param drawTurn the turn number that the game ends in a draw on
+	 * @return OK if the game continues, DRAW if the game is a draw
+	 */
+	protected MoveResult drawGameOnTurn(int drawTurn)
+	{
+		MoveResult mr = MoveResult.OK;
+		if(TurnNumber >= drawTurn)
+		{
+			mr = MoveResult.DRAW;
+		}
+		return mr;
+	}
+	
+	/**
+	 * Checks if either player has their butterfly surrounded
+	 * @return if either the red or blue player wins, or OK if niether does
+	 */
+	protected MoveResult checkForWinner()
+	{
+		MoveResult mr = MoveResult.OK;
+		if (countPiecesSurroundingButterfly(HantoPlayerColor.RED) == 6) {
+			mr = MoveResult.BLUE_WINS;
+		}
+		else if (countPiecesSurroundingButterfly(HantoPlayerColor.BLUE) == 6) {
+			mr = MoveResult.RED_WINS;
+		}
+		return mr;
+	}
 }
