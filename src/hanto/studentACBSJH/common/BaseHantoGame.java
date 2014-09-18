@@ -367,7 +367,7 @@ public abstract class BaseHantoGame {
 				}
 			}
 			return count;
-		} if (color == HantoPlayerColor.RED && redButterfly != null) {
+		} else if (color == HantoPlayerColor.RED && redButterfly != null) {
 			int count = 0;
 			HantoCoordinate butterfly = redButterfly.getLocation();
 			for(HantoPieceACBSJH hp : HantoPieces){
@@ -376,7 +376,7 @@ public abstract class BaseHantoGame {
 				}
 			}
 			return count;
-		}else {
+		} else {
 		return 0;
 		}
 	}

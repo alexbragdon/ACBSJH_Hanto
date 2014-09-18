@@ -16,6 +16,9 @@ package hanto.studentACBSJH.common;
 import hanto.common.HantoCoordinate;
 
 /**
+ * Implementation of HantoCoordinate interface. Contains an
+ * x and y coordinate on a hex grid.
+ * 
  * @author alexbragdon
  *
  */
@@ -36,7 +39,6 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 		X = Xin;
 		Y = Yin;
 	}
-	
 
 	/**
 	 * Converts a HantoCoordinate to a HantoCoordinateACBSJH.
@@ -74,34 +76,31 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 		return coordinate.getX() == X && coordinate.getY() == Y;
 	}
 
+	/**
+	 * Returns an ordered pair for this location in a string
+	 */
 	public String toString()
 	{
 		return "(" + X + ", " + Y + ")";
 	}
 	
 	/** Checks if a given coordinate is adjacent to this one.
-	 * @param to
-	 * @return a boolean.
+	 * @param to the coordinate to check adjacency with
+	 * @return true if to is adjacent to this
 	 */
 	public boolean isAdjacent(HantoCoordinate to) {
 		int toX = to.getX();
 		int toY = to.getY();
 		
-		if ((toX == X) && (toY == Y + 1)) {
-			return true;
-		} else if ((toX == X + 1) && (toY == Y)) {
-			return true;
-		} else if ((toX == X + 1) && (toY == Y - 1)) {
-			return true;
-		} else if ((toX == X) && (toY == Y - 1)) {
-			return true;
-		} else if ((toX == X - 1) && (toY == Y)) {
-			return true;
-		} else if ((toX == X - 1) && (toY == Y + 1)) {
-			return true;
-		} else {
-			return false;
-		}
+		boolean adjacency =
+			((toX == X) && (toY == Y + 1)) ||
+			((toX == X + 1) && (toY == Y)) ||
+			((toX == X + 1) && (toY == Y - 1)) ||
+			((toX == X) && (toY == Y - 1)) ||
+			((toX == X - 1) && (toY == Y)) ||
+			((toX == X - 1) && (toY == Y + 1));
+		
+		return adjacency;
 	}
 	
 }
