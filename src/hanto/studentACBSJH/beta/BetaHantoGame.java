@@ -107,7 +107,10 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 	}
 	
 	/**
-	 * @param from
+	 * In beta hanto, pieces already on the board cannot be moved, so this throws an exception
+	 * if the from location is anywhere besides the hand, which is represented by null.
+	 * 
+	 * @param from where the player is moving the piece from
 	 */
 	private void checkCannotMovePieceOnBoard(HantoCoordinate from) throws HantoException{
 		if(from != null)
