@@ -14,7 +14,6 @@
 package AlphaHantoTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import hanto.HantoGameFactory;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGame;
@@ -23,6 +22,7 @@ import hanto.common.HantoPiece;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.common.HantoPieceType;
+import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.alpha.AlphaHantoGame;
 
 import org.junit.Before;

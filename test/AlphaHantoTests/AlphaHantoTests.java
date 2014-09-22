@@ -13,9 +13,9 @@
 
 package AlphaHantoTests;
 import static org.junit.Assert.*;
-import hanto.HantoGameFactory;
 import hanto.common.HantoException;
 import hanto.common.HantoPlayerColor;
+import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.alpha.AlphaHantoGame;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
