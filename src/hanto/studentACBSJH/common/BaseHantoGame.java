@@ -186,7 +186,7 @@ public abstract class BaseHantoGame {
 			HantoCoordinate to) throws HantoException
 	{
 		checkToCoordinateIsValid(to);
-		checkForNoPieceToMoveException(from, to);
+		checkForNoPieceToMoveException(pieceType, from, to);
 		checkForMovingWrongColorPieceException(from);
 		checkFirstMoveIsToOriginException(to);
 		checkForInvalidPieceTypeException(pieceType);
@@ -246,11 +246,22 @@ public abstract class BaseHantoGame {
 	 * @param to
 	 * @throws HantoException
 	 */
-	protected void checkForNoPieceToMoveException(HantoCoordinate from, HantoCoordinate to) throws HantoException
+	protected void checkForNoPieceToMoveException(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to) throws HantoException
 	{
-		if(from != null && getPieceAt(from) == null)
+		if(from != null)
 		{
-			throw new HantoException("There is no piece to move at "+(new HantoCoordinateACBSJH(to)).toString());
+			if(getPieceAt(from) == null)
+			{
+				throw new HantoException("There is no piece to move at "+(new HantoCoordinateACBSJH(to)).toString());
+			}
+			if(getPieceAt(from).getType() != pieceType)
+			{
+				throw new HantoException("There is no piece of type "+pieceType.toString()+"to move at "+(new HantoCoordinateACBSJH(to)).toString());
+			}
+		}
+		if(from == null && getPieceFromHand(pieceType) == null)
+		{
+			throw new HantoException("There is no piece "+pieceType.toString()+" in the hand.");
 		}
 	}
 	

@@ -87,6 +87,8 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 		
 		checkMakeMoveInputForException(pieceType, from, to);
 		
+		checkCannotMovePieceOnBoard(from);
+		
 		checkButterflyIsPlacedByTurn(turnsToButterfly, pieceType);
 		
 		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);
@@ -104,6 +106,16 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 		return mr;
 	}
 	
+	/**
+	 * @param from
+	 */
+	private void checkCannotMovePieceOnBoard(HantoCoordinate from) throws HantoException{
+		if(from != null)
+		{
+			throw new HantoException("Cannot move pieces on board in Beta Hanto.");
+		}
+	}
+
 	/** (non-Javadoc)
 	 * @see hanto.studentACBSJH.common.BaseHantoGame#setupHands()
 	 */
