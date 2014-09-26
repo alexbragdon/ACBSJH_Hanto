@@ -11,7 +11,7 @@
  *		Alex Bragdon
  *******************************************************************************/
 
-package AlphaHantoTests;
+package alphaHantoTests;
 import static org.junit.Assert.*;
 import hanto.common.HantoException;
 import hanto.common.HantoPlayerColor;

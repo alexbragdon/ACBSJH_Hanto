@@ -11,7 +11,7 @@
  *		Alex Bragdon
  *******************************************************************************/
 
-package AlphaHantoTests;
+package alphaHantoTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import hanto.common.HantoCoordinate;

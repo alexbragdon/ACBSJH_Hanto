@@ -10,7 +10,7 @@
  *		Sean Halloran
  *		Alex Bragdon
  *******************************************************************************/
-package BetaHantoTests;
+package betaHantoTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
