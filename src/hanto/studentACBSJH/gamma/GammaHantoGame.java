@@ -30,7 +30,7 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 	/**
 	 * The number of moves that can happen before a draw
 	 */
-	private final int turnsToDraw = 12;
+	private final int turnsToDraw = 40;
 	
 	/**
 	 * The number of moves that can be made before the butterfly must be placed

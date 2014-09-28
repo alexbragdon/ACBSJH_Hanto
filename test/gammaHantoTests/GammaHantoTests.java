@@ -262,33 +262,6 @@ public class GammaHantoTests {
 		assertEquals(MoveResult.OK, mrOK);
 		assertEquals(MoveResult.BLUE_WINS, mrWin);
 	}
-
-	@Test
-	public void testDrawCondition() throws HantoException {
-		
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
-		
-		//turn 1
-		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, 0));
-		//turn 2
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(2, 0));
-		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(3, 0));
-		//turn 3
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(4, 0));
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(5, 0));
-		//turn 4
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(6, 0));
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(7, 0));
-		//turn 5
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(8, 0));
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(9, 0));
-		//turn 6
-		MoveResult okResult = gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(10, 0));
-		assertEquals(MoveResult.OK, okResult);
-		MoveResult result = gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(11, 0));
-		assertEquals(MoveResult.DRAW, result);
-	}
 	
 	@Test(expected = HantoException.class)
 	public void noSuchPieceInHandExsists() throws HantoException
