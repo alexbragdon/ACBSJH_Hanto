@@ -13,19 +13,29 @@ package hanto.studentACBSJH.gamma;
 
 import hanto.common.HantoPlayerColor;
 import common.HantoTestGame;
+import common.TestGameUtilities;
 
 /**
+ * The same as a GammaHantoGame, but with the ability to set the turn
+ * number 
+ * 
  * @author Sean
  *
  */
 public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame {
 
 	/**
+	 * A class with functions for implementing the HantoTestGameInterface
+	 */
+	private TestGameUtilities testGameBoardUtilities;
+	
+	/**
 	 * @param firstPlayerColor
 	 */
 	public GammaHantoTestGame(HantoPlayerColor firstPlayerColor) {
 		super(firstPlayerColor);
-		// TODO Auto-generated constructor stub
+		testGameBoardUtilities = new TestGameUtilities(HantoPieces, secondPlayer);
+		
 	}
 
 	/* (non-Javadoc)
@@ -33,8 +43,7 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame 
 	 */
 	@Override
 	public void initializeBoard(PieceLocationPair[] initialPieces) {
-		// TODO Auto-generated method stub
-
+		testGameBoardUtilities.initializeBoard(initialPieces);
 	}
 
 	/* (non-Javadoc)
@@ -42,17 +51,15 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame 
 	 */
 	@Override
 	public void setTurnNumber(int turnNumber) {
-		// TODO Auto-generated method stub
-
+		TurnNumber = testGameBoardUtilities.setTurnNumber(turnNumber);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see common.HantoTestGame#setPlayerMoving(hanto.common.HantoPlayerColor)
 	 */
 	@Override
 	public void setPlayerMoving(HantoPlayerColor player) {
-		// TODO Auto-generated method stub
-
+		TurnNumber = testGameBoardUtilities.setPlayerMoving(TurnNumber, player);
 	}
 
 }
