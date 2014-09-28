@@ -11,7 +11,6 @@
  *******************************************************************************/
 package hanto.studentACBSJH.gamma;
 
-import hanto.common.HantoGameID;
 import hanto.common.HantoPlayerColor;
 import common.HantoTestGame;
 
@@ -22,12 +21,10 @@ import common.HantoTestGame;
 public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame {
 
 	/**
-	 * @param gameID
 	 * @param firstPlayerColor
 	 */
-	public GammaHantoTestGame(HantoGameID gameID,
-			HantoPlayerColor firstPlayerColor) {
-		super(gameID, firstPlayerColor);
+	public GammaHantoTestGame(HantoPlayerColor firstPlayerColor) {
+		super(firstPlayerColor);
 		// TODO Auto-generated constructor stub
 	}
 

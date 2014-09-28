@@ -30,9 +30,18 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 	 * @param gameID
 	 * @param firstPlayerColor
 	 */
-	public GammaHantoGame(HantoGameID gameID, HantoPlayerColor firstPlayerColor) {
+	private GammaHantoGame(HantoGameID gameID, HantoPlayerColor firstPlayerColor) {
 		super(gameID, firstPlayerColor);
-		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * Constructs a GammaHantoGame
+	 * 
+	 * @param firstPlayerColor the color of the first player to move
+	 */
+	public GammaHantoGame(HantoPlayerColor firstPlayerColor)
+	{
+		this(HantoGameID.GAMMA_HANTO, firstPlayerColor);
 	}
 
 	/* (non-Javadoc)
