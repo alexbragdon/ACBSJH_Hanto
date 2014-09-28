@@ -10,11 +10,10 @@
 
 package common;
 
-import hanto.common.*;
-import hanto.studentgpollice.HantoGameFactory;
-import hanto.studentgpollice.alpha.AlphaHantoGame;
-import hanto.studentgpollice.beta.BetaHantoGame;
-import hanto.studentgpollice.gamma.GammaHantoTestGame;
+import hanto.common.HantoGame;
+import hanto.common.HantoGameID;
+import hanto.common.HantoPlayerColor;
+
 
 /**
  * Description
@@ -46,7 +45,7 @@ public class HantoTestGameFactory
 	 * @param gameId the version desired.
 	 * @return the game instance
 	 */
-	public HantoGame makeTestHantoGame(HantoGameID gameId)
+	public HantoGame makeHantoTestGame(HantoGameID gameId)
 	{
 		return makeHantoTestGame(gameId, HantoPlayerColor.BLUE);
 	}
@@ -61,7 +60,7 @@ public class HantoTestGameFactory
 		HantoGame game = null;
 		switch (gameId) {
 			case GAMMA_HANTO:
-				game = new GammaHantoTestGame(movesFirst);
+				//game = new GammaHantoTestGame(movesFirst);
 				break;
 		}
 		return game;

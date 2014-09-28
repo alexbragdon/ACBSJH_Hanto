@@ -56,6 +56,16 @@ public class HantoPieceACBSJH implements HantoPiece {
 		this.type = type;
 	}
 	
+	/**
+	 * Construct a HantoPieceACBSJH from the HantoPiece interface
+	 * 
+	 * @param hp the interface to construct this object from
+	 */
+	public HantoPieceACBSJH(HantoPiece hp) {
+		playerColor = hp.getColor();
+		type = hp.getType();
+	}
+	
 	/** (non-Javadoc)
 	 * @see hanto.common.HantoPiece#getColor()
 	 */

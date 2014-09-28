@@ -95,6 +95,30 @@ public abstract class BaseHantoGame {
 	}
 	
 	/**
+	 * moves a piece of pieceType from one location to another, and makes sure to
+	 * save the butterfly with saveButterfly, also assumes that input validation
+	 * has already done
+	 * 
+	 * @param pieceType  type of piece to move
+	 * @param to location to move piece too
+	 */
+	protected void movePiece(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to)
+	{
+		HantoPieceACBSJH pieceToMove;
+		if(from == null)
+		{
+			pieceToMove = getPieceFromHand(pieceType);
+		}
+		else
+		{
+			pieceToMove = new HantoPieceACBSJH(getPieceAt(from));
+		}
+		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
+		saveButterfly(pieceToMove);
+	}
+	
+	
+	/**
 	 * Gets the color of the player whose turn it is to move
 	 * 
 	 * @return the color of the player who should move next

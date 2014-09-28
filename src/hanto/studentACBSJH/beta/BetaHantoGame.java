@@ -91,10 +91,7 @@ public class BetaHantoGame extends BaseHantoGame implements HantoGame {
 		
 		checkButterflyIsPlacedByTurn(turnsToButterfly, pieceType);
 		
-		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);
-		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
-		
-		saveButterfly(pieceToMove);
+		movePiece(pieceType, from, to);
 
 		TurnNumber++;
 		
