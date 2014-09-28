@@ -11,12 +11,296 @@
  *******************************************************************************/
 package gammaHantoTests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import hanto.common.HantoCoordinate;
+import hanto.common.HantoException;
+import hanto.common.HantoGame;
+import hanto.common.HantoGameID;
+import hanto.common.HantoPiece;
+import hanto.common.HantoPieceType;
+import hanto.common.HantoPlayerColor;
+import hanto.common.MoveResult;
+import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import common.HantoTestGame;
+import common.HantoTestGameFactory;
+
 /**
  * @author Sean
  *
  */
 public class GammaHantoTests {
+	final HantoCoordinateACBSJH HAND = null;
+	HantoCoordinateACBSJH origin;
 	
+	HantoGame gammaHantoGame;
+	HantoTestGame testGammaHantoGame;
 	
+	/**
+	 * 
+	 */
+	@Before
+	public void setup()
+	{
+		origin = new HantoCoordinateACBSJH(0, 0);
+		testGammaHantoGame = HantoTestGameFactory.getInstance().makeHantoTestGame(HantoGameID.GAMMA_HANTO);
+	}
+	
+	/**
+	 * @throws HantoException
+	 */
+	@Test
+	public void testPlacePieceSparrow() throws HantoException {
+		
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		MoveResult result = gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		assertEquals(MoveResult.OK, result);
+		HantoPiece placedPiece = gammaHantoGame.getPieceAt(origin);
+		assertNotEquals(null, placedPiece);
+		assertEquals(HantoPlayerColor.BLUE, placedPiece.getColor());
+		assertEquals(HantoPieceType.SPARROW, placedPiece.getType());
+	}
+	
+	/**
+	 * @throws HantoException
+	 */
+	@Test(expected = HantoException.class)
+	public void testCannotMoveAllreadyPlacePieces() throws HantoException {
+		
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		HantoCoordinate destination = new HantoCoordinateACBSJH(1, 0);
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
+	}
+
+	/**
+	 * @throws HantoException
+	 */
+	@Test(expected = HantoException.class)
+	public void cannotPlaceCrabTest() throws HantoException
+	{
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		gammaHantoGame.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 0));
+	}
+	
+	/**
+	 * @throws HantoException
+	 */
+	@Test(expected = HantoException.class)
+	public void incorrectMoveToNullLocation() throws HantoException
+	{
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, null);
+	}
+	
+	/**
+	 * @throws HantoException
+	 */
+	@Test(expected = HantoException.class)
+	public void incorrectSecondMoveLocation() throws HantoException
+	{
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(1, 1));
+	}
+	
+	/**
+	 * @throws HantoException
+	 */
+	@Test(expected = HantoException.class)
+	public void cannotMoveNonExsistantPieceFromLocation() throws HantoException
+	{
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(0, 1));
+	}
+	
+	/**
+	 * @throws HantoException
+	 */
+	@Test(expected = HantoException.class)
+	public void cannotMoveOtherPlayersPieceOnSecondTurnTest() throws HantoException
+	{
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, destination);
+	}
+	
+	/**
+	 * @throws HantoException
+	 */
+	@Test(expected = HantoException.class)
+	public void cannotPlacePieceOnOccupiedSpace() throws HantoException {
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+	}
+	
+	/**
+	 * @throws HantoException
+	 */
+	@Test(expected = HantoException.class)
+	public void blueDoesNotPlaceButterFlyByFourthTurn() throws HantoException
+	{
+		
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		//turn 1
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 2
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 0));
+		//turn 3
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, -1));
+		//turn 4
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, 0));
+	}
+	
+	/**
+	 * @throws HantoException
+	 */
+	@Test(expected = HantoException.class)
+	public void redDoesNotPlaceButterFlyByFourthTurn() throws HantoException
+	{
+		
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		//turn 1
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 2
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 0));
+		//turn 3
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, -1));
+		//turn 4
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 2));
+	}
+	
+	@Test(expected = HantoException.class)
+	public void cannotPlacePieceInNonAdjacentLocation() throws HantoException
+	{
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		//turn 1
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 2
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 0));
+		//turn 3
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(3, 0));
+	}
+	
+	@Test
+	public void redWins() throws HantoException
+	{
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		//turn 1
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
+		//turn 2
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(2, 0));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 3
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(3, 0));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
+		//turn 4
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(4, 0));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 0));
+		//turn 5
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(5, 0));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
+		//turn 6
+		MoveResult mrOK = gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(6, 0));
+		MoveResult mrWin = gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, -1));
+		assertEquals(MoveResult.OK, mrOK);
+		assertEquals(MoveResult.RED_WINS, mrWin);
+	}
+	
+	@Test
+	public void blueWins() throws HantoException
+	{
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		//turn 1
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 2
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, 0));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
+		//turn 3
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, 1));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -2));
+		//turn 4
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 2));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -3));
+		//turn 5
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 2));
+		MoveResult mrOK = gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -4));
+		//turn 6
+		MoveResult mrWin = gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
+		
+		assertEquals(MoveResult.OK, mrOK);
+		assertEquals(MoveResult.BLUE_WINS, mrWin);
+	}
+
+	@Test
+	public void testDrawCondition() throws HantoException {
+		
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		//turn 1
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, 0));
+		//turn 2
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(2, 0));
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(3, 0));
+		//turn 3
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(4, 0));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(5, 0));
+		//turn 4
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(6, 0));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(7, 0));
+		//turn 5
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(8, 0));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(9, 0));
+		//turn 6
+		MoveResult okResult = gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(10, 0));
+		assertEquals(MoveResult.OK, okResult);
+		MoveResult result = gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(11, 0));
+		assertEquals(MoveResult.DRAW, result);
+	}
+	
+	@Test(expected = HantoException.class)
+	public void noSuchPieceInHandExsists() throws HantoException
+	{
+		
+		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
+		//turn 1
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
+		//turn 2
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(2, 0));
+	}
 
 }
