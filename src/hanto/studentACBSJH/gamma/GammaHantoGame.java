@@ -19,6 +19,7 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentACBSJH.common.BaseHantoGame;
+import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
 /**
  * @author Sean
@@ -26,6 +27,21 @@ import hanto.studentACBSJH.common.BaseHantoGame;
  */
 public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 
+	/**
+	 * The number of moves that can happen before a draw
+	 */
+	private final int turnsToDraw = 40;
+	
+	/**
+	 * The number of moves that can be made before the butterfly must be placed
+	 */
+	private final int turnsToButterfly = 5;
+	
+	/**
+	 * The number of sparrow's in each player's hand.
+	 */
+	private final int sparrowsPerPlayer = 5;
+	
 	/**
 	 * @param gameID
 	 * @param firstPlayerColor
@@ -50,8 +66,20 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
-		// TODO Auto-generated method stub
-		return null;
+		checkMakeMoveInputForException(pieceType, from, to);
+		
+		checkButterflyIsPlacedByTurn(turnsToButterfly, pieceType);
+		
+		movePiece(pieceType, from, to);
+
+		TurnNumber++;
+		
+		MoveResult mr = checkForWinner();
+		if(mr == MoveResult.OK)
+		{
+			mr = drawGameOnTurn(turnsToDraw);
+		}
+		return mr;
 	}
 
 	/* (non-Javadoc)
@@ -59,8 +87,27 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 	 */
 	@Override
 	protected void setupHands() {
-		// TODO Auto-generated method stub
-
+		HantoPieceACBSJH blueButterfly = new HantoPieceACBSJH(HantoPlayerColor.BLUE);
+		HantoPieces.add(blueButterfly);
+		HantoPieceACBSJH redButterfly = new HantoPieceACBSJH(HantoPlayerColor.RED);
+		HantoPieces.add(redButterfly);
+		
+		for (int i=0; i<sparrowsPerPlayer; i++) {
+			HantoPieceACBSJH blueSparrow = new HantoPieceACBSJH(HantoPlayerColor.BLUE, HantoPieceType.SPARROW);
+			HantoPieceACBSJH redSparrow = new HantoPieceACBSJH(HantoPlayerColor.RED, HantoPieceType.SPARROW);
+			HantoPieces.add(blueSparrow);
+			HantoPieces.add(redSparrow);
+		}
+	}
+	
+	/** (non-Javadoc)
+	 * @see hanto.studentACBSJH.common.BaseHantoGame#addValidHantoPieceTypes()
+	 */
+	@Override
+	protected void addValidHantoPieceTypes()
+	{
+		super.addValidHantoPieceTypes();
+		ValidHantoPieceTypes.add(HantoPieceType.SPARROW);
 	}
 
 }
