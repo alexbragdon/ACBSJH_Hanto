@@ -54,7 +54,7 @@ public class GammaHantoTests {
 	 * @throws HantoException
 	 */
 	@Test
-	public void testPlacePieceSparrow() throws HantoException {
+	public void testPlacePieceSparrowFromHand() throws HantoException {
 		
 		gammaHantoGame = (HantoGame) testGammaHantoGame;
 		
@@ -70,7 +70,7 @@ public class GammaHantoTests {
 	 * @throws HantoException
 	 */
 	@Test(expected = HantoException.class)
-	public void testCannotMoveAllreadyPlacePieces() throws HantoException {
+	public void testCannotMoveOtherPlayerPiece() throws HantoException {
 		
 		gammaHantoGame = (HantoGame) testGammaHantoGame;
 		
@@ -147,52 +147,7 @@ public class GammaHantoTests {
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
 	}
-	
-	/**
-	 * @throws HantoException
-	 */
-	@Test(expected = HantoException.class)
-	public void blueDoesNotPlaceButterFlyByFourthTurn() throws HantoException
-	{
 		
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
-		
-		//turn 1
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
-		//turn 2
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 0));
-		//turn 3
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, -1));
-		//turn 4
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, 0));
-	}
-	
-	/**
-	 * @throws HantoException
-	 */
-	@Test(expected = HantoException.class)
-	public void redDoesNotPlaceButterFlyByFourthTurn() throws HantoException
-	{
-		
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
-		
-		//turn 1
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
-		//turn 2
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 0));
-		//turn 3
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, -1));
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(1, -1));
-		//turn 4
-		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
-		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 2));
-	}
-	
 	@Test(expected = HantoException.class)
 	public void cannotPlacePieceInNonAdjacentLocation() throws HantoException
 	{
@@ -210,7 +165,7 @@ public class GammaHantoTests {
 	}
 	
 	@Test
-	public void redWins() throws HantoException
+	public void redWinsSurroundingBlueWithPiecesFromHand() throws HantoException
 	{
 		gammaHantoGame = (HantoGame) testGammaHantoGame;
 		
@@ -237,7 +192,7 @@ public class GammaHantoTests {
 	}
 	
 	@Test
-	public void blueWins() throws HantoException
+	public void blueWinsSurroundingBlueWithPiecesFromHand() throws HantoException
 	{
 		gammaHantoGame = (HantoGame) testGammaHantoGame;
 		
