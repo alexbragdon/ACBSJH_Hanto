@@ -242,4 +242,15 @@ public class GammaHantoTests {
 		
 	}
 	
+	@Test
+	public void testDrawOnTurnTwenty() throws HantoException
+	{
+		testGammaHantoGame.setTurnNumber(20);
+		testGammaHantoGame.setPlayerMoving(HantoPlayerColor.RED);
+		testGammaHantoGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
+				{ new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY, origin)});
+		
+		assertEquals(MoveResult.DRAW, gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 1)));
+	}
+	
 }
