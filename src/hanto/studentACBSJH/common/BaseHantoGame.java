@@ -22,6 +22,7 @@ import hanto.common.MoveResult;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 
 /**
@@ -501,5 +502,71 @@ public abstract class BaseHantoGame {
 			mr = MoveResult.RED_WINS;
 		}
 		return mr;
+	}
+	
+	protected void checkForContinuity() throws HantoException
+	{	
+		HantoPieceACBSJH startPiece = null;
+		
+		LinkedList<HantoPieceACBSJH> visited = new LinkedList<HantoPieceACBSJH>();
+		LinkedList<HantoPieceACBSJH> toVisit = new LinkedList<HantoPieceACBSJH>();
+		LinkedList<HantoPieceACBSJH> tempToVisit = new LinkedList<HantoPieceACBSJH>();
+		
+		for(HantoPieceACBSJH hp : HantoPieces)
+		{
+			if (!hp.isInHand()) {
+				startPiece = hp;
+			}
+		}
+		
+		toVisit.addAll(getListOfNeighbors(startPiece));
+		visited.add(startPiece);
+		
+		while (toVisit.size() != 0) {
+			tempToVisit.addAll(toVisit);
+			for (HantoPieceACBSJH hp : tempToVisit) {
+				for (HantoPieceACBSJH hp2 : getListOfNeighbors(hp)) {
+					if (!visited.contains(hp2)){
+						toVisit.add(hp2);
+					}
+				}
+				visited.add(hp);
+				toVisit.remove(hp);
+			}
+			tempToVisit.clear();
+		}
+		int numOfPicesOnBoard = getNumPiecesOnBoard();
+		if (visited.size() != numOfPicesOnBoard) {
+			throw new HantoException("All pieces must be contiguous.");
+		}
+	}
+	
+	protected int getNumPiecesOnBoard() 
+	{
+		int count = 0;
+		for(HantoPieceACBSJH hp : HantoPieces)
+		{
+			if (!hp.isInHand()) {
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	protected LinkedList<HantoPieceACBSJH> getListOfNeighbors(HantoPieceACBSJH startPiece) {
+		LinkedList<HantoPieceACBSJH> neighbors = new LinkedList<HantoPieceACBSJH>();
+		
+		if (startPiece != null){
+			for(HantoPieceACBSJH hp : HantoPieces)
+			{
+				if (!hp.isInHand()) {
+					if (hp.getLocation().isAdjacent(startPiece.getLocation())) {
+						neighbors.add(hp);
+					}
+				}
+			}
+		}
+		
+		return neighbors;
 	}
 }

@@ -70,6 +70,7 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 		checkButterflyIsPlacedByTurn(turnsToButterfly, pieceType);
 		
 		movePiece(pieceType, from, to);
+		checkForContinuity();
 
 		TurnNumber++;
 		
@@ -78,6 +79,7 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 		{
 			mr = drawGameOnTurn(turnsToDraw);
 		}
+		
 		return mr;
 	}
 
