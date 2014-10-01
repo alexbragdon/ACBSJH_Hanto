@@ -524,20 +524,23 @@ public abstract class BaseHantoGame {
 		
 		while (toVisit.size() != 0) {
 			tempToVisit.addAll(toVisit);
-			for (HantoPieceACBSJH hp : tempToVisit) {
-				for (HantoPieceACBSJH hp2 : getListOfNeighbors(hp)) {
-					if (!visited.contains(hp2)){
-						toVisit.add(hp2);
+			for (HantoPieceACBSJH visiting : tempToVisit) {
+				for (HantoPieceACBSJH neighborToVisiting : getListOfNeighbors(visiting)) {
+					if (!visited.contains(neighborToVisiting)){
+						toVisit.add(neighborToVisiting);
 					}
 				}
-				visited.add(hp);
-				toVisit.remove(hp);
+				if(!visited.contains(visiting))
+				{
+					visited.add(visiting);
+				}
+				toVisit.remove(visiting);
 			}
 			tempToVisit.clear();
 		}
 		int numOfPicesOnBoard = getNumPiecesOnBoard();
 		if (visited.size() != numOfPicesOnBoard) {
-			throw new HantoException("All pieces must be contiguous.");
+			throw new HantoException("All pieces must be contiguous. Could only reach " + visited.size() + " out of " + numOfPicesOnBoard);
 		}
 	}
 	
