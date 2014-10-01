@@ -48,6 +48,7 @@ public class GammaHantoTests {
 	{
 		origin = new HantoCoordinateACBSJH(0, 0);
 		testGammaHantoGame = HantoTestGameFactory.getInstance().makeHantoTestGame(HantoGameID.GAMMA_HANTO);
+		gammaHantoGame = testGammaHantoGame;
 	}
 	
 	/**
@@ -55,8 +56,6 @@ public class GammaHantoTests {
 	 */
 	@Test
 	public void testPlacePieceSparrowFromHand() throws HantoException {
-		
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
 		
 		MoveResult result = gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
 		assertEquals(MoveResult.OK, result);
@@ -72,7 +71,7 @@ public class GammaHantoTests {
 	@Test(expected = HantoException.class)
 	public void testCannotMoveOtherPlayerPiece() throws HantoException {
 		
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
 		
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		HantoCoordinate destination = new HantoCoordinateACBSJH(1, 0);
@@ -85,7 +84,7 @@ public class GammaHantoTests {
 	@Test(expected = HantoException.class)
 	public void cannotPlaceCrabTest() throws HantoException
 	{
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
 		
 		gammaHantoGame.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 0));
 	}
@@ -96,7 +95,7 @@ public class GammaHantoTests {
 	@Test(expected = HantoException.class)
 	public void incorrectMoveToNullLocation() throws HantoException
 	{
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
 		
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, null);
 	}
@@ -107,7 +106,7 @@ public class GammaHantoTests {
 	@Test(expected = HantoException.class)
 	public void incorrectSecondMoveLocation() throws HantoException
 	{
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
 		
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(1, 1));
@@ -119,7 +118,7 @@ public class GammaHantoTests {
 	@Test(expected = HantoException.class)
 	public void cannotMoveNonExsistantPieceFromLocation() throws HantoException
 	{
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
 		
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(0, 1));
 	}
@@ -130,7 +129,7 @@ public class GammaHantoTests {
 	@Test(expected = HantoException.class)
 	public void cannotMoveOtherPlayersPieceOnSecondTurnTest() throws HantoException
 	{
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
 		
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		HantoCoordinate destination = new HantoCoordinateACBSJH(0, 1);
@@ -142,7 +141,7 @@ public class GammaHantoTests {
 	 */
 	@Test(expected = HantoException.class)
 	public void cannotPlacePieceOnOccupiedSpace() throws HantoException {
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
 		
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
@@ -151,7 +150,7 @@ public class GammaHantoTests {
 	@Test(expected = HantoException.class)
 	public void cannotPlacePieceInNonAdjacentLocation() throws HantoException
 	{
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
 		
 		//turn 1
 		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, origin);
@@ -167,7 +166,7 @@ public class GammaHantoTests {
 	@Test
 	public void redWinsSurroundingBlueWithPiecesFromHand() throws HantoException
 	{
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
 		
 		//turn 1
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
@@ -194,7 +193,7 @@ public class GammaHantoTests {
 	@Test
 	public void blueWinsSurroundingBlueWithPiecesFromHand() throws HantoException
 	{
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
 		
 		//turn 1
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
@@ -222,7 +221,7 @@ public class GammaHantoTests {
 	public void noSuchPieceInHandExsists() throws HantoException
 	{
 		
-		gammaHantoGame = (HantoGame) testGammaHantoGame;
+		
 		
 		//turn 1
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
