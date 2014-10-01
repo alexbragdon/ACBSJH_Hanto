@@ -67,7 +67,6 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
 		checkMakeMoveInputForException(pieceType, from, to);
-		
 		checkButterflyIsPlacedByTurn(turnsToButterfly, pieceType);
 		
 		movePiece(pieceType, from, to);
