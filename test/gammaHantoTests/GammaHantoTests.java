@@ -26,6 +26,7 @@ import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import org.junit.Before;
 import org.junit.Test;
 
+import sun.net.ftp.FtpDirEntry.Permission;
 import common.HantoTestGame;
 import common.HantoTestGameFactory;
 
@@ -221,8 +222,6 @@ public class GammaHantoTests {
 	public void noSuchPieceInHandExsists() throws HantoException
 	{
 		
-		
-		
 		//turn 1
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
@@ -230,4 +229,17 @@ public class GammaHantoTests {
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(2, 0));
 	}
 
+	@Test(expected = HantoException.class)
+	public void cannotBreakContinuityWithMove() throws HantoException
+	{
+		//turn 1
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
+		
+		//turn 2
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(2, 0));
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, new HantoCoordinateACBSJH(1, 0), new HantoCoordinateACBSJH(-1, 0));
+		
+	}
+	
 }
