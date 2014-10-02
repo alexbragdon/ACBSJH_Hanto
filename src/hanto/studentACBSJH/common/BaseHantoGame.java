@@ -40,6 +40,11 @@ public abstract class BaseHantoGame {
 	protected Collection<HantoPieceACBSJH> HantoPieces;
 	
 	/**
+	 * A bool for if the game is over.
+	 */
+	protected boolean isGameOver = false;
+	
+	/**
 	 * A list of the types of Hanto pieces used in this game.
 	 */
 	protected Collection<HantoPieceType> ValidHantoPieceTypes;
@@ -477,6 +482,7 @@ public abstract class BaseHantoGame {
 		if(TurnNumber >= drawTurn)
 		{
 			mr = MoveResult.DRAW;
+			isGameOver = true;
 		}
 		return mr;
 	}
@@ -490,9 +496,11 @@ public abstract class BaseHantoGame {
 		MoveResult mr = MoveResult.OK;
 		if (countPiecesSurroundingButterfly(HantoPlayerColor.RED) == 6) {
 			mr = MoveResult.BLUE_WINS;
+			isGameOver = true;
 		}
 		else if (countPiecesSurroundingButterfly(HantoPlayerColor.BLUE) == 6) {
 			mr = MoveResult.RED_WINS;
+			isGameOver = true;
 		}
 		return mr;
 	}
@@ -578,5 +586,16 @@ public abstract class BaseHantoGame {
 		}
 		
 		return neighbors;
+	}
+	
+	protected void preventMovesAfterGameOver() throws HantoException 
+	{
+	if (isGameOver) {
+		throw new HantoException("The game is over.");
+		}
+	}
+	
+	public void setGameOver() {
+		isGameOver = true;
 	}
 }

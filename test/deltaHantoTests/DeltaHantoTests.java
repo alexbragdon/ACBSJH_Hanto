@@ -332,4 +332,14 @@ public class DeltaHantoTests {
 		assertEquals(MoveResult.BLUE_WINS, result);
 	}
 	
+	/**
+	 * @throws HantoException
+	 */
+	@Test(expected = HantoException.class)
+	public void TestCannotMoveAfterGameOver() throws HantoException {
+		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		deltaHantoGame.makeMove(null, null, null);
+		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+	}
+	
 }

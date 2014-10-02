@@ -68,6 +68,8 @@ public class DeltaHantoGame extends BaseHantoGame implements HantoGame {
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
 		
+		preventMovesAfterGameOver();
+		
 		if (pieceType == null && from == null && to == null){
 			MoveResult mr = null;
 			if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
@@ -75,6 +77,7 @@ public class DeltaHantoGame extends BaseHantoGame implements HantoGame {
 			} else {
 				mr = MoveResult.BLUE_WINS;
 			}
+			setGameOver();
 			return mr;
 		}
 		

@@ -334,7 +334,5 @@ public class GammaHantoTests {
 				origin, new HantoCoordinateACBSJH(2,0));
 		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
 				new HantoCoordinateACBSJH(3, 0));
-
 	}
-
 }
