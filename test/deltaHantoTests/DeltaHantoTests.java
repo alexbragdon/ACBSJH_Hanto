@@ -251,14 +251,14 @@ public class DeltaHantoTests {
 
 	}
 
-	@Test(expected = HantoException.class)
+	@Test(expected = HantoException.class) 
 	public void cannotMoveMoreThanOneSpace() throws HantoException {
-		// turn 1
+		// turn 1 
 		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND,
 				new HantoCoordinateACBSJH(1, 0));
 
-		// turn 2
+		// turn 2 
 		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY,
 				origin, new HantoCoordinateACBSJH(2,0));
 		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
@@ -266,7 +266,7 @@ public class DeltaHantoTests {
 
 	}
 	
-	@Test
+	@Test 
 	public void testGammaHantoGameFactory() {
 		HantoGameFactory.getInstance().makeHantoGame(HantoGameID.GAMMA_HANTO);
 	}
@@ -330,6 +330,16 @@ public class DeltaHantoTests {
 		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		MoveResult result = deltaHantoGame.makeMove(null, null, null);
 		assertEquals(MoveResult.BLUE_WINS, result);
+	}
+	
+	/**
+	 * @throws HantoException
+	 */
+	@Test(expected = HantoException.class)
+	public void TestCannotMoveAfterGameOver() throws HantoException {
+		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		deltaHantoGame.makeMove(null, null, null);
+		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
 	}
 	
 }

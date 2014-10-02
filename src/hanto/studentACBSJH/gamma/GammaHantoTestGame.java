@@ -38,7 +38,7 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame 
 		
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see common.HantoTestGame#initializeBoard(common.HantoTestGame.PieceLocationPair[])
 	 */
 	@Override
@@ -46,7 +46,7 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame 
 		testGameBoardUtilities.initializeBoard(initialPieces);
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see common.HantoTestGame#setTurnNumber(int)
 	 */
 	@Override
@@ -54,7 +54,7 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame 
 		TurnNumber = testGameBoardUtilities.setTurnNumber(turnNumber);
 	}
 	
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see common.HantoTestGame#setPlayerMoving(hanto.common.HantoPlayerColor)
 	 */
 	@Override

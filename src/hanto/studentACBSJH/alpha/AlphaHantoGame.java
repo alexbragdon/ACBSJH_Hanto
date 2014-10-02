@@ -60,11 +60,6 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 			HantoCoordinate to) throws HantoException {
 		checkMakeMoveInputForException(pieceType, from, to);
 		
-		if(TurnNumber == 1) {
-			HantoCoordinateACBSJH toACBSJH = new HantoCoordinateACBSJH(to.getX(), to.getY());
-			HantoCoordinateACBSJH otherButterfly = new HantoCoordinateACBSJH(0, 0);
-		}
-		
 		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);
 		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
 		TurnNumber++;
