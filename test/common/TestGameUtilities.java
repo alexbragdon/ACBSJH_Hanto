@@ -11,7 +11,9 @@
  *******************************************************************************/
 package common;
 
+import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.studentACBSJH.common.BaseHantoGame;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 

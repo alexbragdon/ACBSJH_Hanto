@@ -422,7 +422,7 @@ public abstract class BaseHantoGame {
 	 * 
 	 * @param piece piece to check for being the butterfly
 	 */
-	protected void saveButterfly(HantoPieceACBSJH piece)
+	public void saveButterfly(HantoPieceACBSJH piece)
 	{
 		//Saves the the butterfly's location to prevent having to search for it in the future. 
 		if ((piece.getType() == HantoPieceType.BUTTERFLY) && (getCurrentPlayersTurn() == HantoPlayerColor.BLUE)) {
@@ -441,14 +441,33 @@ public abstract class BaseHantoGame {
 	 */
 	protected boolean isButterflyPlaced(HantoPlayerColor color)
 	{
+		HantoPieceACBSJH butterflyToCheck;
 		if(color == HantoPlayerColor.RED)
 		{
-			return redButterfly != null;
+			butterflyToCheck = redButterfly;
 		}
 		else
 		{
-			return blueButterfly != null;
+			butterflyToCheck = blueButterfly;
 		}
+		
+		if(butterflyToCheck != null)
+		{
+			return true;
+		}
+		else
+		{
+			for(HantoPieceACBSJH hp : HantoPieces)
+			{
+				if(!hp.isInHand() && hp.getType() == HantoPieceType.BUTTERFLY && hp.getColor() == color)
+				{
+					butterflyToCheck = hp;
+					return true;
+				}
+			}
+			return false;
+		}
+		
 	}
 	
 	/**
