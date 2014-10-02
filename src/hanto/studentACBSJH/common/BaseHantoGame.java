@@ -112,7 +112,7 @@ public abstract class BaseHantoGame {
 		}
 		else
 		{
-			pieceToMove = new HantoPieceACBSJH(getPieceAt(from));
+			pieceToMove = (HantoPieceACBSJH) getPieceAt(from);
 		}
 		pieceToMove.setLocation(new HantoCoordinateACBSJH(to));
 		saveButterfly(pieceToMove);
