@@ -53,7 +53,6 @@ public class DeltaHantoGame extends BaseHantoGame implements HantoGame {
 	}
 	
 	/**
-	 * @param gameID
 	 * @param firstPlayerColor
 	 */
 	public DeltaHantoGame(HantoPlayerColor firstPlayerColor) 
@@ -120,6 +119,15 @@ public class DeltaHantoGame extends BaseHantoGame implements HantoGame {
 		}
 	}
 	
+	/**
+	 * 
+	 * Prevents either the butterfly or the crab from walking more than one hex.
+	 * 
+	 * @param pieceType
+	 * @param from
+	 * @param to
+	 * @throws HantoException
+	 */
 	protected void checkPlayerMovesTheCorrectNumberOfHexes(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
 		

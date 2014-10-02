@@ -118,6 +118,14 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 		ValidHantoPieceTypes.add(HantoPieceType.SPARROW);
 	}
 	
+	/**
+	 * 
+	 * Prevents pieces from walking more than one hex.
+	 * 
+	 * @param from
+	 * @param to
+	 * @throws HantoException
+	 */
 	protected void checkPlayerMovesTheCorrectNumberOfHexes(HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
 		
