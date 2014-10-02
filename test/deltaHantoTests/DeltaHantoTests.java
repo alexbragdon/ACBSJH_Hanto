@@ -251,6 +251,21 @@ public class DeltaHantoTests {
 
 	}
 
+	@Test(expected = HantoException.class)
+	public void cannotMoveMoreThanOneSpace() throws HantoException {
+		// turn 1
+		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND,
+				new HantoCoordinateACBSJH(1, 0));
+
+		// turn 2
+		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY,
+				origin, new HantoCoordinateACBSJH(2,0));
+		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
+				new HantoCoordinateACBSJH(3, 0));
+
+	}
+	
 	@Test
 	public void testGammaHantoGameFactory() {
 		HantoGameFactory.getInstance().makeHantoGame(HantoGameID.GAMMA_HANTO);
