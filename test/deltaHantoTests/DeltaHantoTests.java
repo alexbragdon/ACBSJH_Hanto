@@ -308,6 +308,20 @@ public class DeltaHantoTests {
 		assertEquals(MoveResult.RED_WINS, result);
 	}
 
+	@Test(expected = HantoException.class)
+	public void testInitializeBoardRemovesPiecesFromHand() throws HantoException
+	{
+		testDeltaHantoGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
+			{
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY, origin),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY, new HantoCoordinateACBSJH(0, 1))
+			});
+		testDeltaHantoGame.setPlayerMoving(HantoPlayerColor.BLUE);
+		testDeltaHantoGame.setTurnNumber(2);
+		
+		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND,
+				new HantoCoordinateACBSJH(0, 2));
+	}
 	/**
 	 * @throws HantoException
 	 */
