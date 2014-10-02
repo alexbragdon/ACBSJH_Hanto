@@ -11,9 +11,7 @@
  *******************************************************************************/
 package common;
 
-import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
-import hanto.studentACBSJH.common.BaseHantoGame;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
@@ -46,6 +44,10 @@ public class TestGameUtilities {
 	
 	/**
 	 * Constructs this class with all the data it needs from the HantoTestGame
+	 * 
+	 * @param HantoPiecesReference
+	 * @param secondPlayer
+	 * 
 	 */
 	public TestGameUtilities(Collection<HantoPieceACBSJH> HantoPiecesReference, HantoPlayerColor secondPlayer)
 	{

@@ -102,8 +102,9 @@ public abstract class BaseHantoGame {
 	 * save the butterfly with saveButterfly, also assumes that input validation
 	 * has already done
 	 * 
-	 * @param pieceType  type of piece to move
-	 * @param to location to move piece too
+	 * @param pieceType
+	 * @param from
+	 * @param to
 	 */
 	protected void movePiece(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to)
 	{
@@ -269,6 +270,7 @@ public abstract class BaseHantoGame {
 	 * Throws an exception if there is no piece to move
 	 * at the 'from' location.
 	 * 
+	 * @param pieceType
 	 * @param from
 	 * @param to
 	 * @throws HantoException
@@ -525,6 +527,10 @@ public abstract class BaseHantoGame {
 		return mr;
 	}
 	
+	/**
+	 * Checks that all the pieces on the board are in one continuous block.
+	 * @throws HantoException
+	 */
 	protected void checkForContinuity() throws HantoException
 	{	
 		HantoPieceACBSJH startPiece = null;
@@ -566,6 +572,10 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
+	/**
+	 * A function that gets the number of pieces on the board.
+	 * @return The number of pieces on the board. 
+	 */
 	protected int getNumPiecesOnBoard() 
 	{
 		int count = 0;
@@ -578,6 +588,11 @@ public abstract class BaseHantoGame {
 		return count;
 	}
 	
+	/**
+	 * Takes in a pieces and gets all pieces adjacent to it.
+	 * @param startPiece
+	 * @return a list of neighbors.
+	 */
 	protected List<HantoPieceACBSJH> getListOfNeighbors(HantoPieceACBSJH startPiece) {
 		List<HantoPieceACBSJH> neighbors = new LinkedList<HantoPieceACBSJH>();
 		
