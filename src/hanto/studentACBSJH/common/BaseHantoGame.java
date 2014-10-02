@@ -559,24 +559,51 @@ public abstract class BaseHantoGame {
 	}
 	
 	/**
-	 * Takes in a pieces and gets all pieces adjacent to it.
+	 * Takes in a piece and gets all pieces adjacent to it.
 	 * @param startPiece
 	 * @return a list of neighbors.
 	 */
 	protected List<HantoPieceACBSJH> getListOfNeighbors(HantoPieceACBSJH startPiece) {
+		return getListOfNeighbors(startPiece.getLocation());
+	}
+	
+	/**
+	 * Takes in a location and gets all pieces adjacent to it.
+	 * @param location
+	 * @return a list of neighbor pieces
+	 */
+	protected List<HantoPieceACBSJH> getListOfNeighbors(HantoCoordinateACBSJH location) {
 		List<HantoPieceACBSJH> neighbors = new LinkedList<HantoPieceACBSJH>();
 		
-		if (startPiece != null){
-			for(HantoPieceACBSJH hp : HantoPieces)
-			{
-				if (!hp.isInHand()) {
-					if (hp.getLocation().isAdjacent(startPiece.getLocation())) {
-						neighbors.add(hp);
-					}
+		for(HantoPieceACBSJH hp : HantoPieces)
+		{
+			if (!hp.isInHand()) {
+				if (hp.getLocation().isAdjacent(location)) {
+					neighbors.add(hp);
 				}
 			}
 		}
 		
 		return neighbors;
+	}
+	
+	/**
+	 * Checks if a piece of a color is adjacent to a given location
+	 * 
+	 * @param location
+	 * @param color
+	 * @return true if a piece of color is adjacent to location
+	 */
+	protected boolean isAdjacentToColor(HantoCoordinateACBSJH location, HantoPlayerColor color)
+	{
+		List<HantoPieceACBSJH> neighbors = getListOfNeighbors(location);
+		for(HantoPieceACBSJH hp : neighbors)
+		{
+			if(hp.getColor() == color)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

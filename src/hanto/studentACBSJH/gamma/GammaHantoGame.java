@@ -71,7 +71,8 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 		
 		movePiece(pieceType, from, to);
 		checkForContinuity();
-
+		
+		
 		TurnNumber++;
 		
 		MoveResult mr = checkForWinner();
