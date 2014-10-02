@@ -25,6 +25,7 @@ import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 import hanto.studentACBSJH.gamma.GammaHantoGame;
+import hanto.studentACBSJH.gamma.GammaHantoTestGame;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -302,6 +303,21 @@ public class GammaHantoTests {
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND,
 				new HantoCoordinateACBSJH(0, 1));
 
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND,
+				new HantoCoordinateACBSJH(0, 2));
+	}
+	
+	@Test(expected = HantoException.class)
+	public void testInitializeBoardRemovesPiecesFromHand() throws HantoException
+	{
+		testGammaHantoGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
+			{
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY, origin),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY, new HantoCoordinateACBSJH(0, 1))
+			});
+		testGammaHantoGame.setPlayerMoving(HantoPlayerColor.BLUE);
+		testGammaHantoGame.setTurnNumber(2);
+		
 		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND,
 				new HantoCoordinateACBSJH(0, 2));
 	}
