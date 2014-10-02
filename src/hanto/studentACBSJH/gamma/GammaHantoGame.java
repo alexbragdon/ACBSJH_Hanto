@@ -60,7 +60,7 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 		this(HantoGameID.GAMMA_HANTO, firstPlayerColor);
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
 	 */
 	@Override
@@ -83,7 +83,7 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 		return mr;
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see hanto.studentACBSJH.common.BaseHantoGame#setupHands()
 	 */
 	@Override
