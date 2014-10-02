@@ -21,7 +21,10 @@ import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
+import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
+import hanto.studentACBSJH.common.HantoPieceACBSJH;
+import hanto.studentACBSJH.gamma.GammaHantoGame;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -250,6 +253,39 @@ public class GammaHantoTests {
 				{ new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY, origin)});
 		
 		assertEquals(MoveResult.DRAW, gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 1)));
+	}
+
+	@Test
+	public void testGammaHantoGameFactory()
+	{
+		HantoGameFactory.getInstance().makeHantoGame(HantoGameID.GAMMA_HANTO);
+	}
+	
+	@Test
+	public void testHantoCoordinateACBSJHConstructor()
+	{
+		HantoCoordinate hc1 = new HantoCoordinateACBSJH(0,0);
+		HantoCoordinateACBSJH hc2 = new HantoCoordinateACBSJH(hc1);
+		assertEquals(hc1.getX(), hc2.getX());
+		assertEquals(hc1.getY(), hc2.getY());
+	}
+	
+	@Test
+	public void testHantoPieceACBSJHConstructor()
+	{
+		HantoPiece hp1 = new HantoPieceACBSJH(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY);
+		HantoPieceACBSJH hp2 = new HantoPieceACBSJH(hp1);
+		assertEquals(hp1.getType(), hp2.getType());
+		assertEquals(hp1.getColor(), hp2.getColor());
+	}
+	
+	@Test(expected = HantoException.class)
+	public void testCannotMovePieceFromHandThatIsNotInHand() throws HantoException
+	{
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 1));
+		
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 2));
 	}
 	
 }
