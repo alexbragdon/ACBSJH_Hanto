@@ -23,6 +23,8 @@ import hanto.common.MoveResult;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
+
 
 
 /**
@@ -508,9 +510,9 @@ public abstract class BaseHantoGame {
 	{	
 		HantoPieceACBSJH startPiece = null;
 		
-		LinkedList<HantoPieceACBSJH> visited = new LinkedList<HantoPieceACBSJH>();
-		LinkedList<HantoPieceACBSJH> toVisit = new LinkedList<HantoPieceACBSJH>();
-		LinkedList<HantoPieceACBSJH> tempToVisit = new LinkedList<HantoPieceACBSJH>();
+		List<HantoPieceACBSJH> visited = new LinkedList<HantoPieceACBSJH>();
+		List<HantoPieceACBSJH> toVisit = new LinkedList<HantoPieceACBSJH>();
+		List<HantoPieceACBSJH> tempToVisit = new LinkedList<HantoPieceACBSJH>();
 		
 		for(HantoPieceACBSJH hp : HantoPieces)
 		{
@@ -556,8 +558,8 @@ public abstract class BaseHantoGame {
 		return count;
 	}
 	
-	protected LinkedList<HantoPieceACBSJH> getListOfNeighbors(HantoPieceACBSJH startPiece) {
-		LinkedList<HantoPieceACBSJH> neighbors = new LinkedList<HantoPieceACBSJH>();
+	protected List<HantoPieceACBSJH> getListOfNeighbors(HantoPieceACBSJH startPiece) {
+		List<HantoPieceACBSJH> neighbors = new LinkedList<HantoPieceACBSJH>();
 		
 		if (startPiece != null){
 			for(HantoPieceACBSJH hp : HantoPieces)

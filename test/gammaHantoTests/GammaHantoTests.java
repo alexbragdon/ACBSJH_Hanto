@@ -26,7 +26,6 @@ import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import org.junit.Before;
 import org.junit.Test;
 
-import sun.net.ftp.FtpDirEntry.Permission;
 import common.HantoTestGame;
 import common.HantoTestGameFactory;
 
