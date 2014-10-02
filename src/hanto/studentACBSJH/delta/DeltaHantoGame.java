@@ -120,13 +120,24 @@ public class DeltaHantoGame extends BaseHantoGame implements HantoGame {
 	protected void checkPlayerMovesTheCorrectNumberOfHexes(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
 		
-		if (pieceType == HantoPieceType.BUTTERFLY || pieceType == HantoPieceType.CRAB) {
-			HantoCoordinateACBSJH newTo = (HantoCoordinateACBSJH) to;
-			HantoCoordinateACBSJH newFrom = (HantoCoordinateACBSJH) from;
+		if ((pieceType == HantoPieceType.BUTTERFLY || pieceType == HantoPieceType.CRAB) && from != null) {
+			HantoCoordinateACBSJH newTo = new HantoCoordinateACBSJH(to);
+			HantoCoordinateACBSJH newFrom = new HantoCoordinateACBSJH(from);
 			
 			if (!newTo.isAdjacent(newFrom)) {
 				throw new HantoException(pieceType.toString() + " cannot move more than one space.");
 			}		
 		}
+	}
+	
+	/** (non-Javadoc)
+	 * @see hanto.studentACBSJH.common.BaseHantoGame#addValidHantoPieceTypes()
+	 */
+	@Override
+	protected void addValidHantoPieceTypes()
+	{
+		super.addValidHantoPieceTypes();
+		ValidHantoPieceTypes.add(HantoPieceType.SPARROW);
+		ValidHantoPieceTypes.add(HantoPieceType.CRAB);
 	}
 }
