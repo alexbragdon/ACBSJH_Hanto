@@ -298,5 +298,24 @@ public class DeltaHantoTests {
 		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND,
 				new HantoCoordinateACBSJH(0, 2));
 	}
+	
+	/**
+	 * @throws HantoException
+	 */
+	@Test
+	public void testBlueResign() throws HantoException {
+		MoveResult result = deltaHantoGame.makeMove(null, null, null);
+		assertEquals(MoveResult.RED_WINS, result);
+	}
 
+	/**
+	 * @throws HantoException
+	 */
+	@Test
+	public void testRedResign() throws HantoException {
+		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		MoveResult result = deltaHantoGame.makeMove(null, null, null);
+		assertEquals(MoveResult.BLUE_WINS, result);
+	}
+	
 }
