@@ -539,8 +539,9 @@ public abstract class BaseHantoGame {
 			tempToVisit.clear();
 		}
 		int numOfPicesOnBoard = getNumPiecesOnBoard();
+		int numVisited = visited.size();
 		if (visited.size() != numOfPicesOnBoard) {
-			throw new HantoException("All pieces must be contiguous. Could only reach " + visited.size() + " out of " + numOfPicesOnBoard);
+			throw new HantoException("All pieces must be contiguous. Could only reach " + numVisited + " out of " + numOfPicesOnBoard);
 		}
 	}
 	
