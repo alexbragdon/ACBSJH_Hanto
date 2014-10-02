@@ -606,4 +606,26 @@ public abstract class BaseHantoGame {
 		}
 		return false;
 	}
+	
+	/**
+	 * Checks that a piece placed from the hand is next to a friendly piece and not next to an enemy piece
+	 * 
+	 * @param from 
+	 * @param to
+	 * @throws HantoException
+	 */
+	protected void checkMoveForBadNeighbors(HantoCoordinate from, HantoCoordinate to) throws HantoException
+	{
+		if(TurnNumber < 2 || from != null)
+		{
+			return;
+		}
+		
+		HantoPlayerColor currentColor = getCurrentPlayersTurn();
+		HantoPlayerColor oppositeColor = (currentColor == HantoPlayerColor.BLUE) ? HantoPlayerColor.RED : HantoPlayerColor.BLUE;
+		if(!(isAdjacentToColor(new HantoCoordinateACBSJH(to), currentColor) && !isAdjacentToColor(new HantoCoordinateACBSJH(to), oppositeColor)))
+		{
+			throw new HantoException("Cannot place piece there, bad neighbors.");
+		}
+	}
 }
