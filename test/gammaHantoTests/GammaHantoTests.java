@@ -265,4 +265,18 @@ public class GammaHantoTests {
 		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
 				new HantoCoordinateACBSJH(3, 0));
 	}
+	
+	@Test(expected = HantoException.class)
+	public void cannotPlacePieceFromHandNextToOpponentPiece() throws HantoException
+	{
+		//turn 1
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		gammaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
+		//turn 2
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(2, 0));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 3
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(3, 0));
+		gammaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
+	}
 }

@@ -150,79 +150,6 @@ public class DeltaHantoTests {
 				new HantoCoordinateACBSJH(3, 0));
 	}
 
-	@Test
-	public void redWinsSurroundingBlueWithPiecesFromHand()
-			throws HantoException {
-
-		// turn 1
-		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
-		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND,
-				new HantoCoordinateACBSJH(1, 0));
-		// turn 2
-		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(2, 0));
-		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(0, 1));
-		// turn 3
-		deltaHantoGame.makeMove(HantoPieceType.CRAB, HAND,
-				new HantoCoordinateACBSJH(3, 0));
-		deltaHantoGame.makeMove(HantoPieceType.CRAB, HAND,
-				new HantoCoordinateACBSJH(-1, 1));
-		// turn 4
-		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(4, 0));
-		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(-1, 0));
-		// turn 5
-		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(5, 0));
-		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(0, -1));
-		// turn 6
-		MoveResult mrOK = deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(6, 0));
-		MoveResult mrWin = deltaHantoGame.makeMove(HantoPieceType.SPARROW,
-				HAND, new HantoCoordinateACBSJH(1, -1));
-		assertEquals(MoveResult.OK, mrOK);
-		assertEquals(MoveResult.RED_WINS, mrWin);
-	}
-
-	@Test
-	public void blueWinsSurroundingBlueWithPiecesFromHand()
-			throws HantoException {
-
-		// turn 1
-		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
-		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND,
-				new HantoCoordinateACBSJH(0, 1));
-		// turn 2
-		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(1, 0));
-		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(0, -1));
-		// turn 3
-		deltaHantoGame.makeMove(HantoPieceType.CRAB, HAND,
-				new HantoCoordinateACBSJH(1, 1));
-		deltaHantoGame.makeMove(HantoPieceType.CRAB, HAND,
-				new HantoCoordinateACBSJH(0, -2));
-		// turn 4
-		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(0, 2));
-		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(0, -3));
-		// turn 5
-		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(-1, 2));
-		MoveResult mrOK = deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND,
-				new HantoCoordinateACBSJH(0, -4));
-		// turn 6
-		MoveResult mrWin = deltaHantoGame.makeMove(HantoPieceType.SPARROW,
-				HAND, new HantoCoordinateACBSJH(-1, 1));
-
-		assertEquals(MoveResult.OK, mrOK);
-		assertEquals(MoveResult.BLUE_WINS, mrWin);
-	}
-
 	@Test(expected = HantoException.class)
 	public void noSuchPieceInHandExsists() throws HantoException {
 
@@ -340,6 +267,20 @@ public class DeltaHantoTests {
 		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		deltaHantoGame.makeMove(null, null, null);
 		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+	}
+	
+	@Test(expected = HantoException.class)
+	public void cannotPlacePieceFromHandNextToOpponentPiece() throws HantoException
+	{
+		//turn 1
+		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		deltaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(1, 0));
+		//turn 2
+		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(2, 0));
+		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(0, 1));
+		//turn 3
+		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(3, 0));
+		deltaHantoGame.makeMove(HantoPieceType.SPARROW, HAND, new HantoCoordinateACBSJH(-1, 1));
 	}
 	
 }

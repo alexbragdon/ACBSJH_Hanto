@@ -85,6 +85,8 @@ public class DeltaHantoGame extends BaseHantoGame implements HantoGame {
 		
 		movePiece(pieceType, from, to);
 		checkForContinuity();
+		
+		checkMoveForBadNeighbors(from, to);
 		checkPlayerMovesTheCorrectNumberOfHexes(pieceType, from, to);
 		
 		TurnNumber++;
