@@ -19,6 +19,7 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentACBSJH.common.BaseHantoGame;
+import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
 /**
@@ -71,7 +72,8 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 		
 		movePiece(pieceType, from, to);
 		checkForContinuity();
-
+		checkPlayerMovesTheCorrectNumberOfHexes(from, to);
+		
 		TurnNumber++;
 		
 		MoveResult mr = checkForWinner();
@@ -109,6 +111,19 @@ public class GammaHantoGame extends BaseHantoGame implements HantoGame {
 	{
 		super.addValidHantoPieceTypes();
 		ValidHantoPieceTypes.add(HantoPieceType.SPARROW);
+	}
+	
+	protected void checkPlayerMovesTheCorrectNumberOfHexes(HantoCoordinate from,
+			HantoCoordinate to) throws HantoException {
+		
+		if (from != null && to != null) {
+			HantoCoordinateACBSJH newTo = new HantoCoordinateACBSJH(to);
+			HantoCoordinateACBSJH newFrom = new HantoCoordinateACBSJH(from);
+			
+			if (!newTo.isAdjacent(newFrom)) {
+				throw new HantoException("Cannot move more than one space.");
+			}		
+		}
 	}
 
 }
