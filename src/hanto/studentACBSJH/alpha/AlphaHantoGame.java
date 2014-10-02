@@ -63,9 +63,6 @@ public class AlphaHantoGame extends BaseHantoGame implements HantoGame {
 		if(TurnNumber == 1) {
 			HantoCoordinateACBSJH toACBSJH = new HantoCoordinateACBSJH(to.getX(), to.getY());
 			HantoCoordinateACBSJH otherButterfly = new HantoCoordinateACBSJH(0, 0);
-			if(!otherButterfly.isAdjacent(toACBSJH)) {
-				throw new HantoException("Cannot move here! The tile is not ajacent to the other butterfly!");
-			}
 		}
 		
 		HantoPieceACBSJH pieceToMove = getPieceFromHand(pieceType);

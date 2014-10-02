@@ -278,4 +278,13 @@ public class BetaHantoTests {
 		HantoPiece retriviedPience2 = betaHantoGame.getPieceAt(new HantoCoordinateACBSJH(1, 0));
 		assertEquals(HantoPlayerColor.BLUE, retriviedPience2.getColor());
 	}
+	
+	@Test(expected = HantoException.class)
+	public void cannotMovePieceOnBoard() throws HantoException
+	{
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 1));
+		
+		betaHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(0, 2));
+	}
 }
