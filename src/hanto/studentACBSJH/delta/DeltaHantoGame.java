@@ -20,6 +20,7 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentACBSJH.common.BaseHantoGame;
+import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
 /**
@@ -60,7 +61,7 @@ public class DeltaHantoGame extends BaseHantoGame implements HantoGame {
 		this(HantoGameID.DELTA_HANTO, firstPlayerColor);
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
 	 */
 	@Override
@@ -82,7 +83,8 @@ public class DeltaHantoGame extends BaseHantoGame implements HantoGame {
 		
 		movePiece(pieceType, from, to);
 		checkForContinuity();
-
+		checkPlayerMovesTheCorrectNumberOfHexes(pieceType, from, to);
+		
 		TurnNumber++;
 		
 		MoveResult mr = checkForWinner();
@@ -90,7 +92,7 @@ public class DeltaHantoGame extends BaseHantoGame implements HantoGame {
 		return mr;
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see hanto.studentACBSJH.common.BaseHantoGame#setupHands()
 	 */
 	@Override
@@ -112,6 +114,19 @@ public class DeltaHantoGame extends BaseHantoGame implements HantoGame {
 			HantoPieceACBSJH redCrab = new HantoPieceACBSJH(HantoPlayerColor.RED, HantoPieceType.CRAB);
 			HantoPieces.add(blueCrab);
 			HantoPieces.add(redCrab);
+		}
+	}
+	
+	protected void checkPlayerMovesTheCorrectNumberOfHexes(HantoPieceType pieceType, HantoCoordinate from,
+			HantoCoordinate to) throws HantoException {
+		
+		if (pieceType == HantoPieceType.BUTTERFLY || pieceType == HantoPieceType.CRAB) {
+			HantoCoordinateACBSJH newTo = (HantoCoordinateACBSJH) to;
+			HantoCoordinateACBSJH newFrom = (HantoCoordinateACBSJH) from;
+			
+			if (!newTo.isAdjacent(newFrom)) {
+				throw new HantoException(pieceType.toString() + " cannot move more than one space.");
+			}		
 		}
 	}
 }
