@@ -595,6 +595,10 @@ public abstract class BaseHantoGame {
 		return neighbors;
 	}
 	
+	/**
+	 * Throws an exception if a player tries to move after the game has ended.
+	 * @throws HantoException
+	 */
 	protected void preventMovesAfterGameOver() throws HantoException 
 	{
 	if (isGameOver) {
@@ -602,6 +606,9 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
+	/**
+	 *Sets the game to be over. 
+	 */
 	public void setGameOver() {
 		isGameOver = true;
 	}
