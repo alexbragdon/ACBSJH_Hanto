@@ -68,7 +68,7 @@ public class TestGameUtilities {
 			for(int i = 0; i < HantoPieces.size() && !found; i++)
 			{
 				HantoPieceACBSJH hp = (HantoPieceACBSJH) HantoPieces.toArray()[i];
-				if(hp.isInHand() && hp.getType() == pair.pieceType && hp.getType() == pair.pieceType)
+				if(hp.isInHand() && hp.getType() == pair.pieceType && hp.getType() == pair.pieceType && hp.getColor() == pair.player)
 				{
 					hp.setLocation(new HantoCoordinateACBSJH(pair.location));
 					found = true;

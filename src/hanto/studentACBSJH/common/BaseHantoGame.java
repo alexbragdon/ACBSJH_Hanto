@@ -132,7 +132,7 @@ public abstract class BaseHantoGame {
 	 * 
 	 * @return the color of the player who should move next
 	 */
-	protected HantoPlayerColor getCurrentPlayersTurn()
+	public HantoPlayerColor getCurrentPlayersTurn()
 	{
 		return (TurnNumber % 2 == 0) ? firstPlayer : secondPlayer;
 	}
@@ -314,7 +314,7 @@ public abstract class BaseHantoGame {
 			if(!HPToMove.getColor().equals(getCurrentPlayersTurn()))
 			{
 				throw new HantoException("Cannot move "+HPToMove.getColor().toString() +
-						"piece when it is " + getCurrentPlayersTurn() + " turn");
+						" piece when it is " + getCurrentPlayersTurn() + " turn");
 			}
 		}
 	}
@@ -372,6 +372,7 @@ public abstract class BaseHantoGame {
 	 * @param color
 	 * @return count if the butterfly is placed, zero otherwise.
 	 */
+	/*
 	public int countPiecesSurroundingButterfly(HantoPlayerColor color) {
 		if (color == HantoPlayerColor.BLUE && blueButterfly != null) {
 			int count = 0;
@@ -394,6 +395,56 @@ public abstract class BaseHantoGame {
 		} else {
 		return 0;
 		}
+	}*/
+	
+	public int countPiecesSurroundingButterfly(HantoPlayerColor color) {
+		HantoPieceACBSJH blueB = getButterflyOnBoard(HantoPlayerColor.BLUE);
+		HantoPieceACBSJH redB = getButterflyOnBoard(HantoPlayerColor.RED);
+		
+		if(HantoPlayerColor.BLUE == color)
+		{
+			if(blueB != null)
+			{
+				return getListOfNeighbors(blueB).size();
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		else
+		{
+			if(redB != null)
+			{
+				return getListOfNeighbors(redB).size();
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		/*
+		if (color == HantoPlayerColor.BLUE && blueB != null) {
+			int count = 0;
+			HantoCoordinate butterfly = blueB.getLocation();
+			for(HantoPieceACBSJH hp : HantoPieces){
+				if (!hp.isInHand() && hp.getLocation().isAdjacent(butterfly)) {
+					count++;
+				}
+			}
+			return count;
+		} else if (color == HantoPlayerColor.RED && redB != null) {
+			int count = 0;
+			HantoCoordinate butterfly = redB.getLocation();
+			for(HantoPieceACBSJH hp : HantoPieces){
+				if (!hp.isInHand() && hp.getLocation().isAdjacent(butterfly)) {
+					count++;
+				}
+			}
+			return count;
+		} else {
+		return 0;
+		}*/
 	}
 	
 	/**
@@ -447,6 +498,40 @@ public abstract class BaseHantoGame {
 			return false;
 		}
 		
+	}
+	
+	public HantoPieceACBSJH getButterflyOnBoard(HantoPlayerColor color)
+	{
+		if(color == HantoPlayerColor.RED)
+		{
+			if(redButterfly != null)
+			{
+				return redButterfly;
+			}
+		}
+		else
+		{
+			if(blueButterfly != null)
+			{
+				return blueButterfly;
+			}
+		}
+		for(HantoPieceACBSJH hp : HantoPieces)
+		{
+			if(hp.getType() == HantoPieceType.BUTTERFLY && hp.getColor() == color && !hp.isInHand())
+			{
+				if(color == HantoPlayerColor.RED)
+				{
+					redButterfly = hp;
+				}
+				else
+				{
+					blueButterfly = hp;
+				}
+				return hp;
+			}
+		}
+		return null;
 	}
 	
 	/**

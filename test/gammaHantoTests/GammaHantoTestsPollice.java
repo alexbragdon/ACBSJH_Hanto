@@ -10,14 +10,31 @@
 
 package gammaHantoTests;
 
-import static org.junit.Assert.*;
-import hanto.common.*;
-import org.junit.*;
-import common.*;
-import static hanto.common.HantoPieceType.*;
-import static hanto.common.MoveResult.*;
-import static hanto.common.HantoPlayerColor.*;
+import static hanto.common.HantoPieceType.BUTTERFLY;
+import static hanto.common.HantoPieceType.SPARROW;
+import static hanto.common.HantoPlayerColor.BLUE;
+import static hanto.common.HantoPlayerColor.RED;
+import static hanto.common.MoveResult.DRAW;
+import static hanto.common.MoveResult.OK;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import hanto.common.HantoCoordinate;
+import hanto.common.HantoException;
+import hanto.common.HantoGame;
+import hanto.common.HantoGameID;
+import hanto.common.HantoPiece;
+import hanto.common.HantoPieceType;
+import hanto.common.HantoPlayerColor;
+import hanto.common.MoveResult;
+import hanto.studentACBSJH.common.BaseHantoGame;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import common.HantoTestGame;
 import common.HantoTestGame.PieceLocationPair;
+import common.HantoTestGameFactory;
 
 /**
  * Description
