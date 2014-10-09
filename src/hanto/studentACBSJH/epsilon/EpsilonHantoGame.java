@@ -12,9 +12,6 @@
  *******************************************************************************/
 package hanto.studentACBSJH.epsilon;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGame;
@@ -56,7 +53,7 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	 * @param gameID
 	 * @param firstPlayerColor
 	 */
-	public EpsilonHantoGame(HantoGameID gameID, HantoPlayerColor firstPlayerColor) {
+	private EpsilonHantoGame(HantoGameID gameID, HantoPlayerColor firstPlayerColor) {
 		super(gameID, firstPlayerColor);
 	}
 	
@@ -148,18 +145,28 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	 */
 	protected void checkPlayerMovesTheCorrectNumberOfHexes(HantoPieceType pieceType, HantoCoordinate from, 
 			HantoCoordinate to) throws HantoException {
-		HantoCoordinateACBSJH ACBSJHTo = new HantoCoordinateACBSJH(to);
-		HantoCoordinateACBSJH ACBSJHFrom = new HantoCoordinateACBSJH(from);
-		
-		if ((pieceType == HantoPieceType.BUTTERFLY || pieceType == HantoPieceType.CRAB) && from != null) {		
-			if (!ACBSJHTo.isAdjacent(ACBSJHFrom)) {
-				throw new HantoException(pieceType.toString() + " cannot move more than one space.");
-			}		
-		} else if (pieceType == HantoPieceType.HORSE)
-		{
-			if (!ACBSJHFrom.isStraightLine(ACBSJHTo)) {
-				throw new HantoException("The horse must jump in a straight line!");
+		if(from != null){
+			HantoCoordinateACBSJH ACBSJHTo = new HantoCoordinateACBSJH(to);
+			HantoCoordinateACBSJH ACBSJHFrom = new HantoCoordinateACBSJH(from);
+			
+			if ((pieceType == HantoPieceType.BUTTERFLY || pieceType == HantoPieceType.CRAB) && from != null) {		
+				if (!ACBSJHTo.isAdjacent(ACBSJHFrom)) {
+					throw new HantoException(pieceType.toString() + " cannot move more than one space.");
+				}		
+			} else if (pieceType == HantoPieceType.HORSE)
+			{
+				if (!ACBSJHFrom.isStraightLine(ACBSJHTo)) {
+					throw new HantoException("The horse must jump in a straight line!");
+				}
 			}
 		}
+	}
+	
+	protected void addValidHantoPieceTypes()
+	{
+		super.addValidHantoPieceTypes();
+		ValidHantoPieceTypes.add(HantoPieceType.SPARROW);
+		ValidHantoPieceTypes.add(HantoPieceType.CRAB);
+		ValidHantoPieceTypes.add(HantoPieceType.HORSE);
 	}
 }

@@ -261,10 +261,10 @@ public class EpsilonHantoTests {
 	{
 		epsilonHantoTestGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
 			{
-				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, origin),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY, origin),
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, new HantoCoordinateACBSJH(2, 0)),
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.HORSE, new HantoCoordinateACBSJH(0, 1)),
-				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(1, 0)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY, new HantoCoordinateACBSJH(1, 0)),
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(3, 0)),
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(1, -1)),
 			});
