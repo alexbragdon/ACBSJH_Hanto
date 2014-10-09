@@ -195,7 +195,7 @@ public class DeltaHantoTests {
 	
 	@Test 
 	public void testGammaHantoGameFactory() {
-		HantoGameFactory.getInstance().makeHantoGame(HantoGameID.GAMMA_HANTO);
+		HantoGameFactory.getInstance().makeHantoGame(HantoGameID.DELTA_HANTO);
 	}
 
 	@Test
