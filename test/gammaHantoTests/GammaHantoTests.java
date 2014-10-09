@@ -24,8 +24,6 @@ import hanto.common.MoveResult;
 import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
-import hanto.studentACBSJH.gamma.GammaHantoGame;
-import hanto.studentACBSJH.gamma.GammaHantoTestGame;
 
 import org.junit.Before;
 import org.junit.Test;

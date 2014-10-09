@@ -203,7 +203,6 @@ public class DeltaHantoTestPollice
 		testGame.initializeBoard(board);
 		testGame.setPlayerMoving(RED);
 		testGame.setTurnNumber(4);
-		HantoPlayerColor color = ((BaseHantoGame)game).getCurrentPlayersTurn();
 		assertEquals(RED_WINS, game.makeMove(SPARROW, makeCoordinate(-2, 1), makeCoordinate(1, 0)));
 	}
 	
