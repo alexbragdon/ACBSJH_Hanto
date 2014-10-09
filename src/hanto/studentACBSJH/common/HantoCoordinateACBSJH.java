@@ -103,4 +103,19 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 		return adjacency;
 	}
 	
+	/**
+	 * A simple check if to see 
+	 * @param to
+	 * @return
+	 */
+	public boolean isStraightLine(HantoCoordinate to) {
+		if (X - to.getX() == 0 || Y - to.getY() == 0) {
+			return true;
+		} else if (((X - to.getX()) / (Y - to.getY())) == -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 }
