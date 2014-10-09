@@ -31,9 +31,8 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	 * @param gameID
 	 * @param firstPlayerColor
 	 */
-	public EpsilonHantoGame(HantoGameID gameID,
-			HantoPlayerColor firstPlayerColor) {
-		super(gameID, firstPlayerColor);
+	public EpsilonHantoGame(HantoPlayerColor firstPlayerColor) {
+		super(HantoGameID.EPSILON_HANTO, firstPlayerColor);
 		// TODO Auto-generated constructor stub
 	}
 
