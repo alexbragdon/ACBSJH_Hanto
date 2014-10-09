@@ -13,10 +13,6 @@ package epsilonHantoTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGame;
@@ -28,6 +24,15 @@ import hanto.common.MoveResult;
 import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
+
+import java.util.ArrayList;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import com.sun.org.glassfish.external.probe.provider.PluginPoint;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 import common.HantoTestGame;
 import common.HantoTestGameFactory;
 
@@ -233,7 +238,7 @@ public class EpsilonHantoTests {
 	}
 	
 	@Test(expected = HantoException.class)
-	public void butterflyPlacedByFourthTurn()
+	public void butterflyPlacedByFourthTurn() throws HantoException
 	{
 		epsilonHantoTestGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
 			{
@@ -251,5 +256,22 @@ public class EpsilonHantoTests {
 		epsilonHantoGame.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 2));
 	}
 	
+	@Test(expected = HantoException.class)
+	public void horseCanOnlyMoveStraight() throws HantoException
+	{
+		epsilonHantoTestGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
+			{
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, origin),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, new HantoCoordinateACBSJH(2, 0)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.HORSE, new HantoCoordinateACBSJH(0, 1)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(1, 0)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(3, 0)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(1, -1)),
+			});
+		epsilonHantoTestGame.setTurnNumber(4);
+		epsilonHantoTestGame.setPlayerMoving(HantoPlayerColor.BLUE);
+		
+		epsilonHantoGame.makeMove(HantoPieceType.HORSE, new HantoCoordinateACBSJH(0, 1), new HantoCoordinateACBSJH(4, 0));
+	}
 	
 }
