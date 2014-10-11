@@ -12,9 +12,6 @@
  *******************************************************************************/
 package hanto.studentACBSJH.epsilon;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGame;
@@ -27,6 +24,9 @@ import hanto.studentACBSJH.common.BaseHantoGame;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 import hanto.tournament.HantoMoveRecord;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * @author alexbragdon
@@ -80,18 +80,11 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to) throws HantoException {
 		preventMovesAfterGameOver();
 		
-		if (pieceType == null && from == null && to == null && getAllPossibleMovesForCurrentPlayer().isEmpty()){
-			MoveResult mr = null;
-			if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
-				mr = MoveResult.RED_WINS; 
-			} else {
-				mr = MoveResult.BLUE_WINS;
-			}
-			setGameOver();
-			return mr;
-		} else if (pieceType == null && from == null && to == null && !getAllPossibleMovesForCurrentPlayer().isEmpty())
+		
+		MoveResult resignCheckResult = playerResignCheck(pieceType, from, to);
+		if(resignCheckResult != MoveResult.OK)
 		{
-			throw new HantoException("Cannot resign if there are still valid moves.");
+			return  resignCheckResult;
 		}
 		
 		checkMakeMoveInputForException(pieceType, from, to);
@@ -107,6 +100,27 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 		
 		MoveResult mr = checkForWinner();
 		
+		return mr;
+	}
+	
+	private MoveResult playerResignCheck(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to) throws HantoException
+	{
+		MoveResult mr = MoveResult.OK;
+		if(pieceType == null && from == null && to == null)
+		{
+			Collection<HantoMoveRecord> possibleMoves = getAllPossibleMovesForCurrentPlayer();
+			if (possibleMoves.isEmpty()){
+				if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
+					mr = MoveResult.RED_WINS; 
+				} else {
+					mr = MoveResult.BLUE_WINS;
+				}
+				setGameOver();
+			} else
+			{
+				throw new HantoPrematureResignationException();
+			}
+		}
 		return mr;
 	}
 
