@@ -80,7 +80,9 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to) throws HantoException {
 		preventMovesAfterGameOver();
 		
-		if (pieceType == null && from == null && to == null && getAllPossibleMoveDestinations().isEmpty()){
+		Collection<HantoCoordinateACBSJH> moveDestinations = getAllPossibleMoveDestinations();
+		
+		if (pieceType == null && from == null && to == null && moveDestinations.isEmpty()){
 			MoveResult mr = null;
 			if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
 				mr = MoveResult.RED_WINS; 
@@ -89,7 +91,7 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 			}
 			setGameOver();
 			return mr;
-		} else if (pieceType == null && from == null && to == null && !getAllPossibleMoveDestinations().isEmpty())
+		} else if (pieceType == null && from == null && to == null && !moveDestinations.isEmpty())
 		{
 			throw new HantoException("Cannot resign if there are still valid moves.");
 		}
@@ -215,17 +217,36 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 		return listOfPossibleMoves;
 	}
 	
-	protected Collection<HantoCoordinateACBSJH> getAllPossibleMoveDestinations() 
+	private boolean isBoardEmpty()
 	{
-		Collection<HantoCoordinateACBSJH> moveDestinations = new ArrayList<HantoCoordinateACBSJH>();
 		for(HantoPieceACBSJH hp : HantoPieces)
 		{
-			if (hp.getLocation() != null) {
-				for (HantoCoordinateACBSJH destination : hp.getLocation().getAllAdjacentCoordinates())
-				{
-					if(!moveDestinations.contains(destination))
+			if(!hp.isInHand())
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private Collection<HantoCoordinateACBSJH> getAllPossibleMoveDestinations() 
+	{
+		Collection<HantoCoordinateACBSJH> moveDestinations = new ArrayList<HantoCoordinateACBSJH>();
+		if(isBoardEmpty())
+		{
+			moveDestinations.add(new HantoCoordinateACBSJH(0, 0));
+		}
+		else
+		{
+			for(HantoPieceACBSJH hp : HantoPieces)
+			{
+				if (hp.getLocation() != null) {
+					for (HantoCoordinateACBSJH destination : hp.getLocation().getAllAdjacentCoordinates())
 					{
-						moveDestinations.add(destination);
+						if(!moveDestinations.contains(destination))
+						{
+							moveDestinations.add(destination);
+						}
 					}
 				}
 			}
