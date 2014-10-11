@@ -103,6 +103,15 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 		return mr;
 	}
 	
+	/**
+	 * Handles the case where one player tries to resign
+	 * 
+	 * @param pieceType must be null to resign
+	 * @param from must be null to resign
+	 * @param to must be null to resign
+	 * @return OK if no player won as a result of resignation, otherwise RED_WINS or BLUE_WINS returned accordingly
+	 * @throws HantoException thrown if one player resigned while still having a possible move 
+	 */
 	private MoveResult playerResignCheck(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to) throws HantoException
 	{
 		MoveResult mr = MoveResult.OK;
