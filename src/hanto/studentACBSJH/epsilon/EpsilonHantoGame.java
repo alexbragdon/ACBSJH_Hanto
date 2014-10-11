@@ -188,7 +188,7 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	public Collection<HantoMoveRecord> getAllPossibleMovesForCurrentPlayer()
 	{
 		Collection<HantoMoveRecord> listOfPossibleMoves = new ArrayList<HantoMoveRecord>();
-		Collection<HantoCoordinateACBSJH> listOfPossibleDestinations = getAllPossibleMoveDestinations();
+		Collection<HantoCoordinateACBSJH> listOfPossibleDestinations = getMoveDestinations();
 		
 		for(HantoPieceACBSJH hp : HantoPieces)
 		{
@@ -230,7 +230,7 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 		return true;
 	}
 	
-	private Collection<HantoCoordinateACBSJH> getAllPossibleMoveDestinations() 
+	private Collection<HantoCoordinateACBSJH> getMoveDestinations() 
 	{
 		Collection<HantoCoordinateACBSJH> moveDestinations = new ArrayList<HantoCoordinateACBSJH>();
 		if(isBoardEmpty())
