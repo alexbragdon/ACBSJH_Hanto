@@ -13,6 +13,10 @@
 
 package hanto.studentACBSJH.common;
 
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import hanto.common.HantoCoordinate;
 
 /**
@@ -130,5 +134,21 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 		return ((Math.abs(X - toX) + Math.abs(Y - toY)
 				+ Math.abs(X + Y - toX - toY)) / 2);
 	}
-	
+
+	/**
+	 * A function to get all adjacent coordinates.
+	 * @return Collection<HantoCoordinateACBSJH>
+	 */
+	public Collection<HantoCoordinateACBSJH> getAllAdjacentCoordinates() 
+	{
+		Collection<HantoCoordinateACBSJH> listOfMoveLocations = new ArrayList<HantoCoordinateACBSJH>();
+		listOfMoveLocations.add(new HantoCoordinateACBSJH(X, Y + 1));
+		listOfMoveLocations.add(new HantoCoordinateACBSJH(X + 1, Y));
+		listOfMoveLocations.add(new HantoCoordinateACBSJH(X + 1, Y - 1));
+		listOfMoveLocations.add(new HantoCoordinateACBSJH(X, Y - 1));
+		listOfMoveLocations.add(new HantoCoordinateACBSJH(X - 1, Y));
+		listOfMoveLocations.add(new HantoCoordinateACBSJH(X - 1, Y + 1));
+		return listOfMoveLocations;
+		
+	}
 }

@@ -188,7 +188,7 @@ public class EpsilonHantoTests {
 				new HantoCoordinateACBSJH(0, 2));
 	}
 	
-	@Test
+	@Test(expected = HantoException.class)
 	public void testBlueResign() throws HantoException {
 		MoveResult result = epsilonHantoGame.makeMove(null, null, null);
 		assertEquals(MoveResult.RED_WINS, result);
@@ -209,7 +209,7 @@ public class EpsilonHantoTests {
 				new HantoCoordinateACBSJH(0, 2));
 	}
 	
-	@Test
+	@Test(expected = HantoException.class)
 	public void testRedResign() throws HantoException {
 		epsilonHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
 		MoveResult result = epsilonHantoGame.makeMove(null, null, null);

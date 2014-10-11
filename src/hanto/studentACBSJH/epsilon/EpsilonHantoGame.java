@@ -12,16 +12,21 @@
  *******************************************************************************/
 package hanto.studentACBSJH.epsilon;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGame;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.common.HantoPrematureResignationException;
 import hanto.common.MoveResult;
 import hanto.studentACBSJH.common.BaseHantoGame;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
+import hanto.tournament.HantoMoveRecord;
 
 /**
  * @author alexbragdon
@@ -68,13 +73,14 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	}
 
 	/** (non-Javadoc)
+	 * @throws HantoPrematureResignationException 
 	 * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)
 	 */
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to) throws HantoException {
 		preventMovesAfterGameOver();
 		
-		if (pieceType == null && from == null && to == null){
+		if (pieceType == null && from == null && to == null && getAllPossibleMoveDestinations().isEmpty()){
 			MoveResult mr = null;
 			if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
 				mr = MoveResult.RED_WINS; 
@@ -83,6 +89,9 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 			}
 			setGameOver();
 			return mr;
+		} else if (pieceType == null && from == null && to == null && !getAllPossibleMoveDestinations().isEmpty())
+		{
+			throw new HantoException("Cannot resign if there are still valid moves.");
 		}
 		
 		checkMakeMoveInputForException(pieceType, from, to);
@@ -175,4 +184,53 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 		ValidHantoPieceTypes.add(HantoPieceType.CRAB);
 		ValidHantoPieceTypes.add(HantoPieceType.HORSE);
 	}
+	
+	public Collection<HantoMoveRecord> getAllPossibleMoves()
+	{
+		Collection<HantoMoveRecord> listOfPossibleMoves = new ArrayList<HantoMoveRecord>();
+		Collection<HantoCoordinateACBSJH> listOfPossibleDestinations = getAllPossibleMoveDestinations();
+		
+		for(HantoPieceACBSJH hp : HantoPieces)
+		{
+			for(HantoCoordinateACBSJH destination : listOfPossibleDestinations)
+			{
+				boolean isMoveInvalid = false;
+				try
+				{
+					makeMove(hp.getType(), hp.getLocation(), destination);
+				}
+				catch (Exception he)
+				{
+					isMoveInvalid = true;
+				}
+				
+				if (!isMoveInvalid)
+				{
+					listOfPossibleMoves.add(new HantoMoveRecord(hp.getType(), hp.getLocation(), destination));
+				}
+				
+			}
+		}
+		
+		return listOfPossibleMoves;
+	}
+	
+	protected Collection<HantoCoordinateACBSJH> getAllPossibleMoveDestinations() 
+	{
+		Collection<HantoCoordinateACBSJH> moveDestinations = new ArrayList<HantoCoordinateACBSJH>();
+		for(HantoPieceACBSJH hp : HantoPieces)
+		{
+			if (hp.getLocation() != null) {
+				for (HantoCoordinateACBSJH destination : hp.getLocation().getAllAdjacentCoordinates())
+				{
+					if(!moveDestinations.contains(destination))
+					{
+						moveDestinations.add(destination);
+					}
+				}
+			}
+		}
+		return moveDestinations;
+	}
+	
 }
