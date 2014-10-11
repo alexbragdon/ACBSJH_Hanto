@@ -366,37 +366,6 @@ public abstract class BaseHantoGame {
 		}
 	}
 	
-	/**
-	 * Counts how many pieces surround a butterfly of the given color.
-	 * 
-	 * @param color
-	 * @return count if the butterfly is placed, zero otherwise.
-	 */
-	/*
-	public int countPiecesSurroundingButterfly(HantoPlayerColor color) {
-		if (color == HantoPlayerColor.BLUE && blueButterfly != null) {
-			int count = 0;
-			HantoCoordinate butterfly = blueButterfly.getLocation();
-			for(HantoPieceACBSJH hp : HantoPieces){
-				if (!hp.isInHand() && hp.getLocation().isAdjacent(butterfly)) {
-					count++;
-				}
-			}
-			return count;
-		} else if (color == HantoPlayerColor.RED && redButterfly != null) {
-			int count = 0;
-			HantoCoordinate butterfly = redButterfly.getLocation();
-			for(HantoPieceACBSJH hp : HantoPieces){
-				if (!hp.isInHand() && hp.getLocation().isAdjacent(butterfly)) {
-					count++;
-				}
-			}
-			return count;
-		} else {
-		return 0;
-		}
-	}*/
-	
 	public int countPiecesSurroundingButterfly(HantoPlayerColor color) {
 		HantoPieceACBSJH blueB = getButterflyOnBoard(HantoPlayerColor.BLUE);
 		HantoPieceACBSJH redB = getButterflyOnBoard(HantoPlayerColor.RED);
@@ -423,28 +392,6 @@ public abstract class BaseHantoGame {
 				return 0;
 			}
 		}
-		/*
-		if (color == HantoPlayerColor.BLUE && blueB != null) {
-			int count = 0;
-			HantoCoordinate butterfly = blueB.getLocation();
-			for(HantoPieceACBSJH hp : HantoPieces){
-				if (!hp.isInHand() && hp.getLocation().isAdjacent(butterfly)) {
-					count++;
-				}
-			}
-			return count;
-		} else if (color == HantoPlayerColor.RED && redB != null) {
-			int count = 0;
-			HantoCoordinate butterfly = redB.getLocation();
-			for(HantoPieceACBSJH hp : HantoPieces){
-				if (!hp.isInHand() && hp.getLocation().isAdjacent(butterfly)) {
-					count++;
-				}
-			}
-			return count;
-		} else {
-		return 0;
-		}*/
 	}
 	
 	/**
