@@ -136,7 +136,7 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 	}
 
 	/**
-	 * A function to get all adjacent coordinates.
+	 * A function to get all coor adjacent coordinates .
 	 * @return Collection<HantoCoordinateACBSJH>
 	 */
 	public Collection<HantoCoordinateACBSJH> getAllAdjacentCoordinates() 
