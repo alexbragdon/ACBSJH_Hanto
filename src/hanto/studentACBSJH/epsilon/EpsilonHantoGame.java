@@ -80,7 +80,7 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to) throws HantoException {
 		preventMovesAfterGameOver();
 		
-		if (pieceType == null && from == null && to == null && getAllPossibleMoveDestinations().isEmpty()){
+		if (pieceType == null && from == null && to == null && getAllPossibleMovesForCurrentPlayer().isEmpty()){
 			MoveResult mr = null;
 			if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
 				mr = MoveResult.RED_WINS; 
@@ -89,7 +89,7 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 			}
 			setGameOver();
 			return mr;
-		} else if (pieceType == null && from == null && to == null && !getAllPossibleMoveDestinations().isEmpty())
+		} else if (pieceType == null && from == null && to == null && !getAllPossibleMovesForCurrentPlayer().isEmpty())
 		{
 			throw new HantoException("Cannot resign if there are still valid moves.");
 		}
@@ -185,30 +185,33 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 		ValidHantoPieceTypes.add(HantoPieceType.HORSE);
 	}
 	
-	public Collection<HantoMoveRecord> getAllPossibleMoves()
+	public Collection<HantoMoveRecord> getAllPossibleMovesForCurrentPlayer()
 	{
 		Collection<HantoMoveRecord> listOfPossibleMoves = new ArrayList<HantoMoveRecord>();
 		Collection<HantoCoordinateACBSJH> listOfPossibleDestinations = getAllPossibleMoveDestinations();
 		
 		for(HantoPieceACBSJH hp : HantoPieces)
 		{
-			for(HantoCoordinateACBSJH destination : listOfPossibleDestinations)
+			if (hp.getColor() == getCurrentPlayersTurn())
 			{
-				boolean isMoveInvalid = false;
-				try
+				for(HantoCoordinateACBSJH destination : listOfPossibleDestinations)
 				{
-					makeMove(hp.getType(), hp.getLocation(), destination);
-				}
-				catch (Exception he)
-				{
-					isMoveInvalid = true;
-				}
+					boolean isMoveInvalid = false;
+					try
+					{
+						makeMove(hp.getType(), hp.getLocation(), destination);
+					}
+					catch (Exception he)
+					{
+						isMoveInvalid = true;
+					}
 				
-				if (!isMoveInvalid)
-				{
-					listOfPossibleMoves.add(new HantoMoveRecord(hp.getType(), hp.getLocation(), destination));
-				}
+					if (!isMoveInvalid)
+					{
+						listOfPossibleMoves.add(new HantoMoveRecord(hp.getType(), hp.getLocation(), destination));
+					}
 				
+				}
 			}
 		}
 		
