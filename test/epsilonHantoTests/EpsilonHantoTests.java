@@ -25,13 +25,8 @@ import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import com.sun.org.glassfish.external.probe.provider.PluginPoint;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import common.HantoTestGame;
 import common.HantoTestGameFactory;
@@ -47,6 +42,11 @@ public class EpsilonHantoTests {
 	
 	HantoGame epsilonHantoGame;
 	HantoTestGame epsilonHantoTestGame;
+	
+	private HantoTestGame.PieceLocationPair makePieceLocationPair(HantoPlayerColor playerColor, HantoPieceType pieceType, HantoCoordinate location)
+	{
+		return new HantoTestGame.PieceLocationPair(playerColor, pieceType, location);	
+	}
 	
 	@Before
 	public void setup() {
@@ -299,7 +299,6 @@ public class EpsilonHantoTests {
 			epsilonHantoTestGame.setTurnNumber(4);
 			epsilonHantoTestGame.setPlayerMoving(HantoPlayerColor.BLUE);
 			epsilonHantoGame.makeMove(HantoPieceType.SPARROW, new HantoCoordinateACBSJH(0, 1), new HantoCoordinateACBSJH(5, 0));
-			
 	}
 	
 }
