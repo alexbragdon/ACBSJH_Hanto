@@ -117,5 +117,18 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 			return false;
 		}
 	}
+
+	/**
+	 * Computes the distance between two coordinates.
+	 * @param ACBSJHTo
+	 * @return
+	 */
+	public int getDistance(HantoCoordinateACBSJH ACBSJHTo) {
+		int toX = ACBSJHTo.getX();
+		int toY = ACBSJHTo.getY();
+		
+		return ((Math.abs(X - toX) + Math.abs(Y - toY)
+				+ Math.abs(X + Y - toX - toY)) / 2);
+	}
 	
 }

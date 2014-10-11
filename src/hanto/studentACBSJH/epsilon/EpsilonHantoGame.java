@@ -153,10 +153,16 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 				if (!ACBSJHTo.isAdjacent(ACBSJHFrom)) {
 					throw new HantoException(pieceType.toString() + " cannot move more than one space.");
 				}		
-			} else if (pieceType == HantoPieceType.HORSE)
+			} 
+			else if (pieceType == HantoPieceType.HORSE)
 			{
 				if (!ACBSJHFrom.isStraightLine(ACBSJHTo)) {
-					throw new HantoException("The horse must jump in a straight line!");
+					throw new HantoException("The horse must jump in a straight line.");
+				}
+			} 
+			else if (pieceType == HantoPieceType.SPARROW) {
+				if (!(ACBSJHFrom.getDistance(ACBSJHTo) < 5)) {
+					throw new HantoException("The sparrow can only fly up to four tiles.");
 				}
 			}
 		}
