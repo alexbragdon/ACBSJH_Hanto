@@ -381,6 +381,23 @@ public class EpsilonHantoTests {
 		epsilonHantoGame.makeMove(HantoPieceType.CRAB, new HantoCoordinateACBSJH(1, -1), new HantoCoordinateACBSJH(3, -1));
 	}
 	
-	
+	@Test(expected = HantoException.class)
+	public void slideExceptionTest() throws HantoException
+	{
+		epsilonHantoTestGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
+			{
+				makePieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY, origin),
+				makePieceLocationPair(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY, 0, -1),
+				makePieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, -1, 1),
+				makePieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, 1, 0),
+				makePieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, -1, 0),
+				makePieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, 1, -1)
+			});
+		epsilonHantoTestGame.setTurnNumber(3);
+		epsilonHantoTestGame.setPlayerMoving(HantoPlayerColor.BLUE);
+		
+		epsilonHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(0, 1));	
+		
+	}
 	
 }

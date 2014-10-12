@@ -27,6 +27,7 @@ import hanto.tournament.HantoMoveRecord;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author alexbragdon
@@ -185,6 +186,7 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 				if (!ACBSJHTo.isAdjacent(ACBSJHFrom)) {
 					throw new HantoException(pieceType.toString() + " cannot move more than one space.");
 				}
+				checkForSlidingException(ACBSJHFrom, ACBSJHTo);
 			} 
 			else if (pieceType == HantoPieceType.HORSE)
 			{
@@ -205,9 +207,43 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	}
 	
 	/**
+	 * Checks if a piece is trying to slide when it cannot due to pieces around it.
+	 * 
+	 * Assumes that the piece is trying to walk to an otherwise valid position.
+	 * 
+	 * @param from
+	 * @param to
+	 * @throws HantoException
+	 */
+	private void checkForSlidingException(HantoCoordinateACBSJH from, HantoCoordinateACBSJH to) throws HantoException
+	{
+		Collection<HantoCoordinateACBSJH> fromNeighbors = from.getAllAdjacentCoordinates();
+		Collection<HantoCoordinateACBSJH> toNeighbors = to.getAllAdjacentCoordinates();
+		List<HantoCoordinateACBSJH> coordinatesToCheck = new ArrayList<HantoCoordinateACBSJH>();
+		for(HantoCoordinateACBSJH fromNeighbor : fromNeighbors)
+		{
+			for(HantoCoordinateACBSJH toNeighbor : toNeighbors)
+			{
+				if(fromNeighbor.equals(toNeighbor))
+				{
+					coordinatesToCheck.add(fromNeighbor);
+				}
+			}
+		}
+		if(getPieceAt(coordinatesToCheck.get(0)) != null && getPieceAt(coordinatesToCheck.get(1)) != null)
+		{
+			throw new HantoException("Cannot slide piece, pieces are blocking it at " + from + " and " + to);
+		}
+	}
+
+	/**
 	 * Checks if a horse is trying to jump over a gap.
 	 * 
 	 * Assumes the path from 'from' to 'to' is straight.
+	 * 
+	 * @param from
+	 * @param to
+	 * @throws HantoException
 	 */
 	private void checkForGapInHorsePath(HantoCoordinateACBSJH from, HantoCoordinateACBSJH to) throws HantoException
 	{
