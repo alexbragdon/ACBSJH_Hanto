@@ -267,35 +267,34 @@ public class EpsilonHantoTests {
 		epsilonHantoTestGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
 			{
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY, origin),
-				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, new HantoCoordinateACBSJH(2, 0)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, new HantoCoordinateACBSJH(2, 1)),
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.HORSE, new HantoCoordinateACBSJH(0, 1)),
-				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY, new HantoCoordinateACBSJH(1, 0)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY, new HantoCoordinateACBSJH(1, 1)),
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(3, 0)),
-				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(1, -1)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(1, 0)),
 			});
 		epsilonHantoTestGame.setTurnNumber(4);
 		epsilonHantoTestGame.setPlayerMoving(HantoPlayerColor.BLUE);
 		
-		epsilonHantoGame.makeMove(HantoPieceType.HORSE, new HantoCoordinateACBSJH(0, 1), new HantoCoordinateACBSJH(4, 0));
+		epsilonHantoGame.makeMove(HantoPieceType.HORSE, new HantoCoordinateACBSJH(0, 1), new HantoCoordinateACBSJH(2, 2));
 	}
 	
-	@Test
-	public void horseCanMoveStraightOverGap() throws HantoException
+	@Test(expected = HantoException.class)
+	public void horseCannotMoveStraightOverGap() throws HantoException
 	{
 		epsilonHantoTestGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
 			{
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY, origin),
-				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, new HantoCoordinateACBSJH(2, -1)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, new HantoCoordinateACBSJH(2, 1)),
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.HORSE, new HantoCoordinateACBSJH(0, 1)),
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY, new HantoCoordinateACBSJH(1, 0)),
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(3, 0)),
-				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(3, -1)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(2, 0)),
 			});
 		epsilonHantoTestGame.setTurnNumber(4);
 		epsilonHantoTestGame.setPlayerMoving(HantoPlayerColor.BLUE);
 		
-		MoveResult mr = epsilonHantoGame.makeMove(HantoPieceType.HORSE, new HantoCoordinateACBSJH(0, 1), new HantoCoordinateACBSJH(3, 1));
-		assertEquals(MoveResult.OK, mr);
+		epsilonHantoGame.makeMove(HantoPieceType.HORSE, new HantoCoordinateACBSJH(0, 1), new HantoCoordinateACBSJH(3, 1));
 	}
 	
 	@Test
@@ -304,11 +303,11 @@ public class EpsilonHantoTests {
 		epsilonHantoTestGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
 			{
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY, origin),
-				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, new HantoCoordinateACBSJH(2, 0)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, new HantoCoordinateACBSJH(2, 1)),
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.HORSE, new HantoCoordinateACBSJH(0, 1)),
-				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY, new HantoCoordinateACBSJH(1, 0)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY, new HantoCoordinateACBSJH(1, 1)),
 				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(3, 0)),
-				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(1, 1)),
+				new HantoTestGame.PieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, new HantoCoordinateACBSJH(1, 0)),
 			});
 		epsilonHantoTestGame.setTurnNumber(4);
 		epsilonHantoTestGame.setPlayerMoving(HantoPlayerColor.BLUE);
