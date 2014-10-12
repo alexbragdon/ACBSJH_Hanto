@@ -181,22 +181,64 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 			HantoCoordinateACBSJH ACBSJHTo = new HantoCoordinateACBSJH(to);
 			HantoCoordinateACBSJH ACBSJHFrom = new HantoCoordinateACBSJH(from);
 			
-			if ((pieceType == HantoPieceType.BUTTERFLY || pieceType == HantoPieceType.CRAB) && from != null) {		
+			if ((pieceType == HantoPieceType.BUTTERFLY || pieceType == HantoPieceType.CRAB)) {		
 				if (!ACBSJHTo.isAdjacent(ACBSJHFrom)) {
 					throw new HantoException(pieceType.toString() + " cannot move more than one space.");
-				}		
+				}
 			} 
 			else if (pieceType == HantoPieceType.HORSE)
 			{
-				if (!ACBSJHFrom.isStraightLine(ACBSJHTo)) {
+				if (ACBSJHFrom.isStraightLine(ACBSJHTo)) {
+					checkForGapInHorsePath(ACBSJHFrom, ACBSJHTo);
+				}
+				else{
 					throw new HantoException("The horse must jump in a straight line.");
 				}
+					
 			} 
 			else if (pieceType == HantoPieceType.SPARROW) {
 				if (!(ACBSJHFrom.getDistance(ACBSJHTo) < 5)) {
 					throw new HantoException("The sparrow can only fly up to four tiles.");
 				}
 			}
+		}
+	}
+	
+	/**
+	 * Checks if a horse is trying to jump over a gap.
+	 * 
+	 * Assumes the path from 'from' to 'to' is straight.
+	 */
+	private void checkForGapInHorsePath(HantoCoordinateACBSJH from, HantoCoordinateACBSJH to) throws HantoException
+	{
+		int deltaX = 0;
+		if(to.getX() > from.getX())
+		{
+			deltaX = 1;
+		}
+		else if(to.getX() < from.getX())
+		{
+			deltaX = -1;
+		}
+		
+		int deltaY = 0;
+		if(to.getY() > from.getY())
+		{
+			deltaY = 1;
+		}
+		else if(to.getY() < from.getY())
+		{
+			deltaY = -1;
+		}
+		
+		HantoCoordinateACBSJH visiting = new HantoCoordinateACBSJH(from.getX() + deltaX, from.getY() + deltaY);
+		while(!visiting.equals(to))
+		{
+			if(getPieceAt(visiting) == null)
+			{
+				throw new HantoException("Horse cannot jump over gap at " + visiting);
+			}
+			visiting = new HantoCoordinateACBSJH(visiting.getX() + deltaX, visiting.getY() + deltaY);
 		}
 	}
 	
