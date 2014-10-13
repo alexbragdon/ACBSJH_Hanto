@@ -400,4 +400,25 @@ public class EpsilonHantoTests {
 		
 	}
 	
+	@Test
+	public void testHantoPieceInHandToString()
+	{
+		HantoPieceACBSJH hp = new HantoPieceACBSJH(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY);
+		assertEquals(true, hp.toString().toLowerCase().contains("hand"));
+	}
+	
+	@Test
+	public void testNullCoordinateNotEuqals()
+	{
+		assertEquals(false, origin.equals(null));
+	}
+	
+	@Test(expected = HantoException.class)
+	public void testButterflyCannotWalkMoreThanOneTile() throws HantoException
+	{
+		epsilonHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		epsilonHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, new HantoCoordinateACBSJH(0, 1));
+		epsilonHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(0, 2));
+	}
+	
 }

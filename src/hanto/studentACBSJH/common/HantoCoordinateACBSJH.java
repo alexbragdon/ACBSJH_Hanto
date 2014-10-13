@@ -79,15 +79,6 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 	{
 		return (coordinate != null) ? coordinate.getX() == X && coordinate.getY() == Y : false;
 	}
-	
-	/** If two coordinates are equal.
-	 * @param coordinate
-	 * @return a string.
-	 */
-	public boolean equals(HantoCoordinateACBSJH coordinate)
-	{
-		return (coordinate != null) ? coordinate.getX() == X && coordinate.getY() == Y : false;
-	}
 
 	/**
 	 * Returns an ordered pair for this location in a string
