@@ -247,6 +247,10 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	 */
 	private void checkForGapInHorsePath(HantoCoordinateACBSJH from, HantoCoordinateACBSJH to) throws HantoException
 	{
+		if(from.getDistance(to) == 1)
+		{
+			throw new HantoException("Horse can only jump over pieces, it cannot walk.");
+		}
 		int deltaX = 0;
 		if(to.getX() > from.getX())
 		{

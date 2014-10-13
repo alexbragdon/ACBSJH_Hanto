@@ -421,4 +421,23 @@ public class EpsilonHantoTests {
 		epsilonHantoGame.makeMove(HantoPieceType.BUTTERFLY, origin, new HantoCoordinateACBSJH(0, 2));
 	}
 	
+	@Test(expected = HantoException.class)
+	public void testHorseCannotJumpOneTile() throws HantoException
+	{
+		epsilonHantoGame.makeMove(HantoPieceType.HORSE, HAND, origin);
+		epsilonHantoGame.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 1));
+		epsilonHantoGame.makeMove(HantoPieceType.HORSE, origin, new HantoCoordinateACBSJH(1, 0));
+	}
+	
+	@Test
+	public void testHorseCanJumpOverOnePiece() throws HantoException
+	{
+		epsilonHantoGame.makeMove(HantoPieceType.HORSE, HAND, origin);
+		epsilonHantoGame.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 1));
+		MoveResult mr = epsilonHantoGame.makeMove(HantoPieceType.HORSE, origin, new HantoCoordinateACBSJH(0, 2));
+		
+		assertEquals(MoveResult.OK, mr);
+		
+	}
+	
 }

@@ -13,11 +13,10 @@
 
 package hanto.studentACBSJH.common;
 
-import java.awt.List;
+import hanto.common.HantoCoordinate;
+
 import java.util.ArrayList;
 import java.util.Collection;
-
-import hanto.common.HantoCoordinate;
 
 /**
  * Implementation of HantoCoordinate interface. Contains an

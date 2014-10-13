@@ -12,12 +12,9 @@
  *******************************************************************************/
 package hanto.studentACBSJH.common;
 
-import java.util.Collection;
-
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
-import hanto.tournament.HantoMoveRecord;
 
 /**
  * @author alexbragdon seanhalloran
