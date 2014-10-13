@@ -20,16 +20,20 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.common.HantoPrematureResignationException;
 import hanto.common.MoveResult;
 import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import common.HantoTestGame;
 import common.HantoTestGameFactory;
+import common.ImpossibleHantoTestGame;
 
 /**
  * @author Sean
@@ -42,6 +46,7 @@ public class EpsilonHantoTests {
 	
 	HantoGame epsilonHantoGame;
 	HantoTestGame epsilonHantoTestGame;
+	ImpossibleHantoTestGame epsilonHantoImpossibleTestGame;
 	
 	private HantoTestGame.PieceLocationPair makePieceLocationPair(HantoPlayerColor playerColor, HantoPieceType pieceType, HantoCoordinate location)
 	{
@@ -56,8 +61,8 @@ public class EpsilonHantoTests {
 	@Before
 	public void setup() {
 		origin = new HantoCoordinateACBSJH(0, 0);
-		epsilonHantoTestGame = HantoTestGameFactory.getInstance()
-				.makeHantoTestGame(HantoGameID.EPSILON_HANTO);
+		epsilonHantoImpossibleTestGame = HantoTestGameFactory.getInstance().makeImpossibleHantoTestGame(HantoGameID.EPSILON_HANTO);
+		epsilonHantoTestGame = epsilonHantoImpossibleTestGame;
 		epsilonHantoGame = epsilonHantoTestGame;
 	}
 	
@@ -437,7 +442,52 @@ public class EpsilonHantoTests {
 		MoveResult mr = epsilonHantoGame.makeMove(HantoPieceType.HORSE, origin, new HantoCoordinateACBSJH(0, 2));
 		
 		assertEquals(MoveResult.OK, mr);
+	}
+	
+	@Test(expected = HantoPrematureResignationException.class)
+	public void playerConnotResignWithValidMovesLeftOnFirstTurn() throws HantoException
+	{
+		epsilonHantoGame.makeMove(null, null, null);
+	}
+	
+	@Test(expected = HantoPrematureResignationException.class)
+	public void playerConnotResignWithValidMovesLeftAfterManyTurns() throws HantoException
+	{
+		epsilonHantoTestGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
+			{
+				makePieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY, origin),
+				makePieceLocationPair(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY, 0, -1),
+				makePieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, -1, 1),
+				makePieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, 1, 0),
+				makePieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.CRAB, -1, 0),
+				makePieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, 1, -1)
+			});
+		epsilonHantoTestGame.setTurnNumber(3);
+		epsilonHantoTestGame.setPlayerMoving(HantoPlayerColor.BLUE);
 		
+		epsilonHantoGame.makeMove(null, null, null);
+	}
+	
+	@Test
+	public void playerCanResignIfNoValidMoves() throws HantoException
+	{
+		epsilonHantoImpossibleTestGame.clearPieces();
+		epsilonHantoImpossibleTestGame.addPiecesToHand(
+				new HantoPieceType[] {HantoPieceType.BUTTERFLY}, HantoPlayerColor.BLUE);
+		epsilonHantoImpossibleTestGame.addPiecesToHand(
+				new HantoPieceType[]
+						{
+							HantoPieceType.CRAB,
+							HantoPieceType.CRAB,
+							HantoPieceType.CRAB,
+							HantoPieceType.CRAB
+						},
+				HantoPlayerColor.RED);
+		
+		epsilonHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		MoveResult mr = epsilonHantoGame.makeMove(null, null, null);
+		
+		assertEquals(MoveResult.BLUE_WINS, mr);
 	}
 	
 }

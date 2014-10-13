@@ -74,4 +74,24 @@ public class HantoTestGameFactory
 		}
 		return game;
 	}
+	
+	public ImpossibleHantoTestGame makeImpossibleHantoTestGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
+		ImpossibleHantoTestGame game = null;
+		switch (gameId) {
+			case EPSILON_HANTO:
+				game = new EpsilonHantoTestGame(movesFirst);
+			default:
+				break;
+		}
+		return game;
+	}
+
+	/**
+	 * @param epsilonHanto
+	 * @return
+	 */
+	public ImpossibleHantoTestGame makeImpossibleHantoTestGame(
+			HantoGameID hantoGameID) {
+		return makeImpossibleHantoTestGame(hantoGameID, HantoPlayerColor.BLUE);
+	}
 }

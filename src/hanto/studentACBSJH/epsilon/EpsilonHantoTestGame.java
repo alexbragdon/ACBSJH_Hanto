@@ -11,8 +11,10 @@
  *******************************************************************************/
 package hanto.studentACBSJH.epsilon;
 
+import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
-import common.HantoTestGame;
+
+import common.ImpossibleHantoTestGame;
 import common.TestGameUtilities;
 
 /**
@@ -20,7 +22,7 @@ import common.TestGameUtilities;
  *
  */
 public class EpsilonHantoTestGame extends EpsilonHantoGame implements
-		HantoTestGame {
+		ImpossibleHantoTestGame {
 
 	/**
 	 * A class with functions for implementing the HantoTestGameInterface
@@ -61,4 +63,14 @@ public class EpsilonHantoTestGame extends EpsilonHantoGame implements
 		TurnNumber = testGameBoardUtilities.setPlayerMoving(TurnNumber, player);
 	}
 
+	public void clearPieces()
+	{
+		testGameBoardUtilities.clearPieces();
+	}
+	
+	public void addPiecesToHand(HantoPieceType[] newPieces, HantoPlayerColor player)
+	{
+		testGameBoardUtilities.addPiecesToHand(newPieces, player);
+	}
+	
 }
