@@ -48,13 +48,13 @@ public class HantoPlayerTests {
 	 * @throws HantoException
 	 */
 	@Test
-	public void testPlaysFirstPieceAtOrigin() {
-		testPlayer.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, true);
-		//assertEquals(HantoPieceType.BUTTERFLY, testPlayer.makeMove(null).getPiece());
-		HantoMoveRecord testRecord = testPlayer.makeMove(null);
-		HantoCoordinateACBSJH to = (HantoCoordinateACBSJH) testRecord.getTo();
-		assertTrue(origin.equals(to));
-		assertEquals(null, testRecord.getFrom());
-	}
-		
+	public void testPlaysFirstPieceAtOriginFromHand() {
+		for (int i = 0; i < 1000; i++) { //This player is random, 100 times should cover the scope.
+			testPlayer.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, true);
+			HantoMoveRecord testRecord = testPlayer.makeMove(null);
+			HantoCoordinateACBSJH to = (HantoCoordinateACBSJH) testRecord.getTo();
+			assertTrue(origin.equals(to));
+			assertEquals(null, testRecord.getFrom());
+		}
+	}	
 }
