@@ -313,17 +313,7 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 					try
 					{
 						HantoGame copyHantoGame = HantoGameFactory.getInstance().cloneHantoGame(this);
-						MoveResult mr = copyHantoGame.makeMove(hp.getType(), hp.getLocation(), destination);
-						
-						if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
-							if (mr == MoveResult.RED_WINS) {
-								//isMoveInvalid = true;
-							}
-						} else {
-							if (mr == MoveResult.BLUE_WINS) {
-								//isMoveInvalid = true;
-							}
-						}
+						copyHantoGame.makeMove(hp.getType(), hp.getLocation(), destination);
 					}
 					catch (Exception he)
 					{
@@ -388,6 +378,71 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 			}
 		}
 		return moveDestinations;
+	}
+	
+	/**
+	 * This is an optomized version of getAllPossibleMovesForCurrentPlayer, to give us a better chance at winning.
+	 * @return a Collection of HantoMoveRecords
+	 */
+	public Collection<HantoMoveRecord> getOptomizedPossibleMovesForCurrentPlayer()
+	{
+		
+		Collection<HantoMoveRecord> listOfPossibleMoves = new ArrayList<HantoMoveRecord>();
+		Collection<HantoCoordinateACBSJH> listOfPossibleDestinations = getMoveDestinations();
+		
+		for(HantoPieceACBSJH hp : HantoPieces)
+		{
+			if (hp.getColor() == getCurrentPlayersTurn())
+			{
+				for(HantoCoordinateACBSJH destination : listOfPossibleDestinations)
+				{
+					boolean isMoveInvalid = false;
+					
+					try
+					{
+						HantoGame copyHantoGame = HantoGameFactory.getInstance().cloneHantoGame(this);
+						MoveResult mr = copyHantoGame.makeMove(hp.getType(), hp.getLocation(), destination);
+						
+						if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
+							if (mr == MoveResult.RED_WINS) {
+								isMoveInvalid = true;
+							}
+						} else {
+							if (mr == MoveResult.BLUE_WINS) {
+								isMoveInvalid = true;
+							}
+						}
+						
+						if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
+							if (mr == MoveResult.BLUE_WINS) {
+								listOfPossibleMoves.clear();
+								listOfPossibleMoves.add(new HantoMoveRecord(hp.getType(), hp.getLocation(), destination));
+								return listOfPossibleMoves;
+							}
+						} else {
+							if (mr == MoveResult.RED_WINS) {
+								listOfPossibleMoves.clear();
+								listOfPossibleMoves.add(new HantoMoveRecord(hp.getType(), hp.getLocation(), destination));
+								return listOfPossibleMoves;
+							}
+						}
+						
+					}
+					catch (Exception he)
+					{
+						isMoveInvalid = true;
+					}
+						
+					if (!isMoveInvalid)
+					{
+						listOfPossibleMoves.add(new HantoMoveRecord(hp.getType(), hp.getLocation(), destination));
+					}
+				
+				}
+			}
+		}
+		
+		return listOfPossibleMoves;
 	}
 	
 }

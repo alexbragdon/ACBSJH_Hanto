@@ -34,13 +34,16 @@ public class HantoPlayer implements HantoGamePlayer {
 	EpsilonHantoGame localGame;
 	
 	/**
-	 * 
+	 * Empty constructor just to make the object.
 	 */
 	public HantoPlayer() {
 	}
 
 	/** (non-Javadoc)
 	 * @see hanto.tournament.HantoGamePlayer#startGame(hanto.common.HantoGameID, hanto.common.HantoPlayerColor, boolean)
+	 *
+	 * Starts a Hanto Game for the with the given parameters. 
+	 * 
 	 */
 	@Override
 	public void startGame(HantoGameID version, HantoPlayerColor myColor,
@@ -59,19 +62,35 @@ public class HantoPlayer implements HantoGamePlayer {
 
 	/** (non-Javadoc)
 	 * @see hanto.tournament.HantoGamePlayer#makeMove(hanto.tournament.HantoMoveRecord)
+	 * 
+	 * Returns a hanto move record based on the move of the other player.
+	 * If the input is null assume we go first.
+	 * 
 	 */
 	@Override
 	public HantoMoveRecord makeMove(HantoMoveRecord opponentsMove) {
+		boolean opponetWasNull = false;
+		HantoMoveRecord toReturn = new HantoMoveRecord(null, null, null);
+		
 		if (opponentsMove == null) {
-			return makeRandomValidMove();
+			opponetWasNull = true;
+			toReturn = makeRandomValidMove();
 		} else {
 			try {
 				localGame.makeMove(opponentsMove.getPiece(), opponentsMove.getFrom(), opponentsMove.getTo());
 			} catch (HantoException e) {
 				return new HantoMoveRecord(null, null, null);
 			}
-			return makeRandomValidMove();
+			if (!opponetWasNull) {
+				toReturn = makeRandomValidMove();
+			}
 		}
+		try {
+			localGame.makeMove(toReturn.getPiece(), toReturn.getFrom(), toReturn.getTo());
+		} catch (HantoException e) {
+			return new HantoMoveRecord(null, null, null);
+		}
+		return toReturn;
 	}
 	
 	/**
@@ -79,7 +98,7 @@ public class HantoPlayer implements HantoGamePlayer {
 	 * @return HantoMoveRecord
 	 */
 	private HantoMoveRecord makeRandomValidMove() {
-			Collection<HantoMoveRecord> legalMoves = localGame.getAllPossibleMovesForCurrentPlayer();
+			Collection<HantoMoveRecord> legalMoves = localGame.getOptomizedPossibleMovesForCurrentPlayer();
 			if (legalMoves.size() != 0) {
 				Random generator = new Random(); 
 				int selectedMoveNumber = generator.nextInt(legalMoves.size());
