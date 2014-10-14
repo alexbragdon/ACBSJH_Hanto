@@ -285,6 +285,10 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 		}
 	}
 	
+	/** (non-Javadoc)
+	 * @see hanto.studentACBSJH.common.BaseHantoGame#addValidHantoPieceTypes()
+	 * Sets the allowed piece types(In addition to the butterfly).
+	 */
 	protected void addValidHantoPieceTypes()
 	{
 		super.addValidHantoPieceTypes();
@@ -294,7 +298,7 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	}
 	
 	/**
-	 * 
+	 * Generates all possible moves for the current player.
 	 *  @return Collection of HantoMoveRecords
 	 */
 	public Collection<HantoMoveRecord> getAllPossibleMovesForCurrentPlayer()
@@ -333,6 +337,10 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 		return listOfPossibleMoves;
 	}
 	
+	/**
+	 * True if nothing is on the board, false otherwise.
+	 * @return boolean
+	 **/
 	private boolean isBoardEmpty()
 	{
 		for(HantoPieceACBSJH hp : HantoPieces)
@@ -346,7 +354,8 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	}
 	
 	/**
-	 * @return
+	 * Gets all valid destinations that a peice can be placed at.
+	 * @return Collection of HantoCoordinates
 	 */
 	private Collection<HantoCoordinateACBSJH> getMoveDestinations() 
 	{
