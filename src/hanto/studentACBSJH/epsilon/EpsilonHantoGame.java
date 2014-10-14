@@ -327,12 +327,6 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 					{
 						isMoveInvalid = true;
 					}
-					
-					if (hp.getLocation() != null) {
-						if (hp.getLocation().equals(destination)) {
-							//isMoveInvalid = true;
-						}
-					} 
 						
 					if (!isMoveInvalid)
 					{
