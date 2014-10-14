@@ -14,8 +14,6 @@ package common;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 
-import java.util.Collection;
-
 /**
  * @author Sean
  *

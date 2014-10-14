@@ -114,7 +114,7 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	 * @return OK if no player won as a result of resignation, otherwise RED_WINS or BLUE_WINS returned accordingly
 	 * @throws HantoException thrown if one player resigned while still having a possible move 
 	 */
-	private MoveResult playerResignCheck(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to) throws HantoException
+	private MoveResult playerResignCheck(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to) throws HantoPrematureResignationException
 	{
 		MoveResult mr = MoveResult.OK;
 		if(pieceType == null && from == null && to == null)

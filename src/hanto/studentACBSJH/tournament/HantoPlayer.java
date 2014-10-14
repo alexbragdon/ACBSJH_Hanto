@@ -32,12 +32,6 @@ public class HantoPlayer implements HantoGamePlayer {
 	 * This is our local copy of the game.
 	 */
 	EpsilonHantoGame localGame;
-	
-	/**
-	 * Empty constructor just to make the object.
-	 */
-	public HantoPlayer() {
-	}
 
 	/** (non-Javadoc)
 	 * @see hanto.tournament.HantoGamePlayer#startGame(hanto.common.HantoGameID, hanto.common.HantoPlayerColor, boolean)

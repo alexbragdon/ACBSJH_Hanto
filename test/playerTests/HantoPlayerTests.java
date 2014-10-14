@@ -13,7 +13,6 @@
 package playerTests;
 
 import static org.junit.Assert.*;
-import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;

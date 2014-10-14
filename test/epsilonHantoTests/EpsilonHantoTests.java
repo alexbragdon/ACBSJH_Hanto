@@ -26,8 +26,6 @@ import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
 

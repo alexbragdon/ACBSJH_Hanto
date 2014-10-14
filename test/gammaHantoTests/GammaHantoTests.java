@@ -23,7 +23,6 @@ import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
-import hanto.studentACBSJH.common.HantoPieceACBSJH;
 
 import org.junit.Before;
 import org.junit.Test;
