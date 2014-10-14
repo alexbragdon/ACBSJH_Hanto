@@ -294,6 +294,7 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 	}
 	
 	/**
+	 * 
 	 * @return
 	 */
 	public Collection<HantoMoveRecord> getAllPossibleMovesForCurrentPlayer()

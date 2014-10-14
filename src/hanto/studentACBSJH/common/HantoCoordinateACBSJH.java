@@ -107,9 +107,10 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 	}
 	
 	/**
-	 * A simple check if to see 
-	 * @param to
-	 * @return
+	 * Checks if another location is in a straight line from this location in one of six directions
+	 * 
+	 * @param to the location to check against, so the line is from this to 'to'
+	 * @return if the line between locations is straight in one of six directions
 	 */
 	public boolean isStraightLine(HantoCoordinate to) {
 		if (X - to.getX() == 0 || Y - to.getY() == 0) {
@@ -124,7 +125,7 @@ public class HantoCoordinateACBSJH implements HantoCoordinate {
 	/**
 	 * Computes the distance between two coordinates.
 	 * @param ACBSJHTo
-	 * @return
+	 * @return distance between this and ACBSJHTo
 	 */
 	public int getDistance(HantoCoordinateACBSJH ACBSJHTo) {
 		int toX = ACBSJHTo.getX();

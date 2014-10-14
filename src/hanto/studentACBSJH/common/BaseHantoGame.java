@@ -397,6 +397,12 @@ public abstract class BaseHantoGame implements HantoGame{
 		}
 	}
 	
+	/**
+	 * Counts the number of pieces surrounding a butterfly of color
+	 * 
+	 * @param color the color of the butterfly to check
+	 * @return the number of pieces surrounding the butterfly
+	 */
 	public int countPiecesSurroundingButterfly(HantoPlayerColor color) {
 		HantoPieceACBSJH blueB = getButterflyOnBoard(HantoPlayerColor.BLUE);
 		HantoPieceACBSJH redB = getButterflyOnBoard(HantoPlayerColor.RED);
@@ -478,6 +484,13 @@ public abstract class BaseHantoGame implements HantoGame{
 		
 	}
 	
+	/**
+	 * Returns the butterfly of color on the board. Returns null if no butterfly of color
+	 * yet placed on the board.
+	 * 
+	 * @param color The color of the butterfly to look for
+	 * @return the butterfly of color on the board, or null if its not on the board yet
+	 */
 	public HantoPieceACBSJH getButterflyOnBoard(HantoPlayerColor color)
 	{
 		if(color == HantoPlayerColor.RED)
