@@ -490,4 +490,12 @@ public class EpsilonHantoTests {
 		assertEquals(MoveResult.BLUE_WINS, mr);
 	}
 	
+	@Test(expected = HantoException.class)
+	public void cannotMovePieceIntoHand() throws HantoException
+	{
+		epsilonHantoGame.makeMove(HantoPieceType.HORSE, HAND, origin);
+		epsilonHantoGame.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 1));
+		epsilonHantoGame.makeMove(HantoPieceType.HORSE, origin, HAND);
+	}
+	
 }
