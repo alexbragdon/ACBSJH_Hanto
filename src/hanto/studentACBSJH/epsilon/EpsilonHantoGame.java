@@ -369,11 +369,19 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 			for(HantoPieceACBSJH hp : HantoPieces)
 			{
 				if (hp.getLocation() != null) {
-					for (HantoCoordinateACBSJH destination : hp.getLocation().getAllAdjacentCoordinates())
+					for (HantoCoordinateACBSJH newDestination : hp.getLocation().getAllAdjacentCoordinates())
 					{
-						if(!moveDestinations.contains(destination))
+						boolean foundInMoveDestinations = false;
+						for(HantoCoordinateACBSJH moveDestination : moveDestinations)
 						{
-							moveDestinations.add(destination);
+							if(moveDestination.equals(newDestination))
+							{
+								foundInMoveDestinations = true;
+							}
+						}
+						if(!foundInMoveDestinations)
+						{
+							moveDestinations.add(newDestination);
 						}
 					}
 				}

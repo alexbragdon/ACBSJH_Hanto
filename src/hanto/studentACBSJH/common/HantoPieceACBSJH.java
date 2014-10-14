@@ -61,9 +61,10 @@ public class HantoPieceACBSJH implements HantoPiece {
 	 * 
 	 * @param hp the interface to construct this object from
 	 */
-	public HantoPieceACBSJH(HantoPiece hp) {
+	public HantoPieceACBSJH(HantoPieceACBSJH hp) {
 		playerColor = hp.getColor();
 		type = hp.getType();
+		location = hp.getLocation();
 	}
 	
 	/** (non-Javadoc)

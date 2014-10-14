@@ -106,7 +106,8 @@ public class HantoGameFactory
 		if(HantoClone != null)
 		{
 			HantoClone.setInternalTurnNumber(oldHantoGame.getInternalTurnNumber());
-			HantoClone.setAllHantoPieces(deepCopyHantoPieceCollection(oldHantoGame.getAllHantoPieces()));
+			Collection<HantoPieceACBSJH> clonedHantoPieces = deepCopyHantoPieceCollection(oldHantoGame.getAllHantoPieces()); 
+			HantoClone.setAllHantoPieces(clonedHantoPieces);
 		}
 		return HantoClone;
 	}

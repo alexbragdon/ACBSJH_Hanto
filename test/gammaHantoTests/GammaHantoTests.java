@@ -215,15 +215,6 @@ public class GammaHantoTests {
 		assertEquals(hc1.getY(), hc2.getY());
 	}
 
-	@Test
-	public void testHantoPieceACBSJHConstructor() {
-		HantoPiece hp1 = new HantoPieceACBSJH(HantoPlayerColor.BLUE,
-				HantoPieceType.BUTTERFLY);
-		HantoPieceACBSJH hp2 = new HantoPieceACBSJH(hp1);
-		assertEquals(hp1.getType(), hp2.getType());
-		assertEquals(hp1.getColor(), hp2.getColor());
-	}
-
 	@Test(expected = HantoException.class)
 	public void testCannotMovePieceFromHandThatIsNotInHand()
 			throws HantoException {
