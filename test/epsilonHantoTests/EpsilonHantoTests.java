@@ -498,4 +498,12 @@ public class EpsilonHantoTests {
 		epsilonHantoGame.makeMove(HantoPieceType.HORSE, origin, HAND);
 	}
 	
+	@Test(expected = HantoException.class)
+	public void cannotMoveFromToSameLocation() throws HantoException
+	{
+		epsilonHantoGame.makeMove(HantoPieceType.HORSE, HAND, origin);
+		epsilonHantoGame.makeMove(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(0, 1));
+		epsilonHantoGame.makeMove(HantoPieceType.HORSE, origin, origin);
+	}
+	
 }
