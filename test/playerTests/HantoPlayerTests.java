@@ -32,7 +32,7 @@ import org.junit.Test;
 public class HantoPlayerTests {
 
 	HantoPlayer testPlayer;
-	HantoCoordinate origin;
+	HantoCoordinateACBSJH origin;
 	
 	
 	/**
@@ -48,11 +48,13 @@ public class HantoPlayerTests {
 	 * @throws HantoException
 	 */
 	@Test
-	public void testPlaysAButterflyFirst() {
+	public void testPlaysFirstPieceAtOrigin() {
 		testPlayer.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, true);
-		assertEquals(HantoPieceType.BUTTERFLY, testPlayer.makeMove(null).getPiece());
-		//assertEquals(origin, testPlayer.makeMove(null).getTo());
-		assertEquals(null, testPlayer.makeMove(null).getFrom());
+		//assertEquals(HantoPieceType.BUTTERFLY, testPlayer.makeMove(null).getPiece());
+		HantoMoveRecord testRecord = testPlayer.makeMove(null);
+		HantoCoordinateACBSJH to = (HantoCoordinateACBSJH) testRecord.getTo();
+		assertTrue(origin.equals(to));
+		assertEquals(null, testRecord.getFrom());
 	}
 		
 }
