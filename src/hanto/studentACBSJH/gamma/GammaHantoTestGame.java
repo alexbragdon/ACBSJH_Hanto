@@ -12,6 +12,7 @@
 package hanto.studentACBSJH.gamma;
 
 import hanto.common.HantoPlayerColor;
+
 import common.HantoTestGame;
 import common.TestGameUtilities;
 

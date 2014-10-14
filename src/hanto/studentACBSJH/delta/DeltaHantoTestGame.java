@@ -13,6 +13,7 @@
 package hanto.studentACBSJH.delta;
 
 import hanto.common.HantoPlayerColor;
+
 import common.HantoTestGame;
 import common.TestGameUtilities;
 
