@@ -33,11 +33,6 @@ public class HantoPlayer implements HantoGamePlayer {
 	 */
 	EpsilonHantoGame localGame;
 	
-	/**
-	 * 
-	 */
-	public HantoPlayer() {
-	}
 
 	/** (non-Javadoc)
 	 * @see hanto.tournament.HantoGamePlayer#startGame(hanto.common.HantoGameID, hanto.common.HantoPlayerColor, boolean)
@@ -79,18 +74,18 @@ public class HantoPlayer implements HantoGamePlayer {
 	 * @return HantoMoveRecord
 	 */
 	private HantoMoveRecord makeRandomValidMove() {
-			Collection<HantoMoveRecord> legalMoves = localGame.getAllPossibleMovesForCurrentPlayer();
-			if (legalMoves.size() != 0) {
-				Random generator = new Random(); 
-				int selectedMoveNumber = generator.nextInt(legalMoves.size());
-				int count = 0;
-				for(HantoMoveRecord mr : legalMoves) {
-					if (count == selectedMoveNumber) {
-						return mr;
-					} 
-					count ++;
-				}
+		Collection<HantoMoveRecord> legalMoves = localGame.getAllPossibleMovesForCurrentPlayer();
+		if (legalMoves.size() != 0) {
+			Random generator = new Random(); 
+			int selectedMoveNumber = generator.nextInt(legalMoves.size());
+			int count = 0;
+			for(HantoMoveRecord mr : legalMoves) {
+				if (count == selectedMoveNumber) {
+					return mr;
+				} 
+				count ++;
 			}
-			return new HantoMoveRecord(null, null, null);
+		}
+		return new HantoMoveRecord(null, null, null);
 	}
 }
