@@ -139,7 +139,7 @@ public class DeltaHantoGame extends BaseHantoGame implements HantoGame {
 			
 			if (!newTo.isAdjacent(newFrom)) {
 				throw new HantoException(pieceType.toString() + " cannot move more than one space.");
-			}		
+			}
 		}
 	}
 	
