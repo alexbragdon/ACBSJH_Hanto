@@ -92,6 +92,11 @@ public class HantoGameFactory
 		return game;
 	}
 	
+	/**
+	 * Makes a copy of a hanto game.
+	 * @param oldHantoGame
+	 * @return HantoGame
+	 */
 	public HantoGame cloneHantoGame(BaseHantoGame oldHantoGame)
 	{
 		BaseHantoGame HantoClone = null;
@@ -112,6 +117,11 @@ public class HantoGameFactory
 		return HantoClone;
 	}
 	
+	/**
+	 * Copies a collection of HantoPieceACBSJHs
+	 * @param hantoPieces
+	 * @return a collection of HantoPieceACBSJHs
+	 */
 	public Collection<HantoPieceACBSJH> deepCopyHantoPieceCollection(Collection<HantoPieceACBSJH> hantoPieces)
 	{
 		Collection<HantoPieceACBSJH> newHantoPieces = new ArrayList<HantoPieceACBSJH>();
