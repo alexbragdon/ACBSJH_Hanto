@@ -110,6 +110,6 @@ public class HantoPlayer implements HantoGamePlayer {
 					count ++;
 				}
 			}
-			return new HantoMoveRecord(null, null, null);
+		return new HantoMoveRecord(null, null, null);
 	}
 }

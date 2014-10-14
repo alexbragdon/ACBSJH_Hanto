@@ -33,6 +33,8 @@ public class HantoPlayerTests {
 
 	HantoPlayer testPlayer;
 	HantoCoordinateACBSJH origin;
+	HantoCoordinateACBSJH HAND;
+	HantoMoveRecord resign;
 	
 	
 	/**
@@ -42,6 +44,8 @@ public class HantoPlayerTests {
 	public void setup() {
 		testPlayer = new HantoPlayer();
 		origin = new HantoCoordinateACBSJH(0, 0);
+		HAND = null;
+		resign = new HantoMoveRecord(null, null, null);
 	}
 
 	/**
@@ -57,4 +61,48 @@ public class HantoPlayerTests {
 			assertEquals(null, testRecord.getFrom());
 		}
 	}	
+	
+	@Test
+	public void testMoveRecordFunctions()
+	{
+		HantoMoveRecord testHMR = new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, null);
+		assertEquals(HantoPieceType.BUTTERFLY, testHMR.getPiece());
+	}
+	
+	@Test
+	public void startGameWithOponentRedFirstMovesToOrigin()
+	{
+		testPlayer.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, false);
+		HantoMoveRecord hmr = testPlayer.makeMove(null);
+		assertEquals(0, hmr.getTo().getX());
+		assertEquals(0, hmr.getTo().getY());
+	}
+	
+	@Test
+	public void startGameWithOponentBlueFirstMovesToOrigin()
+	{
+		testPlayer.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.RED, false);
+		HantoMoveRecord hmr = testPlayer.makeMove(null);
+		assertEquals(0, hmr.getTo().getX());
+		assertEquals(0, hmr.getTo().getY());
+	}
+	
+	@Test
+	public void makeMoveAfterOpponent()
+	{
+		testPlayer.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, false);
+		HantoMoveRecord hmr = testPlayer.makeMove(new HantoMoveRecord(HantoPieceType.CRAB, HAND, origin));
+		assertNotEquals(resign.getTo(), hmr.getTo());
+		assertNotEquals(resign.getPiece(), hmr.getPiece());
+	}
+	
+	@Test
+	public void opponentMakesInvalidMove()
+	{
+		testPlayer.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, false);
+		HantoMoveRecord hmr = testPlayer.makeMove(new HantoMoveRecord(HantoPieceType.CRAB, HAND, new HantoCoordinateACBSJH(1, 1)));
+		assertEquals(resign.getTo(), hmr.getTo());
+		assertEquals(resign.getFrom(), hmr.getFrom());
+		assertEquals(resign.getPiece(), hmr.getPiece());
+	}
 }
