@@ -33,7 +33,7 @@ public class HantoPlayer implements HantoGamePlayer {
 	 */
 	EpsilonHantoGame localGame;
 
-	HantoPlayer() {}
+	public HantoPlayer() {}
 	
 	/** (non-Javadoc)
 	 * @see hanto.tournament.HantoGamePlayer#startGame(hanto.common.HantoGameID, hanto.common.HantoPlayerColor, boolean)
