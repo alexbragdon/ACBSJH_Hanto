@@ -474,11 +474,19 @@ public class EpsilonHantoTests {
 							HantoPieceType.CRAB
 						},
 				HantoPlayerColor.RED);
+		epsilonHantoTestGame.initializeBoard(new HantoTestGame.PieceLocationPair[]
+				{
+					makePieceLocationPair(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY, origin),
+					makePieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, -1, 0),
+					makePieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, 1, -1),
+					makePieceLocationPair(HantoPlayerColor.RED, HantoPieceType.CRAB, 0, 1)
+				});
 		
-		epsilonHantoImpossibleTestGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		epsilonHantoTestGame.setTurnNumber(3);
+		epsilonHantoTestGame.setPlayerMoving(HantoPlayerColor.BLUE);
 		MoveResult mr = epsilonHantoImpossibleTestGame.makeMove(null, null, null);
 		
-		assertEquals(MoveResult.BLUE_WINS, mr);
+		assertEquals(MoveResult.RED_WINS, mr);
 	}
 	
 	@Test(expected = HantoException.class)
