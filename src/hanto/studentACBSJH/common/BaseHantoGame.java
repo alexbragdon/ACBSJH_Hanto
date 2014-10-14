@@ -14,6 +14,7 @@ package hanto.studentACBSJH.common;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
+import hanto.common.HantoGame;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
@@ -31,7 +32,7 @@ import java.util.List;
  * @author alexbragdon
  *
  */
-public abstract class BaseHantoGame {
+public abstract class BaseHantoGame implements HantoGame{
 
 	/**
 	 * All of the HantoPieces used in this HantoGame,
@@ -100,6 +101,36 @@ public abstract class BaseHantoGame {
 		TurnNumber = 0;
 		setupHands();
 		addValidHantoPieceTypes();
+	}
+	
+	public Collection<HantoPieceACBSJH> getAllHantoPieces()
+	{
+		return HantoPieces;
+	}
+	
+	public void setAllHantoPieces(Collection<HantoPieceACBSJH> newHantoPieces)
+	{
+		HantoPieces = newHantoPieces;
+	}
+	
+	public int getInternalTurnNumber()
+	{
+		return TurnNumber;
+	}
+	
+	public void setInternalTurnNumber(int newTurnNumber)
+	{
+		TurnNumber = newTurnNumber;
+	}
+	
+	public HantoPlayerColor getFirstPlayer()
+	{
+		return firstPlayer;
+	}
+	
+	public HantoGameID getHantoGameID()
+	{
+		return iD;
 	}
 	
 	/**

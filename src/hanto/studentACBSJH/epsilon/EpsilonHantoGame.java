@@ -20,6 +20,7 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.HantoPrematureResignationException;
 import hanto.common.MoveResult;
+import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.common.BaseHantoGame;
 import hanto.studentACBSJH.common.HantoCoordinateACBSJH;
 import hanto.studentACBSJH.common.HantoPieceACBSJH;
@@ -311,7 +312,8 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 					
 					try
 					{
-						MoveResult mr = makeMove(hp.getType(), hp.getLocation(), destination);
+						HantoGame copyHantoGame = HantoGameFactory.getInstance().cloneHantoGame(this);
+						MoveResult mr = copyHantoGame.makeMove(hp.getType(), hp.getLocation(), destination);
 						
 						if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
 							if (mr == MoveResult.RED_WINS) {

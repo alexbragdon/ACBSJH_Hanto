@@ -10,12 +10,19 @@
 
 package hanto.studentACBSJH;
 
-import hanto.common.*;
+import hanto.common.HantoGame;
+import hanto.common.HantoGameID;
+import hanto.common.HantoPlayerColor;
 import hanto.studentACBSJH.alpha.AlphaHantoGame;
 import hanto.studentACBSJH.beta.BetaHantoGame;
+import hanto.studentACBSJH.common.BaseHantoGame;
+import hanto.studentACBSJH.common.HantoPieceACBSJH;
 import hanto.studentACBSJH.delta.DeltaHantoGame;
 import hanto.studentACBSJH.epsilon.EpsilonHantoGame;
 import hanto.studentACBSJH.gamma.GammaHantoGame;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * This is a singleton class that provides a factory to create an instance of any version
@@ -83,5 +90,34 @@ public class HantoGameFactory
 			break;
 		}
 		return game;
+	}
+	
+	public HantoGame cloneHantoGame(BaseHantoGame oldHantoGame)
+	{
+		BaseHantoGame HantoClone = null;
+		switch(oldHantoGame.getHantoGameID())
+		{
+		case EPSILON_HANTO:
+			HantoClone = new EpsilonHantoGame(oldHantoGame.getFirstPlayer());
+			break;
+		default:
+			break;
+		}
+		if(HantoClone != null)
+		{
+			HantoClone.setInternalTurnNumber(oldHantoGame.getInternalTurnNumber());
+			HantoClone.setAllHantoPieces(deepCopyHantoPieceCollection(oldHantoGame.getAllHantoPieces()));
+		}
+		return HantoClone;
+	}
+	
+	public Collection<HantoPieceACBSJH> deepCopyHantoPieceCollection(Collection<HantoPieceACBSJH> hantoPieces)
+	{
+		Collection<HantoPieceACBSJH> newHantoPieces = new ArrayList<HantoPieceACBSJH>();
+		for(HantoPieceACBSJH hp : hantoPieces)
+		{
+			newHantoPieces.add(new HantoPieceACBSJH(hp));
+		}
+		return newHantoPieces;
 	}
 }
