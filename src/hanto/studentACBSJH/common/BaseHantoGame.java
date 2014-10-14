@@ -103,31 +103,51 @@ public abstract class BaseHantoGame implements HantoGame{
 		addValidHantoPieceTypes();
 	}
 	
+	/**
+	 * @return the collection of all the hanto pieces in the hands and on the board
+	 */
 	public Collection<HantoPieceACBSJH> getAllHantoPieces()
 	{
 		return HantoPieces;
 	}
 	
+	/**
+	 * @param newHantoPieces sets the collection of all hanto pieces in this game to a new collection
+	 */
 	public void setAllHantoPieces(Collection<HantoPieceACBSJH> newHantoPieces)
 	{
 		HantoPieces = newHantoPieces;
 	}
 	
+	/**
+	 * @return the internal turn number for this game that increments on every single move
+	 */
 	public int getInternalTurnNumber()
 	{
 		return TurnNumber;
 	}
 	
+	/**
+	 * @param newTurnNumber the new internal turn number that incriments on every single move
+	 */
 	public void setInternalTurnNumber(int newTurnNumber)
 	{
 		TurnNumber = newTurnNumber;
 	}
 	
+	/**
+	 * Gets the color of the first player
+	 * 
+	 * @return the color of the first player
+	 */
 	public HantoPlayerColor getFirstPlayer()
 	{
 		return firstPlayer;
 	}
 	
+	/**
+	 * @return the ID of this hanto game
+	 */
 	public HantoGameID getHantoGameID()
 	{
 		return iD;

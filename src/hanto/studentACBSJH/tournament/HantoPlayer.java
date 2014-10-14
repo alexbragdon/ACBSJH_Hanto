@@ -11,9 +11,6 @@
  *******************************************************************************/
 package hanto.studentACBSJH.tournament;
 
-import java.util.Collection;
-import java.util.Random;
-
 import hanto.common.HantoException;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPlayerColor;
@@ -21,6 +18,9 @@ import hanto.studentACBSJH.HantoGameFactory;
 import hanto.studentACBSJH.epsilon.EpsilonHantoGame;
 import hanto.tournament.HantoGamePlayer;
 import hanto.tournament.HantoMoveRecord;
+
+import java.util.Collection;
+import java.util.Random;
 
 /**
  * @author Sean
@@ -33,7 +33,7 @@ public class HantoPlayer implements HantoGamePlayer {
 	 */
 	EpsilonHantoGame localGame;
 
-	public HantoPlayer() {}
+	public 	HantoPlayer() {}
 	
 	/** (non-Javadoc)
 	 * @see hanto.tournament.HantoGamePlayer#startGame(hanto.common.HantoGameID, hanto.common.HantoPlayerColor, boolean)
