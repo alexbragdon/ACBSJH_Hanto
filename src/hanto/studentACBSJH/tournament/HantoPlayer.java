@@ -80,14 +80,16 @@ public class HantoPlayer implements HantoGamePlayer {
 	 */
 	private HantoMoveRecord makeRandomValidMove() {
 			Collection<HantoMoveRecord> legalMoves = localGame.getAllPossibleMovesForCurrentPlayer();
-			Random generator = new Random(); 
-			int selectedMoveNumber = generator.nextInt(legalMoves.size());
-			int count = 0;
-			for(HantoMoveRecord mr : legalMoves) {
-				if (count == selectedMoveNumber) {
-					return mr;
-				} 
-				count ++;
+			if (legalMoves.size() != 0) {
+				Random generator = new Random(); 
+				int selectedMoveNumber = generator.nextInt(legalMoves.size());
+				int count = 0;
+				for(HantoMoveRecord mr : legalMoves) {
+					if (count == selectedMoveNumber) {
+						return mr;
+					} 
+					count ++;
+				}
 			}
 			return new HantoMoveRecord(null, null, null);
 	}

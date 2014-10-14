@@ -119,14 +119,16 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 		if(pieceType == null && from == null && to == null)
 		{
 			Collection<HantoMoveRecord> possibleMoves = getAllPossibleMovesForCurrentPlayer();
-			if (possibleMoves.isEmpty()){
+			if (possibleMoves.isEmpty())
+			{
 				if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
 					mr = MoveResult.RED_WINS; 
 				} else {
 					mr = MoveResult.BLUE_WINS;
 				}
 				setGameOver();
-			} else
+			} 
+			else
 			{
 				throw new HantoPrematureResignationException();
 			}
@@ -290,8 +292,12 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 		ValidHantoPieceTypes.add(HantoPieceType.HORSE);
 	}
 	
+	/**
+	 * @return
+	 */
 	public Collection<HantoMoveRecord> getAllPossibleMovesForCurrentPlayer()
 	{
+		
 		Collection<HantoMoveRecord> listOfPossibleMoves = new ArrayList<HantoMoveRecord>();
 		Collection<HantoCoordinateACBSJH> listOfPossibleDestinations = getMoveDestinations();
 		
@@ -302,15 +308,32 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 				for(HantoCoordinateACBSJH destination : listOfPossibleDestinations)
 				{
 					boolean isMoveInvalid = false;
+					
 					try
 					{
-						makeMove(hp.getType(), hp.getLocation(), destination);
+						MoveResult mr = makeMove(hp.getType(), hp.getLocation(), destination);
+						
+						if (getCurrentPlayersTurn() == HantoPlayerColor.BLUE) {
+							if (mr == MoveResult.RED_WINS) {
+								//isMoveInvalid = true;
+							}
+						} else {
+							if (mr == MoveResult.BLUE_WINS) {
+								//isMoveInvalid = true;
+							}
+						}
 					}
 					catch (Exception he)
 					{
 						isMoveInvalid = true;
 					}
-				
+					
+					if (hp.getLocation() != null) {
+						if (hp.getLocation().equals(destination)) {
+							//isMoveInvalid = true;
+						}
+					} 
+						
 					if (!isMoveInvalid)
 					{
 						listOfPossibleMoves.add(new HantoMoveRecord(hp.getType(), hp.getLocation(), destination));
@@ -335,6 +358,9 @@ public class EpsilonHantoGame extends BaseHantoGame implements HantoGame {
 		return true;
 	}
 	
+	/**
+	 * @return
+	 */
 	private Collection<HantoCoordinateACBSJH> getMoveDestinations() 
 	{
 		Collection<HantoCoordinateACBSJH> moveDestinations = new ArrayList<HantoCoordinateACBSJH>();

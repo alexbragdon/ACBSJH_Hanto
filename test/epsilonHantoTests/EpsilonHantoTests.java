@@ -484,8 +484,8 @@ public class EpsilonHantoTests {
 						},
 				HantoPlayerColor.RED);
 		
-		epsilonHantoGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
-		MoveResult mr = epsilonHantoGame.makeMove(null, null, null);
+		epsilonHantoImpossibleTestGame.makeMove(HantoPieceType.BUTTERFLY, HAND, origin);
+		MoveResult mr = epsilonHantoImpossibleTestGame.makeMove(null, null, null);
 		
 		assertEquals(MoveResult.BLUE_WINS, mr);
 	}
