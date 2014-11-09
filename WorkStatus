@@ -1,0 +1,27 @@
+
+Updated 9/10
+
+Interfaces to impliment <- alex does
+
+HantoGame
+HantoCoordinate
+HantoPiece
+
+Classes to write <- sean does
+
+HantoBaseClass
+AlphaHantoClass
+
+
+
+///////////////////////////////////////////////////////////////////
+///////////DENTAL HANTO NOTES'N SHITT///////////////////////////////
+///////////////////////////////////////////////////////////////////
+
+Add a check that moving a piece does not break continuity of board
+allow pieces from board to move
+look at beta hanto, template-ify that make move function a bit more
+
+
+
+
